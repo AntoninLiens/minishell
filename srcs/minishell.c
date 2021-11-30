@@ -11,11 +11,8 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 
-int main(int argc, char **argv, char **env)
+int main(void)
 {
     char *answer;
     int  i;
@@ -23,7 +20,7 @@ int main(int argc, char **argv, char **env)
     i = -1;
     while (++i < 10)
     {
-        answer = readline("My personal prompt $ ");
+        answer = readline("❤ MINISHELL $");
         add_history(answer);
         printf("%s\n", answer);
     }
