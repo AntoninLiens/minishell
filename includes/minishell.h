@@ -14,8 +14,10 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "../libft/includes/libft.h"
 
 # define BLACK "\033[30m"
 # define RED "\033[31m"
