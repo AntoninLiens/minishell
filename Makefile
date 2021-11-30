@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
+#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/11/30 15:45:03 by aliens           ###   ########.fr        #
+#    Updated: 2021/11/30 16:06:29 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ PURPLE	=	$(shell tput -Txterm setaf 5)
 BLUE	=	$(shell tput -Txterm setaf 6)
 RESET	=	$(shell tput -Txterm sgr0)
 
-SRCS	=	
+SRCS	=	srcs/minishell.c
 
 OBJS	=	$(SRCS:.c=.o)
 
@@ -28,7 +28,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			make -C ./libft
-			@$(CC) libft/libft.a $(SRCS) -o $(NAME)
+			@$(CC) libft/libft.a $(SRCS) -lreadline -o $(NAME)
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
 
 .c.o:
