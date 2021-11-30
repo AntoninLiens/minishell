@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
+#    By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 17:05:49 by ctirions          #+#    #+#              #
-#    Updated: 2021/11/30 15:45:40 by aliens           ###   ########.fr        #
+#    Updated: 2021/11/30 17:03:22 by zminhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,11 +102,9 @@ RM			= rm -f
 
 .c.o:
 			@gcc -Wall -Wextra -Werror -c -I./includes $< -o ${<:.c=.o}
-			@echo "[$(LIGHTPURPLE)✓$(RESET)] compilation of $<"
 
 $(NAME):	${OBJS} ${OBJS_PRINTF} ${OBJS_GNL}
 			@ar -rcs ${NAME} ${OBJS} ${OBJS_PRINTF} ${OBJS_GNL}
-			@echo "[$(GREEN)✓$(RESET)] libft.a created"
 
 all:		${NAME}
 
@@ -117,13 +115,10 @@ full:		all	bonus
 
 clean:
 			@$(RM) ${OBJS} ${OBJS_PRINTF} ${OBJS_GNL} ${OBJS_BONUS}
-			@echo "[$(BLUE)✓$(RESET)] libft objects erased"
 
 fclean:		
 			@$(RM) ${OBJS} ${OBJS_PRINTF} ${OBJS_GNL} ${OBJS_BONUS}
-			@echo "[$(BLUE)✓$(RESET)] libft objects erased"
 			@$(RM) $(NAME)
-			@echo "[$(RED)✓$(RESET)] libft.a erased"
 			
 re:			fclean all
 

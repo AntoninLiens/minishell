@@ -20,9 +20,15 @@ int main(void)
     i = -1;
     while (++i < 10)
     {
-        answer = readline("❤ MINISHELL $");
-        add_history(answer);
-        printf("%s\n", answer);
+		answer = readline("❤ MINISHELL $");
+		if (!answer)
+		{
+			printf("\n");
+			return (0);
+		}
+		add_history(answer);
+		printf("%s\n", answer);
+		free(answer);
     }
     return (0);
 }

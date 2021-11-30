@@ -6,7 +6,7 @@
 #    By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/11/30 16:20:56 by zminhas          ###   ########.fr        #
+#    Updated: 2021/11/30 17:03:00 by zminhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ $(NAME):	$(OBJS)
 
 .c.o:
 			@$(CC) $(CFLAGS) -c -I./includes $< -o $(<:.c=.o)
-			@echo "[$(PURPLE)✓$(RESET)] compilation of $<"
 
 clean:
 			make clean -C ./libft
@@ -43,9 +42,8 @@ clean:
 fclean:
 			make fclean -C ./libft		
 			@$(RM) $(OBJS)
-			@echo "[$(BLUE)✓$(RESET)] objects erased"
 			@$(RM) $(NAME)
-			@echo "[$(RED)✓$(RESET)] minishell erased"
+			@echo "[$(RED)✓$(RESET)] full clean"
 
 re:			fclean $(NAME)
 
