@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "../libft/includes/libft.h"
 
 # define BLACK "\033[30m"
 # define RED "\033[31m"
