@@ -12,22 +12,31 @@
 
 #include "../includes/minishell.h"
 
-int main(void)
+int main(int argc, char **argv, char **env)
 {
 	char *answer;
 	int  i;
 
+	argc = 0;
+	argv = NULL;
 	i = -1;
-	while (++i < 10)
+	answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
+	while (answer)
 	{
-		answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
-		if (!answer)
-		{
-			printf("\n");
-			return (0);
-		}
 		add_history(answer);
-		printf("%s\n", answer);
+		make_my_actions(answer, env, &data);
+		answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
 	}
+	printf("\n");
 	return (0);
+}
+
+void	make_my_actions(char *ans, char **env, t_data *data)
+{
+	char **cmd;
+
+	cmd = ft_split(ans, ' ');
+	if (cmd[0] == "echo")
+		;
+	else if (ans == )
 }
