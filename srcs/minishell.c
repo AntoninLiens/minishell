@@ -52,7 +52,26 @@ void	make_my_actions(char *ans, char **env)
 		waitpid(pid, 0, 0);
 }
 
+int	parse_answer(char *answer, char **env)
+{
+	(void)env;
+	char	**cmd;
+	int		i;
 
+	i = -1;
+	cmd = ft_split(answer, ' ');
+	while (cmd[++i])
+	{
+		if (cmd[i] == "echo" || cmd[i] == "cd" || cmd[i] == "ls" || \
+		cmd[i] == "pwd" || cmd[i] == "export" || cmd[i] == "unset" || \
+		cmd[i] == "env")
+			cass_exec(cmd[i], env);
+		else if (cmd[i] == "exit")
+			return (0);
+		else
+			return (1);
+	}
+}
 
 int main(int argc, char **argv, char **env)
 {
@@ -67,6 +86,8 @@ int main(int argc, char **argv, char **env)
 		answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
 		add_history(answer);
 		make_my_actions(answer, env);
+		if (parse_answer(answer, env))
+			return (1);
 	}
 	printf("\n");
 	return (0);
