@@ -6,7 +6,7 @@
 #    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/01 14:55:29 by aliens           ###   ########.fr        #
+#    Updated: 2021/12/01 14:59:31 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			make -C ./libft
-			@$(CC) $(SRCS) -lreadline libft/libft.a -o $(NAME)
+			@$(CC) $(SRCS) libft/libft.a -lreadline -o $(NAME)
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
 
 .c.o:
