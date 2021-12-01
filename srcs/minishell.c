@@ -12,13 +12,36 @@
 
 #include "../includes/minishell.h"
 
-int main(void)
+int	parse_answer(char *answer, char **env)
 {
-	char *answer;
-	int  i;
+	(void)env;
+	char	**cmd;
+	int		i;
 
 	i = -1;
-	while (++i < 10)
+	cmd = ft_split(answer, ' ');
+	while (cmd[++i])
+	{
+		if (cmd[i] == "echo" || cmd[i] == "cd" || cmd[i] == "ls" || \
+		cmd[i] == "pwd" || cmd[i] == "export" || cmd[i] == "unset" || \
+		cmd[i] == "env")
+			cass_exec(cmd[i], env);
+		else if (cmd[i] == "exit")
+			return (0);
+		else
+			return (1);
+	}
+}
+
+int main(int ac, char **av, char **env)
+{
+	char *answer;
+	(void)env;
+	(void)av;
+
+	if (ac > 1)
+		return (1);
+	while (1)
 	{
 		answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
 		if (!answer)
@@ -27,7 +50,8 @@ int main(void)
 			return (0);
 		}
 		add_history(answer);
-		printf("%s\n", answer);
+		if (parse_answer(answer, env))
+			return (1);
 	}
 	return (0);
 }
