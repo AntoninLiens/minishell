@@ -12,31 +12,62 @@
 
 #include "../includes/minishell.h"
 
-int main(int argc, char **argv, char **env)
+char	*pathfinder(char *ans, char **env)
 {
-	char *answer;
-	int  i;
+	char	**paths;
+	char	*part_path;
+	char	*path;
+	int		i;
 
-	argc = 0;
-	argv = NULL;
 	i = -1;
-	answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
-	while (answer)
+	while (!ft_strnstr(env[++i], "PATH", 4))
+		;
+	paths = ft_split(env[i] + 5, ':');
+	i = -1;
+	while (paths[++i])
 	{
-		add_history(answer);
-		make_my_actions(answer, env, &data);
-		answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
+		part_path = ft_strjoin(paths[i], "/");
+		path = ft_strjoin(part_path, ans);
+		free(part_path);
+		if (!access(path, F_OK))
+			return (path);
 	}
-	printf("\n");
 	return (0);
 }
 
-void	make_my_actions(char *ans, char **env, t_data *data)
+void	make_my_actions(char *ans, char **env)
 {
-	char **cmd;
+	pid_t	pid;
+	char	**cmd;
+	char	*path;
 
+	pid = fork();
 	cmd = ft_split(ans, ' ');
-	if (cmd[0] == "echo")
-		;
-	else if (ans == )
+	path = pathfinder(ans, env);
+	if (!path)
+		return ;
+	if (!pid)
+		execve(path, cmd, env);
+	else
+		waitpid(pid, 0, 0);
+}
+
+
+
+int main(int argc, char **argv, char **env)
+{
+	char	*answer;
+	int		first;
+
+	first = 0;
+	if (argc > 1 && argv)
+		return (1);
+	while (!first++ || answer)
+	{
+		answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
+		add_history(answer);
+		make_my_actions(answer, env);
+	}
+	printf("\n");
+	return (0);
 }
