@@ -60,6 +60,14 @@ typedef struct  s_mini
 
 int init_env(t_mini *shell, char **basic_env);
 
+/*		ENV		*/
+
+char    *get_env_val(t_env *env, char *name);
+
+/*		SHLVL		*/
+
+void    up_shlvl(t_mini *shell);
+
 /*		UTILS		*/
 
 void	print_env(t_env *env);

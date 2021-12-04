@@ -6,7 +6,7 @@
 #    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/04 16:09:48 by ctirions         ###   ########.fr        #
+#    Updated: 2021/12/04 16:31:56 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ RESET	=	$(shell tput -Txterm sgr0)
 SRCS	=	srcs/minishell.c	\
 			srcs/init.c			\
 			srcs/utils.c		\
-			srcs/shlvl.c
+			srcs/shlvl.c		\
+			srcs/env.c
 
 OBJS	=	$(SRCS:.c=.o)
 
