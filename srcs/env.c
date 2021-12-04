@@ -3,13 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/04 16:12:01 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:51:17 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char    *get_env_val(t_env *env, char *name)
+void	free_env(t_env *env)
+{
+	t_env	*tmp;
+
+	while (env->next)
+	{
+		tmp = env;
+		env = tmp->next;
+		free(tmp);
+	}
+	free(env);
+}

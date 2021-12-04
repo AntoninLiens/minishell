@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 15:44:07 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/04 16:03:52 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:48:04 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int init_env(t_mini *shell, char **basic_env)
 	shell->env = (t_env *)malloc(sizeof(t_env));
 	if (!shell->env)
 		return (1);
+	tmp = shell->env;
 	i = -1;
 	while (basic_env[++i])
 	{
@@ -28,7 +29,10 @@ int init_env(t_mini *shell, char **basic_env)
 		{
 			tmp->next = (t_env *)malloc(sizeof(t_env));
 			if (!tmp->next)
+			{
+				free_env(shell->env);
 				return (1);
+			}
 			tmp = tmp->next;
 		}
 		else
