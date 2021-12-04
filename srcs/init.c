@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 15:43:50 by aliens            #+#    #+#             */
-/*   Updated: 2021/12/04 16:05:01 by aliens           ###   ########.fr       */
+/*   Created: 2021/12/04 15:44:07 by ctirions          #+#    #+#             */
+/*   Updated: 2021/12/04 16:03:52 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	init_env(t_mini *shell, char **basic_env)
+int init_env(t_mini *shell, char **basic_env)
 {
 	t_env	*tmp;
 	int		i;
@@ -34,4 +34,5 @@ int	init_env(t_mini *shell, char **basic_env)
 		else
 			tmp->next = NULL;
 	}
+	return (0);
 }

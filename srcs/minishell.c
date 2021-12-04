@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/04 16:09:30 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/04 16:07:29 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	make_my_actions(char *ans, char **env)
 	else
 		waitpid(pid, 0, 0);
 }
-
-
 
 int main(int argc, char **argv, char **env)
 {

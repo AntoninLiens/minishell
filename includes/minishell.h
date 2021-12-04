@@ -56,4 +56,12 @@ typedef struct s_mini
 	int		exit;
 }				t_mini;
 
+/*		INIT		*/
+
+int init_env(t_mini *shell, char **basic_env);
+
+/*		UTILS		*/
+
+void	print_env(t_env *env);
+
 #endif
