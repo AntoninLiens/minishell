@@ -20,7 +20,7 @@ SRCS	=	srcs/minishell.c	\
 			srcs/init.c			\
 			srcs/utils.c		\
 			srcs/shlvl.c		\
-			srcs/free.c
+			srcs/env.c
 
 OBJS	=	$(SRCS:.c=.o)
 
