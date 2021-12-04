@@ -13,6 +13,7 @@
 #include "../includes/minishell.h"
 
 char    *get_env_val(t_env *env, char *name)
+<<<<<<< HEAD
 {
 	t_env	*tmp;
 	char	*res;
@@ -35,3 +36,5 @@ char    *get_env_val(t_env *env, char *name)
 	}
 	return (NULL);
 }
+=======
+>>>>>>> e2b4fdc2efa7828e7b506503a0fe3f27569182b0

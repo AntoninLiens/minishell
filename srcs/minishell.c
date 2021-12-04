@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
 /*   Updated: 2021/12/04 16:31:34 by ctirions         ###   ########.fr       */
@@ -59,7 +59,8 @@ int main(int argc, char **argv, char **env)
 	if (argc > 1 && argv)
 		return (1);
 	shell.exit = 0;
-	init_env(&shell, env);
+	if (init_env(&shell, env))
+		return (1);
 	up_shlvl(&shell);
 	while (!shell.exit)
 	{

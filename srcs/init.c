@@ -17,16 +17,18 @@ int init_env(t_mini *shell, char **basic_env)
 	t_env	*tmp;
 	int		i;
 
-	i = -1;
-	
 	shell->env = (t_env *)malloc(sizeof(t_env));
-	tmp = shell->env;
+	if (!shell->env)
+		return (1);
+	i = -1;
 	while (basic_env[++i])
 	{
 		tmp->str = ft_strdup(basic_env[i]);
 		if (basic_env[i + 1])
 		{
 			tmp->next = (t_env *)malloc(sizeof(t_env));
+			if (!tmp->next)
+				return (1);
 			tmp = tmp->next;
 		}
 		else
