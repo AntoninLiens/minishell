@@ -79,10 +79,10 @@ void	print_env(t_env *env);
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 15:06:08 by ctirions          #+#    #+#             */
-/*   Updated: 2021/11/30 15:06:08 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:50:19 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ int init_env(t_mini *shell, char **basic_env);
 /*		UTILS		*/
 
 void	print_env(t_env *env);
+void	free_env(t_env *env);
 
 >>>>>>> e2b4fdc2efa7828e7b506503a0fe3f27569182b0
 #endif
