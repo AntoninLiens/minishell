@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/04 15:23:32 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:09:30 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,19 @@ void	make_my_actions(char *ans, char **env)
 
 int main(int argc, char **argv, char **env)
 {
-	char	*answer;
-	int		first;
+	t_mini	shell;
 
-	first = 0;
 	if (argc > 1 && argv)
 		return (1);
-	while (!first++ || answer)
+	shell.exit = 0;
+	if (init_env(&shell, env))
+		return (1);
+	up_shlvl(&shell);
+	while (!shell.exit)
 	{
-		answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
-		add_history(answer);
-		make_my_actions(answer, env);
+		shell.answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
+		add_history(shell.answer);
+		make_my_actions(shell.answer, env);
 	}
 	printf("\n");
 	return (0);
