@@ -31,30 +31,30 @@
 # define WHITE "\033[37m"
 # define RESET "\033[0m"
 
-typedef struct	s_env	t_env;
-typedef struct	s_cmd	t_cmd;
+typedef struct s_env	t_env;
+typedef struct s_cmd	t_cmd;
 
-struct	s_env
+struct s_env
 {
 	char	*str;
 	t_env	*next;
 };
 
-struct	s_cmd
+struct s_cmd
 {
 	char	*str;
 	t_cmd	*next;
 	t_cmd	*prev;
 };
 
-typedef struct  s_mini
+typedef struct s_mini
 {
-    t_env	*env;
+	t_env	*env;
 	t_cmd	*cmd;
 	char	*answer;
 	int		pid;
-    int		exit;
-}               t_mini;
+	int		exit;
+}				t_mini;
 
 /*		INIT		*/
 
