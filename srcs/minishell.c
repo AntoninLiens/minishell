@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/04 16:31:34 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/05 01:46:38 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,17 @@ int main(int argc, char **argv, char **env)
 	up_shlvl(&shell);
 	while (!shell.exit)
 	{
+		signal(SIGINT, &sigint);
 		shell.answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
+		if (!shell.answer)
+		{
+			printf("\n");
+			return (1);
+		}
 		add_history(shell.answer);
 		make_my_actions(shell.answer, env);
 	}
+	free_env(shell.env);
 	printf("\n");
 	return (0);
 }

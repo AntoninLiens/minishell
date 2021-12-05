@@ -73,4 +73,8 @@ void    up_shlvl(t_mini *shell);
 void	print_env(t_env *env);
 void	free_env(t_env *env);
 
+/*		SIGNALS		*/
+
+void    sigint(int code);
+
 #endif

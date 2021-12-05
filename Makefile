@@ -6,7 +6,7 @@
 #    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/05 01:20:31 by ctirions         ###   ########.fr        #
+#    Updated: 2021/12/05 01:31:32 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,11 @@ SRCSDIR = srcs
 OBJSDIR = objs
 
 SRCS	=	srcs/minishell.c	\
-			srcs/init.c		\
+			srcs/init.c			\
 			srcs/utils.c		\
 			srcs/shlvl.c		\
-			srcs/env.c
+			srcs/env.c			\
+			srcs/signals.c
 
 OBJS	=	$(SRCS:.c=.o)
 
