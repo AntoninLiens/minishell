@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
+#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/04 16:49:22 by aliens           ###   ########.fr        #
+#    Updated: 2021/12/05 01:20:31 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,11 @@ PURPLE	=	$(shell tput -Txterm setaf 5)
 BLUE	=	$(shell tput -Txterm setaf 6)
 RESET	=	$(shell tput -Txterm sgr0)
 
+SRCSDIR = srcs
+OBJSDIR = objs
+
 SRCS	=	srcs/minishell.c	\
-			srcs/init.c			\
+			srcs/init.c		\
 			srcs/utils.c		\
 			srcs/shlvl.c		\
 			srcs/env.c
@@ -31,23 +34,25 @@ CC		=	gcc -Wall -Wextra -Werror
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			make -C ./libft
+			@echo ""
+			@make -C ./libft
 			@$(CC) $(SRCS) libft/libft.a -lreadline -o $(NAME)
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
+			@mv $(OBJS) $(OBJSDIR)
 
 .c.o:
+			@printf "[$(PURPLE)✓$(RESET)] compilation of $<       \r"
 			@$(CC) $(CFLAGS) -c -I./includes $< -o $(<:.c=.o)
-			@echo "[$(PURPLE)✓$(RESET)] compilation of $<"
 
 clean:
-			make clean -C ./libft
-			@$(RM) $(OBJS)
+			@make clean -C ./libft
+			@$(RM) $(OBJSDIR)/*.o
 			@echo "[$(BLUE)✓$(RESET)] objects erased"
 
 fclean:
-			make fclean -C ./libft		
-			@$(RM) $(OBJS)
-			@echo "[$(BLUE)✓$(RESET)] objects erased"
+			@make fclean -C ./libft		
+			@$(RM) $(OBJSDIR)/*.o
+			@echo "[$(RED)✓$(RESET)] objects erased"
 			@$(RM) $(NAME)
 			@echo "[$(RED)✓$(RESET)] minishell erased"
 
