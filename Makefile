@@ -35,25 +35,22 @@ CC		=	gcc -Wall -Wextra -Werror
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@echo ""
 			@make -C ./libft
 			@$(CC) $(SRCS) libft/libft.a -lreadline -o $(NAME)
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
-			@mv $(OBJS) $(OBJSDIR)
-
 .c.o:
 			@printf "[$(PURPLE)✓$(RESET)] compilation of $<       \r"
 			@$(CC) $(CFLAGS) -c -I./includes $< -o $(<:.c=.o)
 
 clean:
 			@make clean -C ./libft
-			@$(RM) $(OBJSDIR)/*.o
+			@$(RM) $(OBJS)
 			@echo "[$(BLUE)✓$(RESET)] objects erased"
 
 fclean:
 			@make fclean -C ./libft		
-			@$(RM) $(OBJSDIR)/*.o
-			@echo "[$(RED)✓$(RESET)] objects erased"
+			@$(RM) $(OBJS)
+			@echo "[$(BLUE)✓$(RESET)] objects erased"
 			@$(RM) $(NAME)
 			@echo "[$(RED)✓$(RESET)] minishell erased"
 

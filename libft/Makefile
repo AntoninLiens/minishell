@@ -121,7 +121,7 @@ clean:
 
 fclean:		
 			@$(RM) ${OBJS} ${OBJS_PRINTF} ${OBJS_GNL} ${OBJS_BONUS}
-			@echo "[$(RED)✓$(RESET)] libft objects erased"
+			@echo "[$(BLUE)✓$(RESET)] libft objects erased"
 			@$(RM) $(NAME)
 			@echo "[$(RED)✓$(RESET)] libft.a erased"
 			

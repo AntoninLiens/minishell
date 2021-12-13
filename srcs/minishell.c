@@ -32,7 +32,7 @@ char	*pathfinder(char *ans, char **env)
 		if (!access(path, F_OK))
 			return (path);
 	}
-	return (0);
+	return (NULL);
 }
 
 void	make_my_actions(char *ans, char **env)
@@ -41,11 +41,11 @@ void	make_my_actions(char *ans, char **env)
 	char	**cmd;
 	char	*path;
 
-	pid = fork();
 	cmd = ft_split(ans, ' ');
 	path = pathfinder(cmd[0], env);
 	if (!path)
 		return ;
+	pid = fork();
 	if (!pid)
 		execve(path, cmd, env);
 	else
@@ -65,7 +65,7 @@ int main(int argc, char **argv, char **env)
 	while (!shell.exit)
 	{
 		signal(SIGINT, &sigint);
-		shell.answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
+		shell.answer = readline("\r😁 \033[34mMINISHELL \033[31m$ \033[0m");
 		if (!shell.answer)
 		{
 			printf("\n");
