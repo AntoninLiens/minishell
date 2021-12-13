@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/05 01:46:38 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:53:52 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*pathfinder(char *ans, char **env)
 		if (!access(path, F_OK))
 			return (path);
 	}
+	if (ans)
+		printf("minishell: command not found: %s\n", ans);
 	return (NULL);
 }
 
@@ -65,7 +67,7 @@ int main(int argc, char **argv, char **env)
 	while (!shell.exit)
 	{
 		signal(SIGINT, &sigint);
-		shell.answer = readline("\r😁 \033[34mMINISHELL \033[31m$ \033[0m");
+		shell.answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
 		if (!shell.answer)
 		{
 			printf("\n");
