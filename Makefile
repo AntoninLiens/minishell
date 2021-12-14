@@ -6,7 +6,7 @@
 #    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/05 01:31:32 by ctirions         ###   ########.fr        #
+#    Updated: 2021/12/14 17:04:56 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,18 @@ PURPLE	=	$(shell tput -Txterm setaf 5)
 BLUE	=	$(shell tput -Txterm setaf 6)
 RESET	=	$(shell tput -Txterm sgr0)
 
-SRCSDIR = srcs
-OBJSDIR = objs
+SRCSDIR = srcs/
+OBJSDIR = objs/
 
-SRCS	=	srcs/minishell.c	\
-			srcs/init.c			\
-			srcs/utils.c		\
-			srcs/shlvl.c		\
-			srcs/env.c			\
-			srcs/signals.c
+FILES	=	minishell.c	\
+			init.c		\
+			utils.c		\
+			shlvl.c		\
+			env.c		\
+			signals.c
 
-OBJS	=	$(SRCS:.c=.o)
+SRCS	=	$(addprefix srcs/, $(FILES))
+OBJS	=	$(patsubst srcs%.c, objs%.o, $(SRCS))
 
 NAME	=	minishell
 RM		=	rm -f
@@ -40,7 +41,7 @@ $(NAME):	$(OBJS)
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
 .c.o:
 			@printf "[$(PURPLE)✓$(RESET)] compilation of $<       \r"
-			@$(CC) $(CFLAGS) -c -I./includes $< -o $(<:.c=.o)
+			@$(CC) $(CFLAGS) -c -I./includes $^ -o $(patsubst srcs%, objs%, $@)
 
 clean:
 			@make clean -C ./libft
