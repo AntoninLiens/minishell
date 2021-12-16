@@ -70,11 +70,23 @@ void    up_shlvl(t_mini *shell);
 
 /*		UTILS		*/
 
-void	print_env(t_env *env);
 void	free_env(t_env *env);
 
 /*		SIGNALS		*/
 
 void    sigint(int code);
+
+/*		PARSE		*/
+
+void    parser(char *ans, t_mini *shell);
+
+/*		COMMANDS	*/
+
+void    echo(char **cmds);
+void	env(t_env *env);
+void    pwd(t_env *env);
+void    cd(char *path, t_mini *shell);
+void    export(t_env *env, char *arg);
+void    unset(t_env *env, char *name);
 
 #endif

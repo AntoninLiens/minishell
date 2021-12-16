@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/13 16:53:52 by zminhas          ###   ########.fr       */
+/*   Updated: 2021/12/16 00:31:44 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ int main(int argc, char **argv, char **env)
 			return (1);
 		}
 		add_history(shell.answer);
-		make_my_actions(shell.answer, env);
+		parser(shell.answer, &shell);
+	//	make_my_actions(shell.answer, env);
 	}
 	free_env(shell.env);
-	printf("\n");
 	return (0);
 }

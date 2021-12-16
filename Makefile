@@ -6,7 +6,7 @@
 #    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/14 17:04:56 by ctirions         ###   ########.fr        #
+#    Updated: 2021/12/16 00:15:20 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,13 @@ FILES	=	minishell.c	\
 			utils.c		\
 			shlvl.c		\
 			env.c		\
-			signals.c
+			signals.c	\
+			parse.c		\
+			commands/pwd.c\
+			commands/env.c\
+			commands/variables.c\
+			commands/echo.c\
+			commands/cd.c
 
 SRCS	=	$(addprefix srcs/, $(FILES))
 OBJS	=	$(patsubst srcs%.c, objs%.o, $(SRCS))
@@ -37,11 +43,14 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			@make -C ./libft
-			@$(CC) $(SRCS) libft/libft.a -lreadline -o $(NAME)
+			@$(CC) -o $(NAME) $(OBJS) libft/libft.a -lreadline
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
-.c.o:
+			
+objs/%.o:	srcs/%.c
 			@printf "[$(PURPLE)✓$(RESET)] compilation of $<       \r"
-			@$(CC) $(CFLAGS) -c -I./includes $^ -o $(patsubst srcs%, objs%, $@)
+			@$(CC) $(CFLAGS) -c -I./includes $^ -o $@
+
+run:		@make && ./minishell
 
 clean:
 			@make clean -C ./libft
