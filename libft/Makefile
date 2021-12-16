@@ -6,7 +6,7 @@
 #    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 17:05:49 by ctirions          #+#    #+#              #
-#    Updated: 2021/12/05 01:20:53 by ctirions         ###   ########.fr        #
+#    Updated: 2021/12/14 18:00:26 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,8 @@ RM			= rm -f
 
 $(NAME):	${OBJS} ${OBJS_PRINTF} ${OBJS_GNL}
 			@ar -rcs ${NAME} ${OBJS} ${OBJS_PRINTF} ${OBJS_GNL}
-			@echo "\n[$(GREEN)✓$(RESET)] libft.a created"
+			@printf "                                                    \r"
+			@printf "[$(GREEN)✓$(RESET)] libft.a created\n"
 
 all:		${NAME}
 
