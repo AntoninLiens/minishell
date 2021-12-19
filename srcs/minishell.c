@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/16 00:31:44 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:02:21 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	make_my_actions(char *ans, char **env)
 		return ;
 	pid = fork();
 	if (!pid)
-		execve(path, cmd, env);
+	{
+		if (execve(path, cmd, env))
+			printf("minishell: command not found: %s\n", cmd[0]);
+	}
 	else
 		waitpid(pid, 0, 0);
 }
@@ -67,15 +70,15 @@ int main(int argc, char **argv, char **env)
 	while (!shell.exit)
 	{
 		signal(SIGINT, &sigint);
-		shell.answer = readline("😁 \033[34mMINISHELL \033[31m$ \033[0m");
+		shell.answer = readline("MINISHELL $ ");
 		if (!shell.answer)
 		{
 			printf("\n");
 			return (1);
 		}
 		add_history(shell.answer);
-		parser(shell.answer, &shell);
-	//	make_my_actions(shell.answer, env);
+		if (!parser(shell.answer, &shell))
+			make_my_actions(shell.answer, env);
 	}
 	free_env(shell.env);
 	return (0);

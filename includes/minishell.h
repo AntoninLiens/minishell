@@ -78,7 +78,7 @@ void    sigint(int code);
 
 /*		PARSE		*/
 
-void    parser(char *ans, t_mini *shell);
+int		parser(char *ans, t_mini *shell);
 
 /*		COMMANDS	*/
 
