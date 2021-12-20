@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/16 15:02:21 by zminhas          ###   ########.fr       */
+/*   Updated: 2021/12/20 16:35:03 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,28 @@ char	*pathfinder(char *ans, char **env)
 	return (NULL);
 }
 
-void	make_my_actions(char *ans, char **env)
+int	make_my_actions(char *ans, char **env)
 {
-	pid_t	pid;
 	char	**cmd;
 	char	*path;
 
 	cmd = ft_split(ans, ' ');
 	path = pathfinder(cmd[0], env);
 	if (!path)
-		return ;
-	pid = fork();
-	if (!pid)
+		return (1);
+	if (execve(path, cmd, env))
 	{
-		if (execve(path, cmd, env))
-			printf("minishell: command not found: %s\n", cmd[0]);
+		printf("minishell: command not found: %s\n", cmd[0]);
+		return (1);
 	}
-	else
-		waitpid(pid, 0, 0);
+	return (0);
 }
 
 int main(int argc, char **argv, char **env)
 {
 	t_mini	shell;
 
+	shell.basic_env = env;
 	if (argc > 1 && argv)
 		return (1);
 	shell.exit = 0;
@@ -77,8 +75,8 @@ int main(int argc, char **argv, char **env)
 			return (1);
 		}
 		add_history(shell.answer);
-		if (!parser(shell.answer, &shell))
-			make_my_actions(shell.answer, env);
+		if (parser(shell.answer, &shell))
+			shell.exit = 1;
 	}
 	free_env(shell.env);
 	return (0);

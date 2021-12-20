@@ -49,9 +49,11 @@ struct	s_cmd
 
 typedef struct  s_mini
 {
-    t_env	*env;
 	t_cmd	*cmd;
+    t_env	*env;
+	char	**basic_env;
 	char	*answer;
+	int		**pipes;
 	int		pid;
     int		exit;
 }               t_mini;
@@ -79,6 +81,15 @@ void    sigint(int code);
 /*		PARSE		*/
 
 int		parser(char *ans, t_mini *shell);
+int		builts_in(char *ans, t_mini *shell);
+int		make_my_actions(char *ans, char **env);
+int		check_operator(char *ans, t_mini *shell);
+
+/*		PIPES		*/
+
+int		**malloc_pipes(int size, t_mini *shell);
+int		begin_pipe(char *ans, t_mini *shell, int i);
+int		end_pipe(char *ans, t_mini *shell, int i);
 
 /*		COMMANDS	*/
 

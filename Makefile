@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
+#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/16 00:15:20 by ctirions         ###   ########.fr        #
+#    Updated: 2021/12/20 16:33:33 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,17 +19,18 @@ RESET	=	$(shell tput -Txterm sgr0)
 SRCSDIR = srcs/
 OBJSDIR = objs/
 
-FILES	=	minishell.c	\
-			init.c		\
-			utils.c		\
-			shlvl.c		\
-			env.c		\
-			signals.c	\
-			parse.c		\
-			commands/pwd.c\
-			commands/env.c\
-			commands/variables.c\
-			commands/echo.c\
+FILES	=	minishell.c				\
+			init.c					\
+			utils.c					\
+			shlvl.c					\
+			env.c					\
+			signals.c				\
+			parse.c					\
+			pipes.c					\
+			commands/pwd.c			\
+			commands/env.c			\
+			commands/variables.c	\
+			commands/echo.c			\
 			commands/cd.c
 
 SRCS	=	$(addprefix srcs/, $(FILES))

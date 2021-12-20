@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 15:04:19 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/16 15:16:42 by zminhas          ###   ########.fr       */
+/*   Updated: 2021/12/20 16:44:59 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_set_params(size_t *size, char ***dst, char *s, char c)
 	return (s);
 }
 
-char	**ft_split(char *s, char **c)
+char	**ft_split(char *s, char c)
 {
 	char	**dst;
 	size_t	i;

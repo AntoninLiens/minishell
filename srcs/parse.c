@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/16 16:44:30 by zminhas          ###   ########.fr       */
+/*   Updated: 2021/12/20 17:19:24 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_quote(char **cmds)
-{
-	
-}
-
-static int	builts_in(char *ans, t_mini *shell)
+int	builts_in(char *ans, t_mini *shell)
 {
 	char	**cmds;
 
@@ -45,6 +40,44 @@ static int	builts_in(char *ans, t_mini *shell)
 
 int	parser(char *ans, t_mini *shell)
 {
-	
-	return (builts_in(ans, shell));
+	pid_t	pid;
+	int		i;
+	int		nb_cmds;
+
+	i = -1;
+	nb_cmds = check_operator(ans, shell);
+	shell->pipes = malloc_pipes(nb_cmds, shell);
+	if (!shell->pipes)
+		return (1);
+	if (nb_cmds == 1)
+	{
+		pid = fork();
+		if (!pid)
+		{
+			if (!builts_in(ans, shell))
+			{
+				if (make_my_actions(shell->answer, shell->basic_env))
+					exit(1);
+			}
+			else
+				exit(1);
+		}
+		else
+			waitpid(pid, 0, 0);
+		return (0);
+	}
+	while (++i < nb_cmds)
+	{
+		pid = fork();
+		if (!pid)
+		{
+			if (begin_pipe(ans, shell, i))
+				return (1);
+		}
+		else 
+			if (end_pipe(ans, shell, i))
+				return (1);
+		waitpid(pid, 0, 0);
+	}
+	return (0);
 }
