@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
+#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/20 16:33:33 by aliens           ###   ########.fr        #
+#    Updated: 2021/12/21 17:07:08 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ FILES	=	minishell.c				\
 			utils.c					\
 			shlvl.c					\
 			env.c					\
+			exec.c					\
 			signals.c				\
 			parse.c					\
 			pipes.c					\

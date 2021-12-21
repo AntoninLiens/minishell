@@ -6,39 +6,30 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:20:04 by aliens            #+#    #+#             */
-/*   Updated: 2021/12/21 15:59:15 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:21:40 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	begin_pipe(t_mini *shell, int i)
+int	common_pipes(t_mini *shell, int i)
 {
-	close(shell->pipes[i][0]);
-	dup2(shell->pipes[i][1], STDOUT_FILENO);
+	close(shell->pipes[i % 2][0]);
+	dup2(shell->pipes[i % 2][1], STDOUT_FILENO);
 	if (i)
-		dup2(shell->pipes[i - 1][0], STDIN_FILENO);
+		dup2(shell->pipes[(i - 1) % 2][0], STDIN_FILENO);
 	if (!builts_in(shell))
-	{
-		if (make_my_actions(shell, shell->basic_env))
-			exit(1);
-	}
-	else
-		exit(1);
+		if (exec_bin(shell, shell->basic_env))
+			return (1);
 	return (0);
 }
 
 int	end_pipe(t_mini *shell, int i)
 {
-	close(shell->pipes[i][1]);
-	dup2(shell->pipes[i][0], STDIN_FILENO);
-	dup2(STDOUT_FILENO, shell->pipes[i - 1][1]);
+	close(shell->pipes[(i - 1) % 2][1]);
+	dup2(shell->pipes[(i - 1) % 2][0], STDIN_FILENO);
 	if (!builts_in(shell))
-	{
-		if (make_my_actions(shell, shell->basic_env))
-			exit(1);
-	}
-	else
-		exit(1);
+		if (exec_bin(shell, shell->basic_env))
+			return (1);
 	return (0);
 }

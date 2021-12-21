@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 15:44:07 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/21 16:16:34 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/21 17:06:32 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,6 @@ void	add_command(t_mini *shell, char *command)
 		shell->cmd->next->next = NULL;
 		shell->cmd = shell->cmd->next;
 	}
-}
-
-int	check_operator(char *ans, t_mini *shell)
-{
-	char	**cmd;
-	int		nb_cmd;
-	int		i;
-
-	nb_cmd = 1;
-	while (ans[++i])
-		if (ans[i] == '|')
-			nb_cmd++;
-	cmd = ft_split(ans, '|');
-	i = -1;
-	shell->cmd = NULL;
-	if (!ans[0])
-		return (0);
-	while (++i < nb_cmd)
-		add_command(shell, cmd[i]);
-	return (nb_cmd);
 }
 
 int init_env(t_mini *shell, char **basic_env)

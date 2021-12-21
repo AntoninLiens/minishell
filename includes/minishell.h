@@ -60,7 +60,8 @@ typedef struct  s_mini
 
 /*		INIT		*/
 
-int init_env(t_mini *shell, char **basic_env);
+void	add_command(t_mini *shell, char *command);
+int 	init_env(t_mini *shell, char **basic_env);
 
 /*		ENV		*/
 
@@ -72,6 +73,7 @@ void    up_shlvl(t_mini *shell);
 
 /*		UTILS		*/
 
+char	*pathfinder(char *ans, char **env);
 void	free_env(t_env *env);
 
 /*		SIGNALS		*/
@@ -82,12 +84,12 @@ void    sigint(int code);
 
 int		parser(char *ans, t_mini *shell);
 int		builts_in(t_mini *shell);
-int		make_my_actions(t_mini *shell, char **env);
+int		exec_bin(t_mini *shell, char **env);
 int		check_operator(char *ans, t_mini *shell);
 
 /*		PIPES		*/
 
-int		begin_pipe(t_mini *shell, int i);
+int		common_pipes(t_mini *shell, int i);
 int		end_pipe(t_mini *shell, int i);
 
 /*		COMMANDS	*/
