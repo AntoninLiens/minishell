@@ -6,28 +6,41 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 23:19:42 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/16 00:06:16 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:41:06 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    echo(char **cmds)
+void    echo(char *cmd)
 {
+	char	**arg;
     int     i;
+	int		tmp;
+	int		no_backslash;
 
-    i = 0;
-    while (cmds[++i])
-        ;
-    if (cmds[1][0] == '\"')
+    i = 1;
+	no_backslash = 0;
+	arg = ft_split(cmd, ' ');
+	if (arg[1][0] == '-' && arg[1][1] == 'n')
+	{
+		no_backslash = 1;
+		i++;
+	}
+    if (arg[i][0] == '\"')
     {
-        cmds[i - 1][ft_strlen(cmds[i - 1]) - 1] = '\0';
-        cmds[1]++;
-        i = 0;
-        while (cmds[++i])
-            printf("%s ", cmds[i]);
-        printf("\n");
+    	arg[i]++;
+		tmp = i - 1;
+		while (arg[++tmp])
+			if (arg[tmp][ft_strlen(arg[tmp]) - 1] == '\"')
+				arg[tmp][ft_strlen(arg[tmp]) - 1] = '\0';
     }
-    else
-        printf("%s\n", cmds[1]);
+    while (arg[i])
+	{
+    	printf("%s", arg[i++]);
+		if (arg[i])
+			printf(" ");
+	}
+	if (!no_backslash)
+		printf("\n");
 }

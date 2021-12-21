@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 00:05:34 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/16 00:47:03 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/21 16:04:10 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,12 @@ static void replace_pwd(t_env *env)
     }
 }
 
-void    cd(char *path, t_mini *shell)
+void    cd(t_mini *shell)
 {
+	char	**path;
+
+	path = ft_split(shell->cmd->str, ' ');
     replace_oldpwd(shell->env);
-    chdir(path);
+    chdir(path[1]);
     replace_pwd(shell->env);
 }

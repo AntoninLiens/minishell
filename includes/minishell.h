@@ -53,7 +53,7 @@ typedef struct  s_mini
     t_env	*env;
 	char	**basic_env;
 	char	*answer;
-	int		**pipes;
+	int		pipes[2][2];
 	int		pid;
     int		exit;
 }               t_mini;
@@ -81,22 +81,21 @@ void    sigint(int code);
 /*		PARSE		*/
 
 int		parser(char *ans, t_mini *shell);
-int		builts_in(char *ans, t_mini *shell);
-int		make_my_actions(char *ans, char **env);
+int		builts_in(t_mini *shell);
+int		make_my_actions(t_mini *shell, char **env);
 int		check_operator(char *ans, t_mini *shell);
 
 /*		PIPES		*/
 
-int		**malloc_pipes(int size, t_mini *shell);
-int		begin_pipe(char *ans, t_mini *shell, int i);
-int		end_pipe(char *ans, t_mini *shell, int i);
+int		begin_pipe(t_mini *shell, int i);
+int		end_pipe(t_mini *shell, int i);
 
 /*		COMMANDS	*/
 
-void    echo(char **cmds);
+void    echo(char *cmd);
 void	env(t_env *env);
 void    pwd(t_env *env);
-void    cd(char *path, t_mini *shell);
+void    cd(t_mini *shell);
 void    export(t_env *env, char *arg);
 void    unset(t_env *env, char *name);
 

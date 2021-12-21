@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/20 16:35:03 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/21 16:17:43 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ char	*pathfinder(char *ans, char **env)
 	return (NULL);
 }
 
-int	make_my_actions(char *ans, char **env)
+int	make_my_actions(t_mini *shell, char **env)
 {
 	char	**cmd;
 	char	*path;
 
-	cmd = ft_split(ans, ' ');
+	if (!shell->cmd)
+		return (1);
+	cmd = ft_split(shell->cmd->str, ' ');
 	path = pathfinder(cmd[0], env);
 	if (!path)
 		return (1);
@@ -51,6 +53,7 @@ int	make_my_actions(char *ans, char **env)
 		printf("minishell: command not found: %s\n", cmd[0]);
 		return (1);
 	}
+	//shell->cmd = shell->cmd->next;
 	return (0);
 }
 

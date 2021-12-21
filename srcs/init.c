@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 15:44:07 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/20 17:04:30 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/21 16:16:34 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	add_command(t_mini *shell, char *command)
 	}
 	else
 	{
-		printf("coucou\n");
 		shell->cmd->next = (t_cmd *)malloc(sizeof(t_cmd));
 		if (!shell->cmd->next)
 			shell->exit = 1;
@@ -49,6 +48,8 @@ int	check_operator(char *ans, t_mini *shell)
 	cmd = ft_split(ans, '|');
 	i = -1;
 	shell->cmd = NULL;
+	if (!ans[0])
+		return (0);
 	while (++i < nb_cmd)
 		add_command(shell, cmd[i]);
 	return (nb_cmd);
