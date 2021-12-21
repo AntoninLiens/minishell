@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/20 17:19:24 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/21 14:44:25 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,17 @@ int	parser(char *ans, t_mini *shell)
 		return (1);
 	if (nb_cmds == 1)
 	{
-		pid = fork();
-		if (!pid)
+		if (!builts_in(ans, shell))
 		{
-			if (!builts_in(ans, shell))
+			pid = fork();
+			if (!pid)
 			{
 				if (make_my_actions(shell->answer, shell->basic_env))
 					exit(1);
 			}
 			else
-				exit(1);
+				waitpid(pid, 0, 0);
 		}
-		else
-			waitpid(pid, 0, 0);
 		return (0);
 	}
 	while (++i < nb_cmds)
