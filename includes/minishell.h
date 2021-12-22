@@ -53,7 +53,7 @@ typedef struct  s_mini
     t_env	*env;
 	char	**basic_env;
 	char	*answer;
-	int		pipes[2][2];
+	int		pipes[2];
 	int		pid;
     int		exit;
 }               t_mini;
@@ -75,6 +75,8 @@ void    up_shlvl(t_mini *shell);
 
 char	*pathfinder(char *ans, char **env);
 void	free_env(t_env *env);
+void    lst_first(t_cmd **list);
+void    lst_last(t_cmd **list);
 
 /*		SIGNALS		*/
 
@@ -89,8 +91,9 @@ int		check_operator(char *ans, t_mini *shell);
 
 /*		PIPES		*/
 
-int		common_pipes(t_mini *shell, int i);
-int		end_pipe(t_mini *shell, int i);
+int    **malloc_pipes(int size, t_mini *shell);
+int		common_pipes(t_mini *shell);
+int		end_pipe(t_mini *shell);
 
 /*		COMMANDS	*/
 

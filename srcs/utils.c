@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:03:24 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/21 17:07:55 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:04:29 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,18 @@ char	*pathfinder(char *ans, char **env)
 	if (ans)
 		printf("minishell: command not found: %s\n", ans);
 	return (NULL);
+}
+
+void    lst_first(t_cmd **list)
+{
+    if (list && *list)
+        while ((*list)->prev)
+            *list = (*list)->prev;
+}
+
+void    lst_last(t_cmd **list)
+{
+    if (list && *list)
+        while ((*list)->next)
+            *list = (*list)->next;
 }
