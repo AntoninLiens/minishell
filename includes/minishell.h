@@ -91,7 +91,7 @@ int		check_operator(char *ans, t_mini *shell);
 
 /*		PIPES		*/
 
-int    **malloc_pipes(int size, t_mini *shell);
+void	malloc_pipes(int size, t_mini *shell);
 int		common_pipes(t_mini *shell, t_cmd *cmd, int fd[2]);
 int		end_pipe(t_mini *shell, t_cmd *cmd, int fd[2]);
 

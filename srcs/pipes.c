@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:20:04 by aliens            #+#    #+#             */
-/*   Updated: 2021/12/22 19:07:52 by zminhas          ###   ########.fr       */
+/*   Updated: 2021/12/22 19:18:41 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	common_pipes(t_mini *shell, t_cmd *cmd, int fd[2])
 		if (exec_bin(shell->basic_env, cmd))
 			return (1);
 	}
-	else
-		exit(1);
+	exit(1);
 	return (0);
 }
 
@@ -41,24 +40,24 @@ int	end_pipe(t_mini *shell, t_cmd *cmd, int fd[2])
 	return (0);
 }
 
-/*void    malloc_pipes(int size, t_mini *shell)
+void    malloc_pipes(int size, t_mini *shell)
 {
     int    i;
 
     shell->pipes = (int **)malloc(sizeof(int *) * (size));
     if (!shell->pipes)
-        return (NULL);
-    pipes[size] = NULL;
+        return ;
+    shell->pipes[size] = NULL;
     while (size--)
     {
-        pipes[size] = (int *)malloc(sizeof(int) * 2);
-        if (!pipes[size])
-            return (NULL);
+        shell->pipes[size] = (int *)malloc(sizeof(int) * 2);
+        if (!shell->pipes[size])
+            return ;
     }
     i = -1;
     while (++i < size)
     {
         if (pipe(shell->pipes[i]) == -1)
-            return (NULL);
+            return ;
     }
-}*/
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/22 18:42:08 by zminhas          ###   ########.fr       */
+/*   Updated: 2021/12/22 19:17:28 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	exec_bin(char **env, t_cmd *cmd)
 			printf("minishell: command not found: %s\n", arg[0]);
 			return (0);
 		}
+		exit(1);
 	}
-	else
-		waitpid(pid, 0, 0);
+	pid = waitpid(pid, 0, 0);
 	return (0);
 }
 
