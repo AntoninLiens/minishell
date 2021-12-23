@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/23 17:24:52 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/23 17:43:24 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	parser(char *ans, t_mini *shell)
 	}
 	if (!tmp)
 		return (0);
+	// faire appelle à redir avec une option qui skip les redir; last cmd->STDOUT
 	if (!builts_in(shell, tmp->str))
 	{
 		pid = fork();
