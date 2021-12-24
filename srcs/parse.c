@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/23 17:43:24 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/24 17:02:55 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,19 @@ int	parser(char *ans, t_mini *shell)
 	if (!nb_cmds)
 		return (0);
 	tmp = shell->cmd;
-	if (nb_cmds == 1)
+	if (nb_cmds > 1)
 	{
-		if (!builts_in(shell, tmp->str))
-		{
-			pid = fork();
-			if (!pid && exec_bin(shell->basic_env, tmp->str))	
-				return (1);
-			else
-				waitpid(pid, 0, 0);
-		}
-		return (0);
-	}
-	redir(tmp->str, shell);
-	tmp = tmp->next;
-	while (tmp && tmp->next)
-	{
-		redir(tmp->str, shell);
+		redir(tmp->str, shell, 0);
 		tmp = tmp->next;
+		while (tmp && tmp->next)
+		{
+			redir(tmp->str, shell, 0);
+			tmp = tmp->next;
+		}
 	}
 	if (!tmp)
 		return (0);
-	// faire appelle à redir avec une option qui skip les redir; last cmd->STDOUT
+//	 faire appelle à redir avec une option qui skip les redir; last cmd->STDOUT
 	if (!builts_in(shell, tmp->str))
 	{
 		pid = fork();

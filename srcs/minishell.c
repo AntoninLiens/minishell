@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/23 17:24:30 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/24 15:38:51 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int argc, char **argv, char **env)
 		shell.answer = readline("MINISHELL $ ");
 		if (!shell.answer)
 		{
-			printf("\n");
+			//printf("\n");
 			return (1);
 		}
 		add_history(shell.answer);

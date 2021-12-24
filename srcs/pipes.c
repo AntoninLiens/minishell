@@ -6,29 +6,30 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:20:04 by aliens            #+#    #+#             */
-/*   Updated: 2021/12/23 17:32:11 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/24 15:36:38 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	redir(char *cmd, t_mini *shell)
+void	redir(char *cmd, t_mini *shell, int b2o)
 {
-	int	fd[2];
 	pid_t pid;
 
-	pipe(fd);
+	if (b2o)
+		return ;
+	pipe(shell->pfd);
 	pid = fork();
 	if (pid)
 	{
-		close(fd[1]);
-		dup2(fd[0], 0);
+		close(shell->pfd[1]);
+		dup2(shell->pfd[0], b2o);
 		waitpid(pid, NULL, 0);
 	}
 	else
 	{
-		close(fd[0]);
-		dup2(fd[1], 1);
+		close(shell->pfd[0]);
+		dup2(shell->pfd[1], 1);
 		if (!builts_in(shell, cmd))
 			if (exec_bin(shell->basic_env, cmd))
 				return ;

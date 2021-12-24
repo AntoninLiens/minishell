@@ -53,7 +53,7 @@ typedef struct  s_mini
     t_env	*env;
 	char	**basic_env;
 	char	*answer;
-	int		pid;
+	int		pfd[2];
     int		exit;
 }               t_mini;
 
@@ -93,7 +93,7 @@ int		exec_bin(char **env, char *cmd);
 
 /*		PIPES		*/
 
-void	redir(char *cmd, t_mini *shell);
+void	redir(char *cmd, t_mini *shell, int b2o);
 
 /*		COMMANDS	*/
 
