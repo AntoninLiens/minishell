@@ -3,14 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/22 17:56:36 by zminhas          ###   ########.fr       */
+/*   Updated: 2021/12/25 18:32:16 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	*replace_env_variable(char *ans, t_mini *shell)
+{
+	char	*res;
+	char	*name;
+	char	*value;
+	int		i;
+	int		j;
+
+	i = -1;
+	res = NULL;
+	while (ans[++i])
+	{
+		j = 1;
+		if (ans[i] == '$')
+		{
+			while (ans[i + j] && ans[i + j] != ' ')
+				j++;
+			name = ft_substr(ans, i + 1, j);
+			value = get_env_val(shell->env, name);
+			if (!value)
+			{
+				free(name);
+				printf("\n");
+				return (NULL);
+			}
+			res = ft_strjoin_mini(res, ft_substr(ans, 0, i - 1));
+			res = ft_strjoin_mini(res, value);
+			while (--i + j)
+				ans++;
+			i = 0;
+			free(name);
+		}
+	}
+	return (res);
+}
 
 char    *get_env_val(t_env *env, char *name)
 {

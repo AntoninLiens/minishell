@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:03:24 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/25 16:24:40 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/25 18:32:01 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,24 @@ void    lst_last(t_cmd **list)
     if (list && *list)
         while ((*list)->next)
             *list = (*list)->next;
+}
+
+char	*ft_strjoin_mini(char *s1, char *s2)
+{
+	char	*res;
+	int		i;
+	int		j;
+
+	j = ft_strlen(s1) + ft_strlen(s2) + 1;
+	res = (char *)malloc(sizeof(char) * j);
+	if (!res)
+		return (NULL);
+	res[j] = 0;
+	i = -1;
+	while (s1 && s1[++i])
+		res[i] = s1[i];
+	j = -1;
+	while (s2 && s2[++j])
+		res[i + j] = s2[j];
+	return (res);
 }

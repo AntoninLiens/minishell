@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 12:14:17 by ctirions          #+#    #+#             */
-/*   Updated: 2021/03/18 17:21:18 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/25 17:38:48 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 */
 
 char			*ft_substr(const char *s, unsigned int start, size_t len);
-char			*ft_strjoin(const char *s1, const char *s2);
+char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strtrim(const char *s1, const char *set);
 char			**ft_split(char *s, char c);
 char			*ft_itoa(int n);

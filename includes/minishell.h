@@ -64,6 +64,7 @@ int 	init_env(t_mini *shell, char **basic_env);
 
 /*		ENV		*/
 
+char	*replace_env_variable(char *ans, t_mini *shell);
 char    *get_env_val(t_env *env, char *name);
 
 /*		SHLVL		*/
@@ -73,6 +74,7 @@ void    up_shlvl(t_mini *shell);
 /*		UTILS		*/
 
 char	*pathfinder(char *ans, char **env);
+char	*ft_strjoin_mini(char *s1, char *s2);
 void	free_env(t_env *env);
 void    lst_first(t_cmd **list);
 void    lst_last(t_cmd **list);

@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/25 16:23:05 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/25 18:32:36 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	parser(char *ans, t_mini *shell)
 	t_cmd	*tmp;
 	int		nb_cmds;
 
+	//ans = replace_env_variable(ans, shell);
 	nb_cmds = check_operator(ans, shell);
 	if (!nb_cmds)
 		return (0);
@@ -56,7 +57,6 @@ int	parser(char *ans, t_mini *shell)
 	}
 	if (!tmp)
 		return (0);
-//	 faire appelle à redir avec une option qui skip les redir; last cmd->STDOUT
 	if (!builts_in(shell, tmp->str))
 	{
 		pid = fork();
