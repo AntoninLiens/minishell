@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/24 17:02:55 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/25 16:23:05 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parser(char *ans, t_mini *shell)
 	{
 		pid = fork();
 		if (!pid && exec_bin(shell->basic_env, tmp->str))	
-			return (1);
+			return (0);
 		else
 			waitpid(pid, 0, 0);
 	}

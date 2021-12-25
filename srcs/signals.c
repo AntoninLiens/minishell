@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:28:53 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/16 15:03:32 by zminhas          ###   ########.fr       */
+/*   Updated: 2021/12/25 16:47:10 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void    sigint(int code)
 {
     (void)code;
-    ft_putstr_fd("\b\b   ", STDERR_FILENO);
-    printf("\nMINISHELL $ ");
+    ft_putstr_fd("\b\b   \n", STDERR_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }

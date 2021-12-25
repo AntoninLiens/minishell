@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/23 17:08:31 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/25 16:23:20 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	exec_bin(char **env, char *cmd)
 		return (1);
 	arg = ft_split(cmd, ' ');
 	path = pathfinder(arg[0], env);
-	if (!path)
-		return (0);
 	if (execve(path, arg, env))
 	{
 		printf("minishell: command not found: %s\n", arg[0]);
