@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
+#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/21 17:07:08 by ctirions         ###   ########.fr        #
+#    Updated: 2021/12/30 12:05:39 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,22 +16,22 @@ PURPLE	=	$(shell tput -Txterm setaf 5)
 BLUE	=	$(shell tput -Txterm setaf 6)
 RESET	=	$(shell tput -Txterm sgr0)
 
-SRCSDIR = srcs/
-OBJSDIR = objs/
+SRCSDIR = 	srcs/
+OBJSDIR = 	objs/
 
-FILES	=	minishell.c				\
-			init.c					\
-			utils.c					\
-			shlvl.c					\
-			env.c					\
-			exec.c					\
-			signals.c				\
-			parse.c					\
-			pipes.c					\
-			commands/pwd.c			\
-			commands/env.c			\
-			commands/variables.c	\
-			commands/echo.c			\
+FILES =		init/init_env.c			\
+			init/shlvl.c		\
+			parser/parse.c		\
+			parser/env.c		\
+			exec/minishell.c	\
+			exec/exec.c			\
+			utils/utils.c		\
+			utils/signals.c		\
+			utils/pipes.c		\
+			commands/pwd.c		\
+			commands/env.c		\
+			commands/variables.c\
+			commands/echo.c		\
 			commands/cd.c
 
 SRCS	=	$(addprefix srcs/, $(FILES))
