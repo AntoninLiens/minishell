@@ -6,11 +6,11 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:20:04 by aliens            #+#    #+#             */
-/*   Updated: 2021/12/30 15:29:44 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/30 17:12:36 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	redir(char **cmd, t_mini *shell, int b2o)
 {

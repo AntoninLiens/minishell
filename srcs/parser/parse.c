@@ -6,39 +6,11 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/30 15:25:24 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/30 17:17:52 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-int	check_operator(char *ans, t_mini *shell)
-{
-	char	**cmd;
-	char	**arg;
-	int		nb_cmd;
-	int		i;
-
-	if (!ans[0])
-		return (0);
-	nb_cmd = 1;
-	i = -1;
-	while (ans[++i])
-		if (ans[i] == '|')
-			nb_cmd++;
-	cmd = ft_split(ans, '|');
-	i = -1;
-	while(cmd[++i])
-	{
-		arg = ft_split(cmd[i],  ' ');
-		add_command(shell, arg);
-		free(arg);
-	}
-	free(arg);
-	free(cmd);
-	lst_first(&shell->cmd);
-	return (nb_cmd);
-}
+#include "../../includes/minishell.h"
 
 int	parser(char *ans, t_mini *shell)
 {
@@ -54,7 +26,9 @@ int	parser(char *ans, t_mini *shell)
 		while (shell->cmd->str[++i])
 			printf("%d : %s\n", i, shell->cmd->str[i]);
 		printf("------------------------\n");
+		shell->cmd = shell->cmd->next;
 	}
+	lst_first(&shell->cmd);
 	//replace_env_variable(shell);
 	if (!nb_cmds)
 		return (0);

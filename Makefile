@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
+#    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/30 12:05:39 by aliens           ###   ########.fr        #
+#    Updated: 2021/12/30 17:11:28 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ RESET	=	$(shell tput -Txterm sgr0)
 SRCSDIR = 	srcs/
 OBJSDIR = 	objs/
 
-FILES =		init/init_env.c			\
+FILES =		init/init_env.c		\
+			init/init_cmd.c		\
 			init/shlvl.c		\
 			parser/parse.c		\
 			parser/env.c		\
