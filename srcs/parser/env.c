@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/25 18:32:16 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/30 15:34:00 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*replace_env_variable(char *ans, t_mini *shell)
+/*void	replace_env_variable(t_mini *shell)
 {
 	char	*res;
 	char	*name;
@@ -46,7 +46,7 @@ char	*replace_env_variable(char *ans, t_mini *shell)
 		}
 	}
 	return (res);
-}
+}*/
 
 char    *get_env_val(t_env *env, char *name)
 {

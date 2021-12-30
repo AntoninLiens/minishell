@@ -3,42 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 23:19:42 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/21 15:41:06 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/30 15:40:34 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    echo(char *cmd)
+void    echo(char **cmd)
 {
-	char	**arg;
     int     i;
 	int		tmp;
 	int		no_backslash;
 
     i = 1;
 	no_backslash = 0;
-	arg = ft_split(cmd, ' ');
-	if (arg[1][0] == '-' && arg[1][1] == 'n')
+	if (cmd[1][0] == '-' && cmd[1][1] == 'n')
 	{
 		no_backslash = 1;
 		i++;
 	}
-    if (arg[i][0] == '\"')
+    if (cmd[i][0] == '\"')
     {
-    	arg[i]++;
+    	cmd[i]++;
 		tmp = i - 1;
-		while (arg[++tmp])
-			if (arg[tmp][ft_strlen(arg[tmp]) - 1] == '\"')
-				arg[tmp][ft_strlen(arg[tmp]) - 1] = '\0';
+		while (cmd[++tmp])
+			if (cmd[tmp][ft_strlen(cmd[tmp]) - 1] == '\"')
+				cmd[tmp][ft_strlen(cmd[tmp]) - 1] = '\0';
     }
-    while (arg[i])
+    while (cmd[i])
 	{
-    	printf("%s", arg[i++]);
-		if (arg[i])
+    	printf("%s", cmd[i++]);
+		if (cmd[i])
 			printf(" ");
 	}
 	if (!no_backslash)

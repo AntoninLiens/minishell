@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:20:04 by aliens            #+#    #+#             */
-/*   Updated: 2021/12/25 16:10:26 by ctirions         ###   ########.fr       */
+/*   Updated: 2021/12/30 15:29:44 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	redir(char *cmd, t_mini *shell, int b2o)
+void	redir(char **cmd, t_mini *shell, int b2o)
 {
 	pid_t pid;
 

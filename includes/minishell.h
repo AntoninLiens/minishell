@@ -42,7 +42,7 @@ struct	s_env
 
 struct	s_cmd
 {
-	char	*str;
+	char	**str;
 	t_cmd	*next;
 	t_cmd	*prev;
 };
@@ -59,12 +59,12 @@ typedef struct  s_mini
 
 /*		INIT		*/
 
-void	add_command(t_mini *shell, char *command);
+void	add_command(t_mini *shell, char **command);
 int 	init_env(t_mini *shell, char **basic_env);
 
 /*		ENV		*/
 
-char	*replace_env_variable(char *ans, t_mini *shell);
+void	replace_env_variable(t_mini *shell);
 char    *get_env_val(t_env *env, char *name);
 
 /*		SHLVL		*/
@@ -90,19 +90,19 @@ int		check_operator(char *ans, t_mini *shell);
 
 /*		EXEC		*/
 
-int		builts_in(t_mini *shell, char *cmd);
-int		exec_bin(char **env, char *cmd);
+int		builts_in(t_mini *shell, char **cmd);
+int		exec_bin(char **env, char **cmd);
 
 /*		PIPES		*/
 
-void	redir(char *cmd, t_mini *shell, int b2o);
+void	redir(char **cmd, t_mini *shell, int b2o);
 
 /*		COMMANDS	*/
 
-void    echo(char *cmd);
+void    echo(char **cmd);
 void	env(t_env *env);
 void    pwd(t_env *env);
-void    cd(t_mini *shell);
+void    cd(t_mini *shell, char **cmd);
 void    export(t_env *env, char *arg);
 void    unset(t_env *env, char *name);
 

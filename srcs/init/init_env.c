@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void	add_command(t_mini *shell, char *command)
+void	add_command(t_mini *shell, char **command)
 {
 	if (!shell->cmd)
 	{
