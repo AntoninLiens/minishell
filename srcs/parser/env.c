@@ -6,47 +6,52 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/30 17:12:22 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/30 18:18:12 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*void	replace_env_variable(t_mini *shell)
+void	replace_env_variable(t_mini *shell)
 {
-	char	*res;
-	char	*name;
-	char	*value;
 	int		i;
 	int		j;
+	int		k;
+	char	*tmp;
+	char	*perm;
+	char	*name;
+	t_cmd	*cmd;
 
-	i = -1;
-	res = NULL;
-	while (ans[++i])
+	perm = NULL;
+	tmp = NULL;
+	cmd = shell->cmd;
+	while(cmd)
 	{
-		j = 1;
-		if (ans[i] == '$')
+		i = -1;
+		while (cmd->str[++i])
 		{
-			while (ans[i + j] && ans[i + j] != ' ')
-				j++;
-			name = ft_substr(ans, i + 1, j);
-			value = get_env_val(shell->env, name);
-			if (!value)
+			j = -1;
+			while (cmd->str[i][++j])
 			{
-				free(name);
-				printf("\n");
-				return (NULL);
+				if (cmd->str[i][j] == '$')
+				{
+					perm = ft_substr(cmd->str[i], 0, j);
+					j++;
+					k = 0;
+					while (cmd->str[i][j + k] && cmd->str[i][j + k] != '$')
+						k++;
+					name = ft_substr(cmd->str[i], j, k);
+					tmp = get_env_val(shell->env, name);
+					perm = ft_strjoin(perm, tmp);
+					cmd->str[i] = ft_strjoin(perm,\
+						ft_substr(cmd->str[i], j + k, ft_strlen(cmd->str[i])));
+					j = -1;
+				}
 			}
-			res = ft_strjoin_mini(res, ft_substr(ans, 0, i - 1));
-			res = ft_strjoin_mini(res, value);
-			while (--i + j)
-				ans++;
-			i = 0;
-			free(name);
 		}
+		cmd = cmd->next;
 	}
-	return (res);
-}*/
+}
 
 char    *get_env_val(t_env *env, char *name)
 {
