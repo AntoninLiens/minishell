@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
+#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/30 17:11:28 by aliens           ###   ########.fr        #
+#    Updated: 2021/12/31 17:35:07 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ CC		=	gcc -Wall -Wextra -Werror
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@make -C ./libft
+			@make full -C ./libft
 			@$(CC) -o $(NAME) $(OBJS) libft/libft.a -lreadline
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
 			

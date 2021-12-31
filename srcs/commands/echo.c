@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 23:19:42 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/30 15:40:34 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/31 16:27:34 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    echo(char **cmd)
+int	echo(char **cmd)
 {
     int     i;
 	int		tmp;
@@ -20,7 +20,7 @@ void    echo(char **cmd)
 
     i = 1;
 	no_backslash = 0;
-	if (cmd[1][0] == '-' && cmd[1][1] == 'n')
+	if (cmd[1][0] == '-')
 	{
 		no_backslash = 1;
 		i++;
@@ -41,4 +41,5 @@ void    echo(char **cmd)
 	}
 	if (!no_backslash)
 		printf("\n");
+	return (0);
 }

@@ -55,6 +55,7 @@ typedef struct  s_mini
 	char	*answer;
 	int		pfd[2];
     int		exit;
+	int		exit_status;
 }               t_mini;
 
 /*		INIT		*/
@@ -100,11 +101,11 @@ void	redir(char **cmd, t_mini *shell, int b2o);
 
 /*		COMMANDS	*/
 
-void    echo(char **cmd);
-void	env(t_env *env);
-void    pwd(t_env *env);
-void    cd(t_mini *shell, char **cmd);
-void    export(t_env *env, char *arg);
-void    unset(t_env *env, char *name);
+int		echo(char **cmd);
+int		env(t_env *env, char **cmd);
+int	  	pwd(t_env *env, char **cmd);
+int		cd(t_mini *shell, char **cmd);
+int		export(t_env *env, char **cmd);
+void	unset(t_env *env, char *name);
 
 #endif

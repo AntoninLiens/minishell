@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/30 17:12:05 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/31 16:57:50 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ int	builts_in(t_mini *shell, char **cmd)
 	if (!cmd)
 		return (0);
     if (!ft_strncmp(cmd[0], "pwd", 3))
-        pwd(shell->env);
+        shell->exit_status = pwd(shell->env, cmd);
     else if (!ft_strncmp(cmd[0], "env", 3))
-        env(shell->env);
+       shell->exit_status = env(shell->env, cmd);
     else if (!ft_strncmp(cmd[0], "exit", 4))
     	shell->exit = 1;
     else if (!ft_strncmp(cmd[0], "export", 6))
-        export(shell->env, cmd[0]);
+        shell->exit_status = export(shell->env, cmd);
     else if (!ft_strncmp(cmd[0], "unset", 5))
-        unset(shell->env, cmd[0]);
+        unset(shell->env, cmd[1]);
     else if (!ft_strncmp(cmd[0], "echo", 4))
-        echo(cmd);
+        shell->exit_status = echo(cmd);
     else if (!ft_strncmp(cmd[0], "cd", 2))
-        cd(shell, cmd);
+        shell->exit_status = cd(shell, cmd);
 	else
 		return (0);
 	return (1);

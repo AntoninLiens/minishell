@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 00:05:34 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/30 15:39:15 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/31 16:37:48 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,16 @@ static void replace_pwd(t_env *env)
     }
 }
 
-void    cd(t_mini *shell, char **cmd)
+int	cd(t_mini *shell, char **cmd)
 {
+	if (!cmd[1])
+		chdir(get_env_val(shell->env, "HOME"));
+    if (chdir(cmd[1]) < 0)
+	{
+		printf("cd: no such file or directory: %s\n", cmd[1]);
+		return (1);
+	}
     replace_oldpwd(shell->env);
-    chdir(cmd[1]);
     replace_pwd(shell->env);
+	return (0);
 }

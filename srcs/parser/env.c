@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/31 15:43:17 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/31 16:14:35 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_env_var(t_cmd *cmd, int i, t_mini *shell)
 			k = 0;
 			while (cmd->str[i][j + k] && cmd->str[i][j + k] != '$')
 				k++;
-			name = ft_substr(cmd->str[i], j, k);
+			name = ft_substr(cmd->str[i], j, k);		// if name == ? --> get exit_status
 			tmp = get_env_val(shell->env, name);
 			perm = ft_strjoin(perm, tmp);
 			cmd->str[i] = ft_strjoin(perm,\
