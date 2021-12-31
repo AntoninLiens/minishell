@@ -3,53 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/30 18:18:12 by aliens           ###   ########.fr       */
+/*   Updated: 2021/12/31 15:43:17 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	replace_env_variable(t_mini *shell)
+void	get_env_var(t_cmd *cmd, int i, t_mini *shell)
 {
-	int		i;
+	char	*perm;
+	char	*tmp;
+	char	*name;
 	int		j;
 	int		k;
-	char	*tmp;
-	char	*perm;
-	char	*name;
-	t_cmd	*cmd;
 
 	perm = NULL;
 	tmp = NULL;
-	cmd = shell->cmd;
-	while(cmd)
+	j = -1;
+	while (cmd->str[i][++j])
 	{
-		i = -1;
-		while (cmd->str[++i])
+		if (cmd->str[i][j] == '$')
 		{
+			perm = ft_substr(cmd->str[i], 0, j);
+			j++;
+			k = 0;
+			while (cmd->str[i][j + k] && cmd->str[i][j + k] != '$')
+				k++;
+			name = ft_substr(cmd->str[i], j, k);
+			tmp = get_env_val(shell->env, name);
+			perm = ft_strjoin(perm, tmp);
+			cmd->str[i] = ft_strjoin(perm,\
+				ft_substr(cmd->str[i], j + k, ft_strlen(cmd->str[i])));
 			j = -1;
-			while (cmd->str[i][++j])
-			{
-				if (cmd->str[i][j] == '$')
-				{
-					perm = ft_substr(cmd->str[i], 0, j);
-					j++;
-					k = 0;
-					while (cmd->str[i][j + k] && cmd->str[i][j + k] != '$')
-						k++;
-					name = ft_substr(cmd->str[i], j, k);
-					tmp = get_env_val(shell->env, name);
-					perm = ft_strjoin(perm, tmp);
-					cmd->str[i] = ft_strjoin(perm,\
-						ft_substr(cmd->str[i], j + k, ft_strlen(cmd->str[i])));
-					j = -1;
-				}
-			}
 		}
-		cmd = cmd->next;
 	}
 }
 
@@ -88,4 +77,19 @@ void	free_env(t_env *env)
 		free(tmp);
 	}
 	free(env);
+}
+
+void	replace_env_variable(t_mini *shell)
+{
+	int		i;
+	t_cmd	*cmd;
+
+	cmd = shell->cmd;
+	while(cmd)
+	{
+		i = -1;
+		while (cmd->str[++i])
+			get_env_var(cmd, i, shell);
+		cmd = cmd->next;
+	}
 }

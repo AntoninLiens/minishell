@@ -65,6 +65,7 @@ int 	init_env(t_mini *shell, char **basic_env);
 /*		ENV		*/
 
 void	replace_env_variable(t_mini *shell);
+void	get_env_var(t_cmd *cmd,int i, t_mini *shell);
 char    *get_env_val(t_env *env, char *name);
 
 /*		SHLVL		*/
