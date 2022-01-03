@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/03 15:34:28 by aliens           ###   ########.fr       */
+/*   Created: 2022/01/03 15:48:15 by aliens            #+#    #+#             */
+/*   Updated: 2022/01/03 16:10:33 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	parser(char *ans, t_mini *shell)
+int init(t_mini *shell, char **env)
 {
-	int		nb_cmds;
-
-	nb_cmds = check_operator(ans, shell);
-	lst_first(&shell->cmd);
-	replace_env_variable(shell);
-	if (!nb_cmds)
-		return (0);
-	if (big_exec(shell, nb_cmds))
+	shell->basic_env = env;
+	shell->exit = 0;
+	if (init_env(shell, env))
 		return (1);
-	return (0);
+	up_shlvl(shell);
+    return (0);
 }
