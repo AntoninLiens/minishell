@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/03 15:18:23 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/03 16:10:21 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 int main(int argc, char **argv, char **env)
 {
 	t_mini	shell;
-
-	shell.basic_env = env;
+	
 	if (argc > 1 && argv)
 		return (1);
-	shell.exit = 0;
-	if (init_env(&shell, env))
+	if (init(&shell, env))
 		return (1);
-	up_shlvl(&shell);
 	while (!shell.exit)
 	{
 		signal(SIGINT, &sigint);

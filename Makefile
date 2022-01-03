@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
+#    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2021/12/31 17:35:07 by ctirions         ###   ########.fr        #
+#    Updated: 2022/01/03 15:27:18 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ FILES =		init/init_env.c		\
 			parser/parse.c		\
 			parser/env.c		\
 			exec/minishell.c	\
+			exec/big_exec.c		\
 			exec/exec.c			\
 			utils/utils.c		\
 			utils/signals.c		\

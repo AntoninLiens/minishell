@@ -60,18 +60,16 @@ typedef struct  s_mini
 
 /*		INIT		*/
 
-void	add_command(t_mini *shell, char **command);
+int 	init(t_mini *shell, char **env);
 int 	init_env(t_mini *shell, char **basic_env);
+void	add_command(t_mini *shell, char **command);
+void    up_shlvl(t_mini *shell);
 
 /*		ENV		*/
 
 void	replace_env_variable(t_mini *shell);
 void	get_env_var(t_cmd *cmd,int i, t_mini *shell);
 char    *get_env_val(t_env *env, char *name);
-
-/*		SHLVL		*/
-
-void    up_shlvl(t_mini *shell);
 
 /*		UTILS		*/
 
@@ -92,6 +90,7 @@ int		check_operator(char *ans, t_mini *shell);
 
 /*		EXEC		*/
 
+int 	big_exec(t_mini *shell, int nb_cmds);
 int		builts_in(t_mini *shell, char **cmd);
 int		exec_bin(char **env, char **cmd);
 
