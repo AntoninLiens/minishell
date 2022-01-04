@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:20:04 by aliens            #+#    #+#             */
-/*   Updated: 2021/12/31 16:01:37 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/04 17:10:56 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	redir(char **cmd, t_mini *shell, int b2o)
 		close(shell->pfd[0]);
 		dup2(shell->pfd[1], 1);
 		if (!builts_in(shell, cmd))
-			if (exec_bin(shell->basic_env, cmd))
+			if (exec_bin(shell->basic_env, cmd, shell))
 				return ;
 	}
 }

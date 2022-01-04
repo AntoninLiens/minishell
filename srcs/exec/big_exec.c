@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/03 16:02:47 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/04 17:14:14 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int big_exec(t_mini *shell, int nb_cmds)
 {
-    pid_t   pid;
-	int		status;
 	t_cmd	*tmp;
 
     tmp = shell->cmd;
@@ -31,15 +29,8 @@ int big_exec(t_mini *shell, int nb_cmds)
 	}
 	if (tmp && !builts_in(shell, tmp->str))
 	{
-		pid = fork();
-		if (!pid && exec_bin(shell->basic_env, tmp->str))	
-			return (0);
-		else
-		{
-			waitpid(pid, &status, 0);
-			if (WIFEXITED(status))
-				shell->exit_status = WEXITSTATUS(status);
-		}
+		if (exec_bin(shell->basic_env, tmp->str, shell))
+			return (1);
 	}
 	return (0);
 }

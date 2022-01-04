@@ -97,7 +97,7 @@ int		check_operator(char *ans, t_mini *shell);
 
 int 	big_exec(t_mini *shell, int nb_cmds);
 int		builts_in(t_mini *shell, char **cmd);
-int		exec_bin(char **env, char **cmd);
+int		exec_bin(char **env, char **cmd, t_mini *shell);
 
 /*		PIPES		*/
 

@@ -3,26 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/31 16:57:50 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/04 17:13:19 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	exec_bin(char **env, char **cmd)
+int	exec_bin(char **env, char **cmd, t_mini *shell)
 {
 	char	*path;
+	pid_t	pid;
+	int		status;
 
-	if (!cmd)
-		return (1);
-	path = pathfinder(cmd[0], env);
-	if (execve(path, cmd, env))
+	pid = fork();
+	if (!pid)
 	{
-		printf("minishell: command not found: %s\n", cmd[0]);
-		exit(1);
+		if (!cmd)
+			return (1);
+		path = pathfinder(cmd[0], env);
+		if (execve(path, cmd, env))
+		{
+			printf("minishell: command not found: %s\n", cmd[0]);
+			exit(1);
+		}
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+			shell->exit_status = WEXITSTATUS(status);
 	}
 	return (0);
 }
