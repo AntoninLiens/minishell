@@ -19,6 +19,8 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "../libft/includes/libft.h"
 
 # define BLACK "\033[30m"
@@ -54,6 +56,8 @@ typedef struct  s_mini
 	char	**basic_env;
 	char	*answer;
 	int		pfd[2];
+	int		fdin;
+	int		fdout;
     int		exit;
 	int		exit_status;
 }               t_mini;
@@ -62,6 +66,7 @@ typedef struct  s_mini
 
 int 	init(t_mini *shell, char **env);
 int 	init_env(t_mini *shell, char **basic_env);
+int		init_redir(t_mini *shell);
 void	add_command(t_mini *shell, char **command);
 void    up_shlvl(t_mini *shell);
 

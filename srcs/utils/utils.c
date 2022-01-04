@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:03:24 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/30 17:12:47 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/04 16:57:17 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*pathfinder(char *ans, char **env)
 	char	*path;
 	int		i;
 
+	if (!access(ans, F_OK))
+		return (ans);
 	i = -1;
 	while (!ft_strnstr(env[++i], "PATH", 4))
 		;
