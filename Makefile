@@ -6,7 +6,7 @@
 #    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/04 17:01:31 by aliens           ###   ########.fr        #
+#    Updated: 2022/01/04 18:26:55 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJSDIR = 	objs/
 FILES =		init/init.c			\
 			init/init_env.c		\
 			init/init_cmd.c		\
-			init/init_redir.c	\
+			init/init_inoutfd.c	\
 			init/shlvl.c		\
 			parser/parse.c		\
 			parser/env.c		\

@@ -66,7 +66,7 @@ typedef struct  s_mini
 
 int 	init(t_mini *shell, char **env);
 int 	init_env(t_mini *shell, char **basic_env);
-int		init_redir(t_mini *shell);
+int		init_inoutfd(t_mini *shell);
 void	add_command(t_mini *shell, char **command);
 void    up_shlvl(t_mini *shell);
 
@@ -83,6 +83,7 @@ char	*ft_strjoin_mini(char *s1, char *s2);
 void	free_env(t_env *env);
 void    lst_first(t_cmd **list);
 void    lst_last(t_cmd **list);
+char	*get_file_name(char *str);
 
 /*		SIGNALS		*/
 

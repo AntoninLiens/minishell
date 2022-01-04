@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:03:24 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/04 16:57:17 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/04 18:46:19 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,20 @@ char	*ft_strjoin_mini(char *s1, char *s2)
 	while (s2 && s2[++j])
 		res[i + j] = s2[j];
 	return (res);
+}
+
+char	*get_file_name(char *str)
+{
+	char	*name;
+	int		i;
+
+	if (!str)
+		return (NULL);
+	name = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!name)
+		return (NULL);
+	i = -1;
+	while (str[++i])
+		name[i] = str[i];
+	return (name); 
 }
