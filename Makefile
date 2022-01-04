@@ -6,7 +6,7 @@
 #    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/04 18:26:55 by aliens           ###   ########.fr        #
+#    Updated: 2022/01/04 22:36:24 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,23 +19,23 @@ RESET	=	$(shell tput -Txterm sgr0)
 SRCSDIR = 	srcs/
 OBJSDIR = 	objs/
 
-FILES =		init/init.c			\
-			init/init_env.c		\
-			init/init_cmd.c		\
-			init/init_inoutfd.c	\
-			init/shlvl.c		\
-			parser/parse.c		\
-			parser/env.c		\
-			exec/minishell.c	\
-			exec/big_exec.c		\
-			exec/exec.c			\
-			utils/utils.c		\
-			utils/signals.c		\
-			utils/pipes.c		\
-			commands/pwd.c		\
-			commands/env.c		\
-			commands/variables.c\
-			commands/echo.c		\
+FILES =		init/init.c				\
+			init/init_env.c			\
+			init/shlvl.c			\
+			parser/parse.c			\
+			parser/env.c			\
+			parser/init_inoutfd.c	\
+			parser/init_cmd.c		\
+			exec/minishell.c		\
+			exec/big_exec.c			\
+			exec/exec.c				\
+			utils/utils.c			\
+			utils/signals.c			\
+			utils/pipes.c			\
+			commands/pwd.c			\
+			commands/env.c			\
+			commands/variables.c	\
+			commands/echo.c			\
 			commands/cd.c
 
 SRCS	=	$(addprefix srcs/, $(FILES))

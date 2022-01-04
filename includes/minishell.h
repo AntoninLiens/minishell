@@ -45,6 +45,8 @@ struct	s_env
 struct	s_cmd
 {
 	char	**str;
+//	int		fdin;
+//	int		fdout;
 	t_cmd	*next;
 	t_cmd	*prev;
 };
