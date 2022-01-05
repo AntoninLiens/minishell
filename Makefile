@@ -6,7 +6,7 @@
 #    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/04 22:36:24 by aliens           ###   ########.fr        #
+#    Updated: 2022/01/05 17:00:13 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,14 @@ RESET	=	$(shell tput -Txterm sgr0)
 SRCSDIR = 	srcs/
 OBJSDIR = 	objs/
 
-FILES =		init/init.c				\
+FILES =		minishell.c				\
+			init/init.c				\
 			init/init_env.c			\
 			init/shlvl.c			\
 			parser/parse.c			\
 			parser/env.c			\
 			parser/init_inoutfd.c	\
 			parser/init_cmd.c		\
-			exec/minishell.c		\
 			exec/big_exec.c			\
 			exec/exec.c				\
 			utils/utils.c			\
