@@ -47,6 +47,7 @@ struct	s_cmd
 	char	**str;
 	char	*fdin;
 	char	*fdout;
+	int		heredoc;
 	t_cmd	*next;
 	t_cmd	*prev;
 };
@@ -68,8 +69,8 @@ typedef struct  s_mini
 
 int 	init(t_mini *shell, char **env);
 int 	init_env(t_mini *shell, char **basic_env);
-int		init_inoutfd(t_mini *shell);
-void	add_command(t_mini *shell, char **command);
+char	*init_inoutfd(char *command, t_cmd *cmd);
+void	add_command(t_mini *shell, char *command);
 void    up_shlvl(t_mini *shell);
 
 /*		ENV		*/

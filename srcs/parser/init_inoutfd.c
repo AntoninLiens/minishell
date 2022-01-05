@@ -3,58 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   init_inoutfd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/05 14:21:36 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/05 15:49:00 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int init_inoutfd(t_mini *shell)
+char	*init_inoutfd(char *command, t_cmd *cmd)
 {
-    t_cmd   *tmp;
-    char    *name;
-    int     i;
-    int     j;
+	char	*ret;
+	int		fd;
+	int		i;
 
-    tmp = shell->cmd;
-    while (tmp)
-    {
-        i = -1;
-        while (tmp->str[++i])
-        {
-            j = -1;
-            while (tmp->str[i][++j])
-            {
-                if (tmp->str[i][j] == '>')
-                {
-                    if (tmp->str[i][j + 1])
-                        name = get_file_name(tmp->str[i] + j + 1);
-                    else
-                        name = get_file_name(tmp->str[i + 1]);
-                    if (!name)
-                        return (-1);
-                    shell->fdout = open(name, O_CREAT);
-                    if (!shell->fdout)
-                        return (1);
-                }
-                else if (tmp->str[i][j] == '<')
-                {
-                    if (tmp->str[i][j + 1])
-                        name = get_file_name(tmp->str[i] + j + 1);
-                    else
-                        name = get_file_name(tmp->str[i + 1]);
-                    if (!name)
-                        return (-1);
-                    shell->fdin = open(name, O_RDONLY);
-                    if (!shell->fdin)
-                        return (1);
-                }
-            }
-        }
-        tmp = tmp->next;
-    }
-    return (0);
+	i = -1;
+	ret = NULL;
+	cmd->fdin = NULL;
+	cmd->fdout = NULL;
+	while (command[++i])
+	{
+		if (command[i] == '>' && command[i + 1] != '>')
+		{
+			if (!ret)
+				ret = ft_substr(command, 0, i);
+			cmd->fdout = get_file_name(command + i + 1);
+			fd = open(cmd->fdout, O_CREAT);
+			close(fd);
+		}
+		if (command[i] == '<' && command[i + 1] != '<')
+		{
+			if (!ret)
+				ret = ft_substr(command, 0, i);
+			cmd->fdin = get_file_name(command + i + 1);
+			fd = open(cmd->fdin, O_RDONLY);
+			close(fd);
+		}
+		if (command[i] == '>' && command[i + 1] == '>')
+		{
+			if (!ret)
+				ret = ft_substr(command, 0, i);
+			cmd->fdout = get_file_name(command + i + 2);
+			fd = open(cmd->fdout, O_CREAT);
+			close(fd);
+		}
+		if (command[i] == '<' && command[i + 1] == '<')
+			cmd->heredoc = 1;
+	}
+	if (!ret)
+		return (command);
+	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:03:24 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/04 18:46:19 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/05 15:48:57 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,19 @@ char	*get_file_name(char *str)
 
 	if (!str)
 		return (NULL);
-	name = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
+		str++;
+	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '>' && str[i] != '<')
+		i++;
+	name = (char *)malloc(sizeof(char) * (i + 1));
 	if (!name)
 		return (NULL);
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '>' && str[i] != '<')
+	{
 		name[i] = str[i];
+		i++;
+	}
 	return (name); 
 }
