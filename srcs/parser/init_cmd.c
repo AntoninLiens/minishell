@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/05 15:53:38 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/05 16:45:33 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ void	add_command(t_mini *shell, char *command)
 		shell->cmd->heredoc = 0;
 		command = init_inoutfd(command, shell->cmd);
 		shell->cmd->str = ft_split(command, ' ');
-		i = -1;
-		while (shell->cmd->str[++i])
-			printf("%s\n", shell->cmd->str[i]);
 	}
 	else
 	{

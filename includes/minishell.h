@@ -69,8 +69,6 @@ typedef struct  s_mini
 
 int 	init(t_mini *shell, char **env);
 int 	init_env(t_mini *shell, char **basic_env);
-char	*init_inoutfd(char *command, t_cmd *cmd);
-void	add_command(t_mini *shell, char *command);
 void    up_shlvl(t_mini *shell);
 
 /*		ENV		*/
@@ -96,6 +94,10 @@ void    sigint(int code);
 
 int		parser(char *ans, t_mini *shell);
 int		check_operator(char *ans, t_mini *shell);
+void	add_command(t_mini *shell, char *command);
+char	*init_inoutfd(char *command, t_cmd *cmd);
+char    *init_infile(char *command, t_cmd *cmd, int i, char *ret);
+char    *init_infile(char *command, t_cmd *cmd, int i, char *ret);
 
 /*		EXEC		*/
 
