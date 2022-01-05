@@ -6,13 +6,13 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/04 19:04:55 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/05 14:21:36 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*int init_inoutfd(t_mini *shell)
+int init_inoutfd(t_mini *shell)
 {
     t_cmd   *tmp;
     char    *name;
@@ -57,4 +57,4 @@
         tmp = tmp->next;
     }
     return (0);
-}*/
+}
