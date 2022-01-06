@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/06 15:40:40 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/06 17:10:07 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char    *init_outfile(char *command, t_cmd *cmd, int i, char *ret)
 		if (!ret)
 			ret = ft_substr(command, 0, i);
 		cmd->fdout = get_file_name(command + i + 1);
-		fd = open(cmd->fdout, O_WRONLY | O_CREAT | O_TRUNC);
+		fd = open(cmd->fdout, O_CREAT | O_TRUNC | O_WRONLY, 0664);
 		error = errno;
 		if (fd == -1)
 		{
@@ -62,12 +62,13 @@ char    *init_outfile(char *command, t_cmd *cmd, int i, char *ret)
 		if (!ret)
 			ret = ft_substr(command, 0, i);
 		cmd->fdout = get_file_name(command + i + 2);
-		fd = open(cmd->fdout, O_WRONLY | O_CREAT);
+		fd = open(cmd->fdout, O_CREAT | O_WRONLY, 0664);
 		if (fd == -1)
 		{
 			printf("minishell: %s: %s\n", cmd->fdin, strerror(error));
 			cmd->end_parse_error = 1;	
 		}
+		cmd->append = 1;
 		close(fd);
 	}
     return (ret);

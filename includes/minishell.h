@@ -50,6 +50,7 @@ struct	s_cmd
 	char	*fdin;
 	char	*fdout;
 	int		heredoc;
+	int		append;
 	int		end_parse_error;
 	t_cmd	*next;
 	t_cmd	*prev;

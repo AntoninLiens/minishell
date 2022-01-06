@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/06 15:30:26 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/06 16:41:42 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	add_command(t_mini *shell, char *command)
 		if (!shell->cmd)
 			shell->exit = 1;
 		shell->cmd->end_parse_error = 0;
+		shell->cmd->heredoc = 0;
+		shell->cmd->append = 0;
 		shell->cmd->prev = NULL;
 		shell->cmd->next = NULL;
-		shell->cmd->heredoc = 0;
 		command = init_inoutfd(command, shell->cmd);
 		if (shell->cmd->end_parse_error)
 			return ;
@@ -34,9 +35,10 @@ void	add_command(t_mini *shell, char *command)
 		if (!shell->cmd->next)
 			shell->exit = 1;
 		shell->cmd->end_parse_error = 0;
+		shell->cmd->heredoc = 0;
+		shell->cmd->append = 0;
 		shell->cmd->next->prev = shell->cmd;
 		shell->cmd->next->next = NULL;
-		shell->cmd->heredoc = 0;
 		command = init_inoutfd(command, shell->cmd);
 		if (shell->cmd->end_parse_error)
 			return ;
