@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/06 17:03:53 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/06 18:06:01 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,13 @@ int big_exec(t_mini *shell, int nb_cmds)
 			redir(tmp->str, shell, 0);
 			tmp = tmp->next;
 		}
-	}
-	if (tmp && !builts_in(shell, tmp->str))
-	{
-		if (exec_bin(shell->basic_env, tmp->str, shell))
-			return (1);
-	}
-	return (0);*/
+	}*/
 	while (tmp)
 	{
 		pid = fork();
 		if (!pid)
 		{
-			if (tmp->fdin)
-			{
-				shell->fdin = open(tmp->fdin, O_RDONLY);
-				dup2(shell->fdin, 0);
-			}
-			if (tmp->fdout)
-			{
-				if (tmp->append)
-					shell->fdout = open(tmp->fdout, O_WRONLY | O_APPEND);
-				else
-					shell->fdout = open(tmp->fdout, O_WRONLY);
-				dup2(shell->fdout, 1);
-			}
+			mini_inout(shell, tmp);
 			if (tmp && !builts_in(shell, tmp->str))
 			{
 				if (exec_bin(shell->basic_env, tmp->str, shell))
