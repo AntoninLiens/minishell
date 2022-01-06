@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/05 16:41:53 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/06 15:40:40 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 char    *init_infile(char *command, t_cmd *cmd, int i, char *ret)
 {
-    int		fd;
-        
+    int	fd;
+	int	error;
+
+	errno = 0;
 	if (command[i] == '<' && command[i + 1] != '<')
 	{
 		if (!ret)
 			ret = ft_substr(command, 0, i);
 		cmd->fdin = get_file_name(command + i + 1);
 		fd = open(cmd->fdin, O_RDONLY);
+		error = errno;
+		if (fd == -1)
+		{
+			printf("minishell: %s: %s\n", cmd->fdin, strerror(error));
+			cmd->end_parse_error = 1;
+		}
 		close(fd);
 	}
 	if (command[i] == '<' && command[i + 1] == '<')
@@ -31,14 +39,22 @@ char    *init_infile(char *command, t_cmd *cmd, int i, char *ret)
 
 char    *init_outfile(char *command, t_cmd *cmd, int i, char *ret)
 {
-	int		fd;
+	int	fd;
+	int	error;
 
+	errno = 0;
 	if (command[i] == '>' && command[i + 1] != '>')
 	{
 		if (!ret)
 			ret = ft_substr(command, 0, i);
 		cmd->fdout = get_file_name(command + i + 1);
-		fd = open(cmd->fdout, O_CREAT);
+		fd = open(cmd->fdout, O_WRONLY | O_CREAT | O_TRUNC);
+		error = errno;
+		if (fd == -1)
+		{
+			printf("minishell: %s: %s\n", cmd->fdin, strerror(error));
+			cmd->end_parse_error = 1;		
+		}
 		close(fd);
 	}
 	if (command[i] == '>' && command[i + 1] == '>')
@@ -46,7 +62,12 @@ char    *init_outfile(char *command, t_cmd *cmd, int i, char *ret)
 		if (!ret)
 			ret = ft_substr(command, 0, i);
 		cmd->fdout = get_file_name(command + i + 2);
-		fd = open(cmd->fdout, O_CREAT);
+		fd = open(cmd->fdout, O_WRONLY | O_CREAT);
+		if (fd == -1)
+		{
+			printf("minishell: %s: %s\n", cmd->fdin, strerror(error));
+			cmd->end_parse_error = 1;	
+		}
 		close(fd);
 	}
     return (ret);

@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/04 22:36:06 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/06 15:38:07 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,6 @@ char    *get_env_val(t_env *env, char *name)
 		tmp = tmp->next;
 	}
 	return (NULL);
-}
-
-void	free_env(t_env *env)
-{
-	t_env	*tmp;
-
-	while (env->next)
-	{
-		tmp = env;
-		env = tmp->next;
-		free(tmp);
-	}
-	free(env);
 }
 
 void	replace_env_variable(t_mini *shell)

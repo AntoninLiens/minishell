@@ -21,6 +21,8 @@
 # include <readline/history.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <errno.h>
+# include <string.h>  
 # include "../libft/includes/libft.h"
 
 # define BLACK "\033[30m"
@@ -48,6 +50,7 @@ struct	s_cmd
 	char	*fdin;
 	char	*fdout;
 	int		heredoc;
+	int		end_parse_error;
 	t_cmd	*next;
 	t_cmd	*prev;
 };
@@ -82,6 +85,7 @@ char    *get_env_val(t_env *env, char *name);
 char	*pathfinder(char *ans, char **env);
 char	*ft_strjoin_mini(char *s1, char *s2);
 void	free_env(t_env *env);
+void    free_cmd(t_cmd *cmd);
 void    lst_first(t_cmd **list);
 void    lst_last(t_cmd **list);
 char	*get_file_name(char *str);
@@ -93,6 +97,7 @@ void    sigint(int code);
 /*		PARSE		*/
 
 int		parser(char *ans, t_mini *shell);
+void	stop_parse_error(t_mini *shell, int *nb_cmds);
 int		check_operator(char *ans, t_mini *shell);
 void	add_command(t_mini *shell, char *command);
 char	*init_inoutfd(char *command, t_cmd *cmd);

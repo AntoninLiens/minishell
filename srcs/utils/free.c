@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/03 15:48:15 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/06 14:42:59 by aliens           ###   ########.fr       */
+/*   Created: 2022/01/06 15:09:12 by aliens            #+#    #+#             */
+/*   Updated: 2022/01/06 15:35:52 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int init(t_mini *shell, char **env)
+void	free_env(t_env *env)
 {
-	shell->basic_env = env;
-	shell->exit = 0;
-	shell->fdin = 0;
-	shell->fdout = 1;
-	if (init_env(shell, env))
-		return (1);
-	up_shlvl(shell);
-    return (0);
+	t_env	*tmp;
+
+	while (env->next)
+	{
+		tmp = env;
+		env = tmp->next;
+		free(tmp);
+	}
+	free(env);
+}
+
+void    free_cmd(t_cmd *cmd)
+{
+    lst_first(&cmd);
+    while(cmd->next)
+    {
+        cmd = cmd->next;
+        free(cmd->prev);
+    }
+    free(cmd);
 }
