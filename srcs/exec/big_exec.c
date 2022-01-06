@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/06 18:06:01 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/06 18:08:42 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@ int big_exec(t_mini *shell, int nb_cmds)
 
     tmp = shell->cmd;
 	(void)nb_cmds;
-/*	if (nb_cmds > 1)
-	{
-		redir(tmp->str, shell, 0);
-		tmp = tmp->next;
-		while (tmp && tmp->next)
-		{
-			redir(tmp->str, shell, 0);
-			tmp = tmp->next;
-		}
-	}*/
 	while (tmp)
 	{
 		pid = fork();
