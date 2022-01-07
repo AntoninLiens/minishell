@@ -3,28 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:03:24 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/06 18:05:20 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/08 00:27:41 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*pathfinder(char *ans, char **env)
+char	*pathfinder(char *ans, t_env *env)
 {
 	char	**paths;
 	char	*part_path;
 	char	*path;
+	t_env	*tmp;
 	int		i;
 
 	if (!access(ans, F_OK))
 		return (ans);
-	i = -1;
-	while (!ft_strnstr(env[++i], "PATH", 4))
-		;
-	paths = ft_split(env[i] + 5, ':');
+	tmp = env;
+	while (!ft_strnstr(tmp->str, "PATH", 4))
+		tmp = tmp->next;
+	paths = ft_split(tmp->str + 5, ':');
 	i = -1;
 	while (paths[++i])
 	{
@@ -34,9 +35,8 @@ char	*pathfinder(char *ans, char **env)
 		if (!access(path, F_OK))
 			return (path);
 	}
-	if (ans)
-		printf("minishell: command not found: %s\n", ans);
-	exit(1);
+	free(path);
+	return (NULL);
 }
 
 void    lst_first(t_cmd **list)

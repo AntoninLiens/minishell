@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/06 14:22:53 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/08 00:27:48 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int main(int argc, char **argv, char **env)
 		}
 		add_history(shell.answer);
 		if (parser(shell.answer, &shell))
+			shell.exit = 1;
+		if (big_exec(&shell))
 			shell.exit = 1;
 		printf("status : %d\n", shell.exit_status);
 	}

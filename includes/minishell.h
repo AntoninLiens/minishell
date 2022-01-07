@@ -83,7 +83,7 @@ char    *get_env_val(t_env *env, char *name);
 
 /*		UTILS		*/
 
-char	*pathfinder(char *ans, char **env);
+char	*pathfinder(char *ans, t_env *env);
 char	*ft_strjoin_mini(char *s1, char *s2);
 void	free_env(t_env *env);
 void    free_cmd(t_cmd *cmd);
@@ -107,9 +107,9 @@ char    *init_infile(char *command, t_cmd *cmd, int i, char *ret);
 
 /*		EXEC		*/
 
-int 	big_exec(t_mini *shell, int nb_cmds);
+int 	big_exec(t_mini *shell);
 int		builts_in(t_mini *shell, char **cmd);
-int		exec_bin(char **env, char **cmd, t_mini *shell);
+int		exec_bin(char **cmd, t_mini *shell);
 void	mini_inout(t_mini *shell, t_cmd *cmd);
 
 /*		PIPES		*/
@@ -119,7 +119,7 @@ void	redir(char **cmd, t_mini *shell, int b2o);
 /*		COMMANDS	*/
 
 int		echo(char **cmd);
-int		env(t_env *env, char **cmd);
+int		aff_env(t_env *env, char **cmd);
 int	  	pwd(t_env *env, char **cmd);
 int		cd(t_mini *shell, char **cmd);
 int		export(t_env *env, char **cmd);

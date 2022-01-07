@@ -6,7 +6,7 @@
 #    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/06 15:23:36 by aliens           ###   ########.fr        #
+#    Updated: 2022/01/07 23:26:34 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,9 @@ FILES =		minishell.c				\
 			exec/exec.c				\
 			utils/utils.c			\
 			utils/signals.c			\
-			utils/pipes.c			\
 			utils/free.c			\
 			commands/pwd.c			\
-			commands/env.c			\
+			commands/aff_env.c		\
 			commands/variables.c	\
 			commands/echo.c			\
 			commands/cd.c

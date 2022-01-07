@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/06 15:36:37 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/08 00:27:21 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,5 @@ int	parser(char *ans, t_mini *shell)
 	replace_env_variable(shell);
 	if (!nb_cmds)
 		return (0);
-	if (big_exec(shell, nb_cmds))
-		return (1);
 	return (0);
 }
