@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/08 00:39:36 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/10 17:46:26 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int big_exec(t_mini *shell)
 		if (!pid)
 		{
 			mini_inout(shell, tmp);
+			if (!tmp->str[0])
+				return (0);
 			if (tmp && !builts_in(shell, tmp->str))
 			{
 				if (exec_bin(tmp->str, shell))

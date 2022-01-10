@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/10 16:12:43 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/10 16:39:26 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret)
 		cmd->heredoc = 1;
 		if (!ret)
 			ret = ft_substr(command, 0, *i);
-		cmd->fdin = get_file_name(command + *i + 1);
+		cmd->fdin = get_file_name(command + *i + 2);
 		(*i)++;
 	}
 	else if (command[*i] == '<' && command[*i + 1] != '<')
