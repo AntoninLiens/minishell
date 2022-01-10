@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/10 17:46:26 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/10 18:12:29 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int big_exec(t_mini *shell)
 	int		status;
 
     tmp = shell->cmd;
-	if (tmp && ft_lstsize((t_list *)tmp) == 1)
+	if (tmp && !tmp->next)
 	{
 		if (!ft_strncmp(tmp->str[0], "exit", 4)
 		|| !ft_strncmp(tmp->str[0], "cd", 2)

@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/10 16:39:26 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/10 18:07:13 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char    *init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 		if (!ret)
 			ret = ft_substr(command, 0, *i);
 		cmd->fdout = get_file_name(command + *i + 1);
-		printf("%c\n", command[*i + 1]);
 		fd = open(cmd->fdout, O_CREAT | O_TRUNC | O_WRONLY, 0664);
 		error = errno;
 		if (fd == -1)
