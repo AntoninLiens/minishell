@@ -6,23 +6,31 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/08 00:27:16 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/10 16:12:43 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char    *init_infile(char *command, t_cmd *cmd, int i, char *ret)
+char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret)
 {
     int	fd;
 	int	error;
 
 	errno = 0;
-	if (command[i] == '<' && command[i + 1] != '<')
+	if (command[*i] == '<' && command[*i + 1] == '<')
+	{
+		cmd->heredoc = 1;
+		if (!ret)
+			ret = ft_substr(command, 0, *i);
+		cmd->fdin = get_file_name(command + *i + 1);
+		(*i)++;
+	}
+	else if (command[*i] == '<' && command[*i + 1] != '<')
 	{
 		if (!ret)
-			ret = ft_substr(command, 0, i);
-		cmd->fdin = get_file_name(command + i + 1);
+			ret = ft_substr(command, 0, *i);
+		cmd->fdin = get_file_name(command + *i + 1);
 		fd = open(cmd->fdin, O_RDONLY);
 		error = errno;
 		if (fd == -1)
@@ -32,23 +40,21 @@ char    *init_infile(char *command, t_cmd *cmd, int i, char *ret)
 		}
 		close(fd);
 	}
-	if (command[i] == '<' && command[i + 1] == '<')
-		cmd->heredoc = 1;
     return (ret);
 }
 
-char    *init_outfile(char *command, t_cmd *cmd, int i, char *ret)
+char    *init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 {
 	int	fd;
 	int	error;
 
 	errno = 0;
-	if (command[i] == '>' && command[i + 1] != '>')
+	if (command[*i] == '>' && command[*i + 1] != '>')
 	{
 		if (!ret)
-			ret = ft_substr(command, 0, i);
-		cmd->fdout = get_file_name(command + i + 1);
-		printf("%c\n", command[i + 1]);
+			ret = ft_substr(command, 0, *i);
+		cmd->fdout = get_file_name(command + *i + 1);
+		printf("%c\n", command[*i + 1]);
 		fd = open(cmd->fdout, O_CREAT | O_TRUNC | O_WRONLY, 0664);
 		error = errno;
 		if (fd == -1)
@@ -58,11 +64,11 @@ char    *init_outfile(char *command, t_cmd *cmd, int i, char *ret)
 		}
 		close(fd);
 	}
-	if (command[i] == '>' && command[i + 1] == '>')
+	if (command[*i] == '>' && command[*i + 1] == '>')
 	{
 		if (!ret)
-			ret = ft_substr(command, 0, i);
-		cmd->fdout = get_file_name(command + i + 2);
+			ret = ft_substr(command, 0, *i);
+		cmd->fdout = get_file_name(command + *i + 2);
 		fd = open(cmd->fdout, O_CREAT | O_WRONLY, 0664);
 		if (fd == -1)
 		{
@@ -71,6 +77,7 @@ char    *init_outfile(char *command, t_cmd *cmd, int i, char *ret)
 		}
 		cmd->append = 1;
 		close(fd);
+		(*i)++;
 	}
     return (ret);
 }
@@ -86,8 +93,8 @@ char	*init_inoutfd(char *command, t_cmd *cmd)
 	cmd->fdout = NULL;
 	while (command[++i])
 	{
-        ret = init_infile(command, cmd, i, ret);
-        ret = init_outfile(command, cmd, i, ret);
+        ret = init_infile(command, cmd, &i, ret);
+        ret = init_outfile(command, cmd, &i, ret);
 	}
 	if (!ret)
 		return (command);

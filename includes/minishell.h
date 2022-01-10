@@ -102,14 +102,15 @@ void	stop_parse_error(t_mini *shell, int *nb_cmds);
 int		check_operator(char *ans, t_mini *shell);
 void	add_command(t_mini *shell, char *command);
 char	*init_inoutfd(char *command, t_cmd *cmd);
-char    *init_infile(char *command, t_cmd *cmd, int i, char *ret);
-char    *init_infile(char *command, t_cmd *cmd, int i, char *ret);
+char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
+char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
 
 /*		EXEC		*/
 
 int 	big_exec(t_mini *shell);
 int		builts_in(t_mini *shell, char **cmd);
 int		exec_bin(char **cmd, t_mini *shell);
+int		mini_heredoc(t_cmd *cmd);
 void	mini_inout(t_mini *shell, t_cmd *cmd);
 
 /*		PIPES		*/
