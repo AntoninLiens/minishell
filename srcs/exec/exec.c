@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/11 15:00:58 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/11 15:49:45 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,63 +63,4 @@ int	builts_in(t_mini *shell, char **cmd)
 	else
 		return (0);
 	return (1);
-}
-
-int	mini_heredoc(t_cmd *cmd)
-{
-	char	*line;
-	int		pipefd[2];
-
-	line = NULL;
-	if (!cmd->str[0])
-	{
-		while (ft_strncmp(cmd->fdin, line, ft_strlen(cmd->fdin)))
-		{
-			if (line)
-				free(line);
-			line = readline("> ");	
-		}
-		free(line);
-		return (0);
-	}
-	else
-	{
-		pipe(pipefd);
-		while (ft_strncmp(cmd->fdin, line, ft_strlen(cmd->fdin)))
-		{
-			if (line)
-				free(line);
-			line = readline("> ");
-			write(pipefd[1], line, ft_strlen(line));
-		}
-		free(line);
-		close(pipefd[0]);
-		close(pipefd[1]);
-	}
-	return (pipefd[0]);
-}
-
-void	mini_inout(t_mini *shell, t_cmd *cmd)
-{
-	if (cmd->fdin)
-	{
-		if (!cmd->heredoc)
-		{
-			shell->fdin = open(cmd->fdin, O_RDONLY);
-			dup2(shell->fdin, 0);
-		}
-		else
-		{
-			shell->fdin = mini_heredoc(cmd);
-			dup2(shell->fdin, 0);
-		}
-	}
-	if (cmd->fdout)
-	{
-		if (cmd->append)
-			shell->fdout = open(cmd->fdout, O_WRONLY | O_APPEND);
-		else
-			shell->fdout = open(cmd->fdout, O_WRONLY);
-		dup2(shell->fdout, 1);
-	}
 }

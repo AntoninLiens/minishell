@@ -6,7 +6,7 @@
 #    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/08 00:44:17 by aliens           ###   ########.fr        #
+#    Updated: 2022/01/11 15:52:03 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ FILES =		minishell.c				\
 			parser/init_cmd.c		\
 			exec/big_exec.c			\
 			exec/exec.c				\
+			exec/redirections.c		\
 			utils/utils.c			\
 			utils/signals.c			\
 			utils/free.c			\

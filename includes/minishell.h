@@ -110,12 +110,14 @@ char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
 int 	big_exec(t_mini *shell);
 int		builts_in(t_mini *shell, char **cmd);
 int		exec_bin(char **cmd, t_mini *shell);
+
+/*		REDIRECTIONS		*/
+
 int		mini_heredoc(t_cmd *cmd);
 void	mini_inout(t_mini *shell, t_cmd *cmd);
+int		child_heredoc(t_cmd *cmd, char *line, int pipefd[2]);
+int		heredoc_no_cmd(t_cmd *cmd, char *line);
 
-/*		PIPES		*/
-
-void	redir(char **cmd, t_mini *shell, int b2o);
 
 /*		COMMANDS	*/
 
