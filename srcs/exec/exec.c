@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/10 18:13:19 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/11 15:00:58 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ int	mini_heredoc(t_cmd *cmd)
 			write(pipefd[1], line, ft_strlen(line));
 		}
 		free(line);
+		close(pipefd[0]);
+		close(pipefd[1]);
 	}
-	close(pipefd[1]);
-	close(pipefd[0]);
 	return (pipefd[0]);
 }
 
