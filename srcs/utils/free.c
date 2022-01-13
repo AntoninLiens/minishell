@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 15:09:12 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/08 00:27:30 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/13 17:56:10 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_env(t_env *env)
 {
 	t_env	*tmp;
 
+	if (!env)
+		return ;
 	while (env->next)
 	{
 		tmp = env;
@@ -27,6 +29,8 @@ void	free_env(t_env *env)
 
 void    free_cmd(t_cmd *cmd)
 {
+	if (!cmd)
+		return ;
     lst_first(&cmd);
     while(cmd->next)
     {

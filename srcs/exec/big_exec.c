@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/13 17:10:23 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/13 18:29:52 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ int big_exec(t_mini *shell)
 	i = -1;
 	while (++i < (shell->nb_cmds - 1) * 2)
 		close(pfd[i]);
-	waitpid(pid, &status, 0);
-	shell->exit_status = status;
+	waitpid(pid, 0, 0);
+	if (WIFEXITED(status))
+		shell->exit_status = WEXITSTATUS(status);
 	return (0);
 }
 

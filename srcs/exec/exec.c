@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/13 16:04:58 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/13 18:21:44 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ int	exec_bin(char **cmd, t_mini *shell)
 	char	*path;
 	pid_t	pid;
 	int		status;
-	int		error;
 
-	errno = 0;
 	pid = fork();
 	if (!pid)
 	{
@@ -28,9 +26,8 @@ int	exec_bin(char **cmd, t_mini *shell)
 		path = pathfinder(cmd[0], shell->env);
 		if (execve(path, cmd, shell->basic_env))
 		{
-			error = errno;
-			printf("minishell: %s: %s\n", cmd[0], strerror(error));
-			return (1);
+			printf("minishell: %s: command not found\n", cmd[0]);
+			exit(0);
 		}
 	}
 	else
@@ -38,6 +35,7 @@ int	exec_bin(char **cmd, t_mini *shell)
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			shell->exit_status = WEXITSTATUS(status);
+		printf("%d\n", shell->exit_status);
 	}
 	return (0);
 }

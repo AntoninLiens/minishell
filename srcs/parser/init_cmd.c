@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/13 17:43:08 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/13 17:49:00 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	check_operator(char *ans, t_mini *shell)
 	{
 		if (add_command(shell, cmd[i]))
 		{
-			free_cmd;
+			free_cmd(shell->cmd);
 			return (0);
 		}
 	}
