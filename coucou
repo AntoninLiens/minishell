@@ -5,4 +5,10 @@ libft
 minishell
 objs
 srcs
-test.c
+Makefile
+coucou
+includes
+libft
+minishell
+objs
+srcs

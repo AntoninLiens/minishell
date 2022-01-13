@@ -111,6 +111,7 @@ char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
 int 	big_exec(t_mini *shell);
 int		builts_in(t_mini *shell, char **cmd);
 int		exec_bin(char **cmd, t_mini *shell);
+int		pipes(t_mini *shell, int *pfd);
 
 /*		REDIRECTIONS		*/
 
