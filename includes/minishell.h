@@ -67,6 +67,7 @@ typedef struct  s_mini
 	int		fdout;
     int		exit;
 	int		exit_status;
+	int		nb_cmds;
 }               t_mini;
 
 /*		INIT		*/
@@ -78,7 +79,7 @@ void    up_shlvl(t_mini *shell);
 /*		ENV		*/
 
 void	replace_env_variable(t_mini *shell);
-void	get_env_var(t_cmd *cmd,int i, t_mini *shell);
+void	get_env_var(t_cmd *cmd, int i, t_mini *shell);
 char    *get_env_val(t_env *env, char *name);
 
 /*		UTILS		*/
@@ -98,7 +99,7 @@ void    sigint(int code);
 /*		PARSE		*/
 
 int		parser(char *ans, t_mini *shell);
-void	stop_parse_error(t_mini *shell, int *nb_cmds);
+void	stop_parse_error(t_mini *shell);
 int		check_operator(char *ans, t_mini *shell);
 void	add_command(t_mini *shell, char *command);
 char	*init_inoutfd(char *command, t_cmd *cmd);

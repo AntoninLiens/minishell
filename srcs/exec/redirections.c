@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:39:30 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/11 15:49:46 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/11 16:40:36 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	mini_heredoc(t_cmd *cmd)
 		waitpid(pid, 0, 0);
 		close(pipefd[1]);
 	}
-	return (pipefd[0]);
+	dup2(pipefd[0], 0);
+	return (pipefd[1]);
 }
 
 void	mini_inout(t_mini *shell, t_cmd *cmd)
@@ -70,11 +71,6 @@ void	mini_inout(t_mini *shell, t_cmd *cmd)
 		if (!cmd->heredoc)
 		{
 			shell->fdin = open(cmd->fdin, O_RDONLY);
-			dup2(shell->fdin, 0);
-		}
-		else
-		{
-			shell->fdin = mini_heredoc(cmd);
 			dup2(shell->fdin, 0);
 		}
 	}
