@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/10 17:20:03 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/13 17:39:02 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int main(int argc, char **argv, char **env)
 		if (big_exec(&shell))
 			shell.exit = 1;
 		printf("status : %d\n", shell.exit_status);
+		free_cmd(shell.cmd);
 	}
 	free_env(shell.env);
 	return (shell.exit_status);

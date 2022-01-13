@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:04:02 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/31 17:45:54 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:35:33 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,23 @@ int	export_no_arg(t_env *env)
 		i++;
 		export[i] = (char *)malloc(sizeof(char) * (ft_strlen(tmp->str) + 1));
 		if (!export[i])
+		{
+			while (i--)
+				free(export[i]);
+			free(export[i]);
 			return (-1);
+		}
 		export[i] = tmp->str;
 		tmp = tmp->next;
 	}
 	export = sort_env(export);
 	i = -1;
 	while (export[++i])
+	{
 		printf("export %s\n", export[i]);
+		free(export[i]);
+	}
+	free(export);
 	return (0);
 }
 
@@ -74,6 +83,8 @@ int	export(t_env *env, char **cmd)
     while (tmp->next)
         tmp = tmp->next;
     tmp->next = (t_env *)malloc(sizeof(t_env));
+	if (!tmp->next)
+		return (-1);
     tmp->next->str = cmd[1];
     tmp->next->next = NULL;
 	return (0);
