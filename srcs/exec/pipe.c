@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/13 17:05:29 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/14 14:15:43 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,16 @@ int	pipes(t_mini *shell, int *pfd)
 		pid = fork();
 		if (!pid)
 		{
-			if (!tmp->str[0])
-				return (0);
-			if (tmp->prev)
+			if (tmp->prev && !tmp->heredoc)
 				dup2(pfd[i - 2], 0);
+			if (tmp->prev && tmp->heredoc)
+				dup2(pfd[i - 2], mini_heredoc(tmp));
+			if (tmp->heredoc)
+				mini_heredoc(tmp);
 			if (tmp->next)
 				dup2(pfd[i + 1], 1);
+			if (!tmp->str[0])
+				exit(0);
 			j = -1;
 			while (++j < (shell->nb_cmds - 1) * 2)
 				close(pfd[j]);

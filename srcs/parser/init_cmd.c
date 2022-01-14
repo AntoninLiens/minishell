@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/13 17:49:00 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/14 13:33:19 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	add_command(t_mini *shell, char *command)
 		shell->cmd->next->append = 0;
 		shell->cmd->next->prev = shell->cmd;
 		shell->cmd->next->next = NULL;
-		command = init_inoutfd(command, shell->cmd);
+		command = init_inoutfd(command, shell->cmd->next);
 		if (shell->cmd->next->end_parse_error)
 			return (1);
 		shell->cmd->next->str = ft_split(command, ' ');
