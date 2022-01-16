@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
+#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/13 15:50:49 by aliens           ###   ########.fr        #
+#    Updated: 2022/01/16 17:17:44 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,25 +19,27 @@ RESET	=	$(shell tput -Txterm sgr0)
 SRCSDIR = 	srcs/
 OBJSDIR = 	objs/
 
-FILES =		minishell.c				\
-			init/init.c				\
-			init/init_env.c			\
-			init/shlvl.c			\
-			parser/parse.c			\
-			parser/env.c			\
-			parser/init_inoutfd.c	\
-			parser/init_cmd.c		\
-			exec/big_exec.c			\
-			exec/exec.c				\
-			exec/redirections.c		\
-			exec/pipe.c				\
-			utils/utils.c			\
-			utils/signals.c			\
-			utils/free.c			\
-			commands/pwd.c			\
-			commands/aff_env.c		\
-			commands/variables.c	\
-			commands/echo.c			\
+FILES =		minishell.c					\
+			init/init.c					\
+			init/init_env.c				\
+			init/shlvl.c				\
+			parser/parse.c				\
+			parser/env.c				\
+			parser/init_inoutfd.c		\
+			parser/init_cmd.c			\
+			exec/big_exec.c				\
+			exec/exec.c					\
+			exec/redirections.c			\
+			exec/pipe.c					\
+			signals/signals_defaults.c	\
+			signals/signals_in.c		\
+			signals/signals_out.c		\
+			utils/utils.c				\
+			utils/free.c				\
+			commands/pwd.c				\
+			commands/aff_env.c			\
+			commands/variables.c		\
+			commands/echo.c				\
 			commands/cd.c
 
 SRCS	=	$(addprefix srcs/, $(FILES))

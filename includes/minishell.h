@@ -94,6 +94,17 @@ char	*get_file_name(char *str);
 
 /*		SIGNALS		*/
 
+void	set_sig_cmd_out(t_cmd *cmd);
+void	set_sig_cmd_in(t_cmd *cmd);
+void	ctrl_c_cmd_heredoc_out(int code);
+void	ctrl_c_cmd_heredoc_in(int code);
+void	ctrl_c_cmd_out(int code);
+void	ctrl_c_cmd_in(int code);
+void	sig_cmd_heredoc_out(void);
+int		sig_cmd_heredoc_in(void);
+void	sig_cmd_out(void);
+void	sig_cmd_in(void);
+void	ctrl_c_default(void);
 void    sigint(int code);
 
 /*		PARSE		*/

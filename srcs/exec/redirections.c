@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:39:30 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/14 13:53:55 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/16 17:57:30 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	child_heredoc(t_cmd *cmd, char *line, int pipefd[2])
 			free(line);
 		}
 		line = readline("> ");
+		if (!line)
+			break ;
 	}
 	free(line);
 	close(pipefd[0]);
@@ -55,7 +57,7 @@ int	mini_heredoc(t_cmd *cmd)
 	{
 		pipe(pipefd);
 		pid = fork();
-		if (!pid)
+		if (!pid && sig_cmd_heredoc_in())
 			exit(child_heredoc(cmd, line, pipefd));
 		waitpid(pid, 0, 0);
 		close(pipefd[1]);
