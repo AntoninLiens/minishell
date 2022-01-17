@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 17:24:09 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/17 14:35:46 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:06:09 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	ctrl_c_cmd_heredoc_in(int code)
 {
 	(void)code;
 	usleep(88);
-	exit(2);
+	exit(130);
 }
 
 void	ctrl_c_cmd_in(int code)
 {
 	(void)code;
-	exit(1);
+	exit(130);
 }

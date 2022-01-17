@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:04:02 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/13 17:35:33 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/17 18:24:00 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	export_no_arg(t_env *env)
 	i = -1;
 	while (export[++i])
 	{
-		printf("export %s\n", export[i]);
+		printf("declare -x %s\n", export[i]);
 		free(export[i]);
 	}
 	free(export);

@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 23:19:42 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/31 16:27:34 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:05:24 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,25 @@ int	echo(char **cmd)
 
     i = 1;
 	no_backslash = 0;
-	if (cmd[1][0] == '-')
+	while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
+		tmp = 0;
+		while (cmd[i][++tmp])
+		{
+			if (cmd[i][tmp] != 'n' || cmd[i][0] != '-')
+			{
+				tmp = -1;
+				break ;
+			}
+		}
+		if (tmp == -1)
+			break ;
 		no_backslash = 1;
 		i++;
 	}
+
+	if (!cmd[i])
+		return (0);
     if (cmd[i][0] == '\"')
     {
     	cmd[i]++;

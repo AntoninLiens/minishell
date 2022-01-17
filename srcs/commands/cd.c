@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 00:05:34 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/08 00:26:21 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/17 17:44:11 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	cd(t_mini *shell, char **cmd)
 {
 	if (!cmd[1])
 		chdir(get_env_val(shell->env, "HOME"));
-    if (chdir(cmd[1]) < 0)
+    else if (chdir(cmd[1]) < 0)
 	{
 		printf("cd: no such file or directory: %s\n", cmd[1]);
 		return (1);
