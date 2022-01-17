@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/16 17:31:40 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:12:07 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int big_exec(t_mini *shell)
 	i = -1;
 	while (++i < shell->nb_cmds - 1)
 		pipe(pfd + i * 2);
-	set_sig_cmd_out(shell->cmd);
 	pid = pipes(shell, pfd);
 	i = -1;
 	while (++i < (shell->nb_cmds - 1) * 2)

@@ -6,13 +6,13 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 17:24:09 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/16 18:05:22 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:35:46 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	set_sig_cmd_in(t_cmd *cmd)
+int	set_sig_cmd_in(t_cmd *cmd)
 {
 	t_cmd *tmp;
 
@@ -20,13 +20,10 @@ void	set_sig_cmd_in(t_cmd *cmd)
 	while (tmp)
 	{
 		if (tmp->heredoc)
-		{
-			sig_cmd_heredoc_in();
-			return ;
-		}
+			return (sig_cmd_heredoc_in());
 		tmp = tmp->next;
 	}
-	sig_cmd_in();
+	return (sig_cmd_in());
 }
 
 int	sig_cmd_heredoc_in(void)
@@ -35,16 +32,17 @@ int	sig_cmd_heredoc_in(void)
 	return (1);
 }
 
-void	sig_cmd_in(void)
+int	sig_cmd_in(void)
 {
 	signal(SIGINT, &ctrl_c_cmd_in);
+	return (1);
 }
 
 void	ctrl_c_cmd_heredoc_in(int code)
 {
 	(void)code;
-	write(2, "", 1);
-	exit(1);
+	usleep(88);
+	exit(2);
 }
 
 void	ctrl_c_cmd_in(int code)

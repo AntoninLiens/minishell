@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/16 18:00:51 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:22:33 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	pipes(t_mini *shell, int *pfd)
     tmp = shell->cmd;
 	while (tmp)
 	{
+		set_sig_cmd_out(shell->cmd);
 		pid = fork();
-		if (!pid)
+		if (!pid && set_sig_cmd_in(tmp))
 		{
-			set_sig_cmd_in(tmp);
 			if (tmp->prev && !tmp->heredoc)
 				dup2(pfd[i - 2], 0);
 			if (tmp->prev && tmp->heredoc)
