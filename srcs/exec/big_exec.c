@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/17 14:12:07 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:06:08 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	one_cmd_no_fork(t_mini *shell)
 
 int big_exec(t_mini *shell)
 {
-	pid_t	pid;
-	int		status;
 	int		*pfd;
 	int		i;
 
@@ -43,13 +41,13 @@ int big_exec(t_mini *shell)
 	i = -1;
 	while (++i < shell->nb_cmds - 1)
 		pipe(pfd + i * 2);
-	pid = pipes(shell, pfd);
-	i = -1;
-	while (++i < (shell->nb_cmds - 1) * 2)
-		close(pfd[i]);
-	waitpid(pid, 0, 0);
-	if (WIFEXITED(status))
-		shell->exit_status = WEXITSTATUS(status);
+	pipes(shell, pfd);
+	// waitpid(pid, 0, 0);
+	// if (WIFEXITED(status))
+	// 	shell->exit_status = WEXITSTATUS(status);
+	// i = -1;
+	// while (++i < (shell->nb_cmds - 1) * 2)
+	// 	close(pfd[i]);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/17 14:22:33 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:12:38 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	pipes(t_mini *shell, int *pfd)
 	int		i;
 	int		j;
 	t_cmd	*tmp;
+	int		status;
 
 	i = 0;
     tmp = shell->cmd;
@@ -51,5 +52,18 @@ int	pipes(t_mini *shell, int *pfd)
 		tmp = tmp->next;
 		i += 2;
 	}
-	return (pid);
+	close_my_pipes(pfd, (shell->nb_cmds - 1) * 2);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		shell->exit_status = WEXITSTATUS(status);
+	return (0);
+}
+
+void	close_my_pipes(int *pfd, int size)
+{
+	int i;
+
+	i = -1;
+	while (++i < size)
+		close(pfd[i]);
 }

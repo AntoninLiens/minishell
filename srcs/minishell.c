@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/17 14:50:42 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:01:02 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv, char **env)
 			shell.exit = 1;
 		if (big_exec(&shell))
 			shell.exit = 1;
-	//	printf("status : %d\n", shell.exit_status);
+		printf("status : %d\n", shell.exit_status);
 		free_cmd(shell.cmd);
 		ctrl_c_default();
 	}
