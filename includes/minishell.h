@@ -123,7 +123,7 @@ int 	big_exec(t_mini *shell);
 int		builts_in(t_mini *shell, char **cmd);
 int		exec_bin(char **cmd, t_mini *shell);
 int		pipes(t_mini *shell, int *pfd);
-void	close_my_pipes(int *pfd, int size);
+void	close_my_pipes(int *pfd, t_mini *shell, pid_t pid);
 
 /*		REDIRECTIONS		*/
 

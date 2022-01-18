@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/17 16:12:38 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:09:52 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	pipes(t_mini *shell, int *pfd)
 	int		i;
 	int		j;
 	t_cmd	*tmp;
-	int		status;
 
 	i = 0;
     tmp = shell->cmd;
@@ -52,18 +51,41 @@ int	pipes(t_mini *shell, int *pfd)
 		tmp = tmp->next;
 		i += 2;
 	}
-	close_my_pipes(pfd, (shell->nb_cmds - 1) * 2);
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		shell->exit_status = WEXITSTATUS(status);
+	close_my_pipes(pfd, shell, pid);
+	// waitpid(pid, &status, 0);
+	// if (WIFEXITED(status))
+	// 	shell->exit_status = WEXITSTATUS(status);
 	return (0);
 }
 
-void	close_my_pipes(int *pfd, int size)
-{
-	int i;
+// void	close_my_pipes(int *pfd, int size)
+// {
+// 	int i;
 
-	i = -1;
-	while (++i < size)
-		close(pfd[i]);
+// 	i = -1;
+// 	while (++i < size)
+// 		close(pfd[i]);
+// }
+
+void	close_my_pipes(int *pfd, t_mini *shell, pid_t pid)
+{
+	int 	i;
+	int		status;
+	pid_t	pid2;
+
+	pid2 = waitpid(-1, &status, 0);
+	printf("pid : %d\n", pid);
+	while (pid2 > 0)
+	{
+		if (pid2 == pid)
+		{
+			printf("coucou\n");
+			i = -1;
+			while (++i < (shell->nb_cmds - 1) * 2)
+				close(pfd[i]);
+			if (WIFEXITED(status))
+				shell->exit_status = WEXITSTATUS(status);
+		}
+		pid2 = waitpid(-1, &status, 0);
+	}
 }
