@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/17 16:06:08 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:04:19 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ int big_exec(t_mini *shell)
 	while (++i < shell->nb_cmds - 1)
 		pipe(pfd + i * 2);
 	pipes(shell, pfd);
-	// waitpid(pid, 0, 0);
-	// if (WIFEXITED(status))
-	// 	shell->exit_status = WEXITSTATUS(status);
-	// i = -1;
-	// while (++i < (shell->nb_cmds - 1) * 2)
-	// 	close(pfd[i]);
 	return (0);
 }
 

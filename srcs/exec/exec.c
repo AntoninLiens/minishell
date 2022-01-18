@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/17 15:30:41 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:42:15 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	exec_bin(char **cmd, t_mini *shell)
 	char	*path;
 	pid_t	pid;
 	int		status;
-//	int		error;
 
 	pid = fork();
 	if (!pid)
@@ -36,7 +35,6 @@ int	exec_bin(char **cmd, t_mini *shell)
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			shell->exit_status = WEXITSTATUS(status);
-		printf("%d\n", shell->exit_status);
 	}
 	return (0);
 }
