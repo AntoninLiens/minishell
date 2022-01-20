@@ -51,6 +51,8 @@ struct	s_cmd
 	char	*fdout;
 	int		heredoc;
 	int		append;
+	int		s_quotes;
+	int		d_quotes;
 	int		end_parse_error;
 	t_cmd	*next;
 	t_cmd	*prev;
@@ -109,6 +111,8 @@ void    sigint(int code);
 
 /*		PARSE		*/
 
+int		check_close_quotes(char **cmd);
+int		check_quotes(char **cmd);
 int		parser(char *ans, t_mini *shell);
 void	stop_parse_error(t_mini *shell);
 int		check_operator(char *ans, t_mini *shell);

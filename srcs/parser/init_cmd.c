@@ -6,11 +6,44 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/14 13:33:19 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:56:58 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	check_close_quotes(char **cmd)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = -1;
+	while (cmd[++i])
+	{
+		j = -1;
+		while (cmd[i][++j])
+		{
+			if (cmd[i][j] == '\'' || cmd[i][j] == '\"')
+			{
+				k = 1;
+				while (cmd[i][j + k] && cmd[i][j + k] != cmd[i][j])
+					k++;
+				if (!cmd[i][j + k])
+					return (1);
+			}
+			j += k;
+		}
+	}
+	return (0);
+}
+
+int	check_quotes(char **cmd)
+{
+	if (check_close_quotes(cmd))
+		return (1);
+	return (0);
+}
 
 int	add_command(t_mini *shell, char *command)
 {
@@ -63,6 +96,12 @@ int	check_operator(char *ans, t_mini *shell)
 		if (ans[i] == '|')
 			nb_cmd++;
 	cmd = ft_split(ans, '|');
+	if (check_quotes(cmd))
+	{
+		printf("minishell: quotes not closed\n");
+		return (0);
+	}
+		
 	i = -1;
 	while(cmd[++i])
 	{
