@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/18 18:04:19 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:14:54 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int big_exec(t_mini *shell)
 
 	if (one_cmd_no_fork(shell))
 		return (0);
-	pfd = (int *)malloc(sizeof(int) * (shell->nb_cmds - 1) * 2);
+	pfd = (int *)malloc(sizeof(int) * (shell->nb_cmds) * 2);
 	if (!pfd)
 		return (0);
 	i = -1;
-	while (++i < shell->nb_cmds - 1)
+	while (++i < shell->nb_cmds)
 		pipe(pfd + i * 2);
 	pipes(shell, pfd);
 	return (0);

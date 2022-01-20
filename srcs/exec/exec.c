@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/18 18:42:15 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:21:04 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	exec_bin(char **cmd, t_mini *shell)
 		path = pathfinder(cmd[0], shell->env);
 		if (execve(path, cmd, shell->basic_env))
 		{
-			printf("minishell: %s: %s\n", cmd[0], strerror(errno));
-			exit(errno);
+			printf("minishell: %s: command not found\n", cmd[0]);
+			exit(127);
 		}
 	}
 	else
