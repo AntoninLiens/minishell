@@ -72,6 +72,10 @@ typedef struct  s_mini
 	int		nb_cmds;
 }               t_mini;
 
+/*		MAIN		*/
+
+void	minishell(t_mini shell);
+
 /*		INIT		*/
 
 int 	init(t_mini *shell, char **env);
@@ -111,13 +115,18 @@ void    sigint(int code);
 
 /*		PARSE		*/
 
-int		check_close_quotes(char **cmd);
-int		check_quotes(char **cmd);
 int		parser(char *ans, t_mini *shell);
 void	stop_parse_error(t_mini *shell);
+
 int		check_operator(char *ans, t_mini *shell);
+int		init_cmd(t_mini *shell, char **cmd);
 int		add_command(t_mini *shell, char *command);
+int		init_first_cmd(t_mini *shell, char *command);
+int		init_other_cmd(t_mini *shell, char *command);
+
+int		close_quotes(char **cmd);
 char	*quotes(char *command, t_cmd *cmd);
+
 char	*init_inoutfd(char *command, t_cmd *cmd);
 char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
 char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);

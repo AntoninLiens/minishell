@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
+#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/16 17:17:44 by ctirions         ###   ########.fr        #
+#    Updated: 2022/01/21 14:25:44 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ FILES =		minishell.c					\
 			parser/env.c				\
 			parser/init_inoutfd.c		\
 			parser/init_cmd.c			\
+			parser/quotes.c				\
 			exec/big_exec.c				\
 			exec/exec.c					\
 			exec/redirections.c			\

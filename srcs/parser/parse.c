@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/20 16:44:08 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/21 13:57:00 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	parser(char *ans, t_mini *shell)
 {
 	shell->nb_cmds = check_operator(ans, shell);
 	stop_parse_error(shell);
-	//check_quotes(shell);
 	replace_env_variable(shell);
 	if (!shell->nb_cmds)
 		return (0);
