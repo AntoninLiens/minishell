@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/21 18:53:11 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/21 19:34:19 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	minishell(t_mini shell)
 			shell.exit = 1;
 		if (big_exec(&shell))
 			shell.exit = 1;
-		printf("status : %d\n", shell.exit_status);
 		free_cmd(shell.cmd);
 		ctrl_c_default();
 	}
