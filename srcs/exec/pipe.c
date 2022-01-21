@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/20 16:18:20 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/21 19:24:51 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	pipe_child(t_cmd *tmp, int *pfd,int fdin, t_mini *shell)
+{
+	if (tmp->heredoc)
+		mini_heredoc(tmp);
+	if (!tmp->heredoc)
+		dup2(fdin, 0);
+	if (tmp->next)
+		dup2(pfd[1], 1);
+	close(pfd[0]);
+	if (!tmp->str[0])
+		exit(0);
+	mini_inout(shell, tmp);
+	if (tmp && !builts_in(shell, tmp->str))
+	{
+		if (exec_bin(tmp->str, shell))
+			return ;
+	}
+	exit(shell->exit_status);
+}
 
 int	pipes(t_mini *shell, int *pfd)
 {
@@ -27,24 +47,7 @@ int	pipes(t_mini *shell, int *pfd)
 		set_sig_cmd_out(shell->cmd);
 		pid = fork();
 		if (!pid && set_sig_cmd_in(tmp))
-		{
-			if (tmp->heredoc)
-				mini_heredoc(tmp);
-			if (!tmp->heredoc)
-				dup2(fdin, 0);
-			if (tmp->next)
-				dup2(pfd[i + 1], 1);
-			close(pfd[0]);
-			if (!tmp->str[0])
-				exit(0);
-			mini_inout(shell, tmp);
-			if (tmp && !builts_in(shell, tmp->str))
-			{
-				if (exec_bin(tmp->str, shell))
-					return (1);
-			}
-			exit(shell->exit_status);
-		}
+			pipe_child(tmp, pfd + i, fdin, shell);
 		else
 		{
 			close(pfd[i + 1]);

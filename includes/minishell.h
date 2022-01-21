@@ -125,6 +125,8 @@ int		init_first_cmd(t_mini *shell, char *command);
 int		init_other_cmd(t_mini *shell, char *command);
 
 int		close_quotes(char **cmd);
+char	*s_quotes(char *command, t_cmd *cmd, int *i);
+char	*d_quotes(char *command, t_cmd *cmd, int *i);
 char	*quotes(char *command, t_cmd *cmd);
 
 char	*init_inoutfd(char *command, t_cmd *cmd);
