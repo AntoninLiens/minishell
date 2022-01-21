@@ -117,6 +117,7 @@ int		parser(char *ans, t_mini *shell);
 void	stop_parse_error(t_mini *shell);
 int		check_operator(char *ans, t_mini *shell);
 int		add_command(t_mini *shell, char *command);
+char	*quotes(char *command, t_cmd *cmd);
 char	*init_inoutfd(char *command, t_cmd *cmd);
 char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
 char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
