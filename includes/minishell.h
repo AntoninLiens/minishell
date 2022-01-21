@@ -92,11 +92,13 @@ char    *get_env_val(t_env *env, char *name);
 
 char	*pathfinder(char *ans, t_env *env);
 char	*ft_strjoin_mini(char *s1, char *s2);
+char	*get_file_name(char *str);
+
 void	free_env(t_env *env);
 void    free_cmd(t_cmd *cmd);
+
 void    lst_first(t_cmd **list);
 void    lst_last(t_cmd **list);
-char	*get_file_name(char *str);
 
 /*		SIGNALS		*/
 
@@ -136,15 +138,19 @@ char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
 /*		EXEC		*/
 
 int 	big_exec(t_mini *shell);
+
 int		builts_in(t_mini *shell, char **cmd);
 int		exec_bin(char **cmd, t_mini *shell);
+
 int		pipes(t_mini *shell, int *pfd);
+void	pipe_child(t_cmd *tmp, int *pfd,int fdin, t_mini *shell);
 void	close_my_pipes(int *pfd, t_mini *shell, pid_t pid);
 
 /*		REDIRECTIONS		*/
 
-int		mini_heredoc(t_cmd *cmd);
 void	mini_inout(t_mini *shell, t_cmd *cmd);
+
+int		mini_heredoc(t_cmd *cmd);
 int		child_heredoc(t_cmd *cmd, char *line, int pipefd[2]);
 int		heredoc_no_cmd(t_cmd *cmd, char *line);
 
