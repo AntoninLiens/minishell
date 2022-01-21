@@ -6,50 +6,63 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/21 18:52:10 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/21 19:16:50 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+char	*s_quotes(char *command, t_cmd *cmd, int *i)
+{
+	int	j;
+	char *ret;
+	
+	j = 1;
+	cmd->s_quotes++;
+	ret = ft_substr(command, 0, *i);
+	while(command[*i + j] && command[*i + j] != command[*i])
+		j++;
+	ret = ft_strjoin(ret, ft_substr(command, *i + 1, j - 1));
+	*i += j;
+	j = 0;
+	while (command[*i + j])
+		j++;
+	ret = ft_strjoin(ret, ft_substr(command, *i + 1, j));
+	return (ret);
+}
+
+char	*d_quotes(char *command, t_cmd *cmd, int *i)
+{
+	int	j;
+	char *ret;
+
+	j = 1;
+	cmd->d_quotes++;
+	ret = ft_substr(command, 0, *i);
+	while(command[*i + j] && command[*i + j] != command[*i])
+		j++;
+	ret = ft_strjoin(ret, ft_substr(command, *i + 1, j - 1));
+	*i += j;
+	j = 0;
+	while (command[*i + j])
+		j++;
+	ret = ft_strjoin(ret, ft_substr(command, *i + 1, j));
+	return (ret);
+}
+
 char	*quotes(char *command, t_cmd *cmd)
 {
 	char	*ret;
 	int		i;
-	int		j;
 
 	i = -1;
 	ret = NULL;
 	while (command[++i])
 	{
 		if (command[i] == '\'')
-		{
-			j = 1;
-			cmd->s_quotes++;
-			ret = ft_substr(command, 0, i);
-			while(command[i + j] && command[i + j] != command[i])
-				j++;
-			ret = ft_strjoin(ret, ft_substr(command, i + 1, j - 1));
-			i += j;
-			j = 0;
-			while (command[i + j])
-				j++;
-			ret = ft_strjoin(ret, ft_substr(command, i, j));
-		}
+			ret = s_quotes(command, cmd, &i);
 		if (command[i] == '\"')
-		{
-			j = 1;
-			cmd->d_quotes++;
-			ret = ft_substr(command, 0, i);
-			while(command[i + j] && command[i + j] != command[i])
-				j++;
-			ret = ft_strjoin(ret, ft_substr(command, i + 1, j - 1));
-			i += j;
-			j = 0;
-			while (command[i + j])
-				j++;
-			ret = ft_strjoin(ret, ft_substr(command, i + 1, j));
-		}
+			ret = d_quotes(command, cmd, &i);
 	}
 	if (!ret)
 		return (command);
