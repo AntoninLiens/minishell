@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/22 15:09:36 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/22 20:17:13 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,20 @@ char	*quotes(char *command, t_cmd *cmd)
 	char	*ret;
 	int		i;
 	int		j;
+	(void)cmd;
 
 	ret = NULL;
 	i = -1;
-	while (command[i] != '\"' && command[++i] != '\'')
-		i++;
+	while (command[++i])
+	{
+		if (command[i] == '\"' || command[i] == '\'')
+			break ;
+	}
+	if (!command[i])
+		return (command);
 	ret = ft_substr(command, 0, i);
 	while (command[i])
 	{
-		printf("%p\n", ret);
 		if (command[i] == '\'')
 		{
 			cmd->s_quotes++;
@@ -33,7 +38,9 @@ char	*quotes(char *command, t_cmd *cmd)
 			while (command[i + j] != command[i])
 				j++;
 			ret = ft_strjoin(ret, ft_substr(command, i + 1, j - 1));
-			i += j;
+			i += j + 1;
+			if (!command[i])
+				return (ret);
 		}
 		if (command[i] == '\"')
 		{
@@ -42,7 +49,9 @@ char	*quotes(char *command, t_cmd *cmd)
 			while (command[i + j] != command[i])
 				j++;
 			ret = ft_strjoin(ret, ft_substr(command, i + 1, j - 1));
-			i += j;
+			i += j + 1;
+			if (!command[i])
+				return (ret);
 		}
 		i++;
 	}
