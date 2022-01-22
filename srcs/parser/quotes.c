@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/22 20:17:13 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/22 21:12:58 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,15 @@ char	*quotes(char *command, t_cmd *cmd)
 			if (!command[i])
 				return (ret);
 		}
+		j = 0;
+		while (command[i + j])
+		{
+			if (command[i + j] == '\"' || command[i + j] == '\'')
+				break ;
+			j++;
+		}
+		ret = ft_strjoin(ret, ft_substr(command, i, j));
+		i += j;
 		i++;
 	}
 	return (ret);
