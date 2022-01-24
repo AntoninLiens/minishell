@@ -74,7 +74,7 @@ typedef struct  s_mini
 
 /*		MAIN		*/
 
-void	minishell(t_mini shell);
+void	minishell(t_mini *shell);
 
 /*		INIT		*/
 
@@ -127,8 +127,6 @@ int		init_first_cmd(t_mini *shell, char *command);
 int		init_other_cmd(t_mini *shell, char *command);
 
 int		close_quotes(char **cmd);
-char	*s_quotes(char *command, t_cmd *cmd, int *i);
-char	*d_quotes(char *command, t_cmd *cmd, int *i);
 char	*quotes(char *command, t_cmd *cmd);
 
 char	*init_inoutfd(char *command, t_cmd *cmd);
@@ -159,6 +157,7 @@ int		heredoc_no_cmd(t_cmd *cmd, char *line);
 
 int		echo(char **cmd);
 int		aff_env(t_env *env, char **cmd);
+int		mini_exit(t_mini *shell, char **cmd);
 int	  	pwd(t_env *env, char **cmd);
 int		cd(t_mini *shell, char **cmd);
 int		export(t_env *env, char **cmd);

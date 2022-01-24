@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/22 21:12:58 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/24 16:31:56 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,52 +17,36 @@ char	*quotes(char *command, t_cmd *cmd)
 	char	*ret;
 	int		i;
 	int		j;
-	(void)cmd;
 
 	ret = NULL;
-	i = -1;
-	while (command[++i])
-	{
-		if (command[i] == '\"' || command[i] == '\'')
-			break ;
-	}
+	i = 0;
+	while (command[i] && command[i] != '\"' && command[i] != '\'')
+		i++;
 	if (!command[i])
 		return (command);
 	ret = ft_substr(command, 0, i);
 	while (command[i])
 	{
-		if (command[i] == '\'')
+		printf("%c\n", command[i]);
+		if (command[i] == '\'' || command[i] == '\"')
 		{
-			cmd->s_quotes++;
-			j = 1;
+			if (command[i] == '\'')
+				cmd->s_quotes++;
+			else
+				cmd->d_quotes++;
+			j = 1;	
 			while (command[i + j] != command[i])
 				j++;
 			ret = ft_strjoin(ret, ft_substr(command, i + 1, j - 1));
 			i += j + 1;
-			if (!command[i])
-				return (ret);
-		}
-		if (command[i] == '\"')
-		{
-			cmd->d_quotes++;
-			j = 1;
-			while (command[i + j] != command[i])
-				j++;
-			ret = ft_strjoin(ret, ft_substr(command, i + 1, j - 1));
-			i += j + 1;
-			if (!command[i])
-				return (ret);
 		}
 		j = 0;
-		while (command[i + j])
-		{
-			if (command[i + j] == '\"' || command[i + j] == '\'')
-				break ;
+		while (command[i + j] && \
+		command[i + j] != '\"' && command[i + j] != '\'')
 			j++;
-		}
-		ret = ft_strjoin(ret, ft_substr(command, i, j));
+		if (j)
+			ret = ft_strjoin(ret, ft_substr(command, i, j));
 		i += j;
-		i++;
 	}
 	return (ret);
 }

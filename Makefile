@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aliens <aliens@student.s19.be>             +#+  +:+       +#+         #
+#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/21 14:25:44 by aliens           ###   ########.fr        #
+#    Updated: 2022/01/24 16:54:19 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ FILES =		minishell.c					\
 			commands/aff_env.c			\
 			commands/variables.c		\
 			commands/echo.c				\
+			commands/exit.c				\
 			commands/cd.c
 
 SRCS	=	$(addprefix srcs/, $(FILES))
