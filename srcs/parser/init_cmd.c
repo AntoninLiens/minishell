@@ -6,32 +6,24 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 18:03:55 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/24 19:10:52 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	init_first_cmd(t_mini *shell, char *command)
+void	init_cmd_var(t_cmd *cmd, int type)
 {
-	shell->cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!shell->cmd)
-		return (0);
-	shell->cmd->end_parse_error = 0;
-	shell->cmd->heredoc = 0;
-	shell->cmd->append = 0;
-	shell->cmd->s_quotes = 0;
-	shell->cmd->d_quotes = 0;
-	shell->cmd->fdin = NULL;
-	shell->cmd->fdout = NULL;
-	shell->cmd->prev = NULL;
-	shell->cmd->next = NULL;
-	command = quotes(command, shell->cmd);
-	command = init_inoutfd(command, shell->cmd);
-	if (shell->cmd->end_parse_error)
-		return (0);
-	shell->cmd->str = ft_split(command, ' ');
-	return (1);
+	cmd->end_parse_error = 0;
+	cmd->heredoc = 0;
+	cmd->append = 0;
+	cmd->s_quotes = 0;
+	cmd->d_quotes = 0;
+	cmd->fdin = NULL;
+	cmd->fdout = NULL;
+	if (!type)
+		cmd->prev = NULL;
+	cmd->next = NULL;
 }
 
 int	init_other_cmd(t_mini *shell, char *command)
@@ -39,16 +31,9 @@ int	init_other_cmd(t_mini *shell, char *command)
 	shell->cmd->next = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!shell->cmd->next)
 		return (0);
-	shell->cmd->next->end_parse_error = 0;
-	shell->cmd->next->heredoc = 0;
-	shell->cmd->next->append = 0;
-	shell->cmd->s_quotes = 0;
-	shell->cmd->d_quotes = 0;
-	shell->cmd->fdin = NULL;
-	shell->cmd->fdout = NULL;
+	init_cmd_var(shell->cmd->next, 1);
 	shell->cmd->next->prev = shell->cmd;
-	shell->cmd->next->next = NULL;
-	command = quotes(command, shell->cmd->next);
+	command = quotes(command);
 	command = init_inoutfd(command, shell->cmd->next);
 	if (shell->cmd->next->end_parse_error)
 		return (0);
@@ -61,14 +46,20 @@ int	add_command(t_mini *shell, char *command)
 {
 	if (!shell->cmd)
 	{
-		if(!init_first_cmd(shell, command))
+		shell->cmd = (t_cmd *)malloc(sizeof(t_cmd));
+		if (!shell->cmd)
 			return (0);
+		init_cmd_var(shell->cmd, 0);
+		command = quotes(command);
+		command = init_inoutfd(command, shell->cmd);
+		if (shell->cmd->end_parse_error)
+			return (0);
+		shell->cmd->str = ft_split(command, ' ');
+		return (1);
 	}
 	else
-	{
 		if (!init_other_cmd(shell, command))
 			return (0);
-	}
 	return (1);
 }
 

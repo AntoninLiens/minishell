@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/17 14:44:43 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/24 19:41:40 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,29 @@ void	get_env_var(t_cmd *cmd, int i, t_mini *shell)
 	j = -1;
 	while (cmd->str[i][++j])
 	{
-		if (cmd->str[i][j] == '$')
+		if (cmd->str[i][j] == -2)
 		{
+			cmd->str[i][j] = '$';
 			perm = ft_substr(cmd->str[i], 0, j);
 			j++;
 			k = 0;
-			while (cmd->str[i][j + k] && cmd->str[i][j + k] != '$')
+			while (cmd->str[i][j + k] && cmd->str[i][j + k] != -2 \
+			&& cmd->str[i][j + k] != '\'' && cmd->str[i][j + k] != '\"')
 				k++;
-			name = ft_substr(cmd->str[i], j, k);		// if name == ? --> get exit_status
+			name = ft_substr(cmd->str[i], j, k);
 			tmp = get_env_val(shell->env, name);
+			free(name);
 			if (!ft_strncmp(name, "?", 2))
 				tmp = ft_itoa(shell->exit_status);
-			perm = ft_strjoin(perm, tmp);
-			cmd->str[i] = ft_strjoin(perm,\
-				ft_substr(cmd->str[i], j + k, ft_strlen(cmd->str[i])));
+			perm = ft_strjoin_gnl(perm, tmp);
+			free(tmp);
+			name = ft_substr(cmd->str[i], j + k, ft_strlen(cmd->str[i]));
+			cmd->str[i] = ft_strjoin_gnl(perm, name);
+			free(name);
 			j = -1;
 		}
+		else if (cmd->str[i][j] == -1)
+			cmd->str[i][j] = ' ';
 	}
 }
 

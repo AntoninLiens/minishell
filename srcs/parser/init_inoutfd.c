@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 18:07:22 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:44:55 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char    *init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 		error = errno;
 		if (fd == -1)
 		{
-			printf("minishell: %s: %s\n", cmd->fdin, strerror(error));
+			printf("minishell: %s: %s\n", cmd->fdout, strerror(error));
 			cmd->end_parse_error = 1;
 			return (NULL);	
 		}
@@ -71,9 +71,10 @@ char    *init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 			ret = ft_substr(command, 0, *i);
 		cmd->fdout = get_file_name(command + *i + 2);
 		fd = open(cmd->fdout, O_CREAT | O_WRONLY, 0664);
+		error = errno;
 		if (fd == -1)
 		{
-			printf("minishell: %s: %s\n", cmd->fdin, strerror(error));
+			printf("minishell: %s: %s\n", cmd->fdout, strerror(error));
 			cmd->end_parse_error = 1;	
 		}
 		cmd->append = 1;

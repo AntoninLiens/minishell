@@ -6,13 +6,13 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 18:14:34 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/24 19:43:38 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*quotes(char *command, t_cmd *cmd)
+char	*quotes(char *command)
 {
 	char	*tmp;
 	char	*ret;
@@ -30,13 +30,15 @@ char	*quotes(char *command, t_cmd *cmd)
 	{
 		if (command[i] == '\'' || command[i] == '\"')
 		{
-			if (command[i] == '\'')
-				cmd->s_quotes++;
-			else
-				cmd->d_quotes++;
 			j = 1;	
 			while (command[i + j] != command[i])
+			{
+				if (command[i + j] == '$' && command[i] == '\"')
+					command[i + j] = -2;
+				if (command[i + j] == ' ')
+					command[i + j] = -1;
 				j++;
+			}
 			tmp = ft_substr(command, i + 1, j - 1);
 			ret = ft_strjoin_gnl(ret, tmp);
 			free(tmp);
@@ -45,7 +47,11 @@ char	*quotes(char *command, t_cmd *cmd)
 		j = 0;
 		while (command[i + j] && \
 		command[i + j] != '\"' && command[i + j] != '\'')
+		{
+			if (command[i + j] == '$')
+				command[i + j] = -2;
 			j++;
+		}
 		if (j)
 		{
 			tmp = ft_substr(command, i, j);

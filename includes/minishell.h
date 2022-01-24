@@ -123,11 +123,10 @@ void	stop_parse_error(t_mini *shell);
 int		check_operator(char *ans, t_mini *shell);
 int		init_cmd(t_mini *shell, char **cmd);
 int		add_command(t_mini *shell, char *command);
-int		init_first_cmd(t_mini *shell, char *command);
 int		init_other_cmd(t_mini *shell, char *command);
 
 int		close_quotes(char **cmd);
-char	*quotes(char *command, t_cmd *cmd);
+char	*quotes(char *command);
 
 char	*init_inoutfd(char *command, t_cmd *cmd);
 char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
