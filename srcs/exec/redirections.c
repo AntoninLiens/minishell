@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:39:30 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/17 14:21:43 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:50:13 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,12 @@ int	mini_heredoc(t_cmd *cmd)
 	return (pipefd[1]);
 }
 
-void	mini_inout(t_mini *shell, t_cmd *cmd)
+int	mini_inout(t_mini *shell, t_cmd *cmd)
 {
 	if (cmd->fdin)
 	{
+		if (shell->fdin)
+			close(shell->fdin);
 		if (!cmd->heredoc)
 		{
 			shell->fdin = open(cmd->fdin, O_RDONLY);
@@ -79,10 +81,13 @@ void	mini_inout(t_mini *shell, t_cmd *cmd)
 	}
 	if (cmd->fdout)
 	{
+		if (shell->fdout)
+			close(shell->fdout);
 		if (cmd->append)
 			shell->fdout = open(cmd->fdout, O_WRONLY | O_APPEND);
 		else
 			shell->fdout = open(cmd->fdout, O_WRONLY);
 		dup2(shell->fdout, 1);
 	}
+	return (0);
 }

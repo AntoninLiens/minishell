@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/14 13:33:34 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:07:22 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret)
 		{
 			printf("minishell: %s: %s\n", cmd->fdin, strerror(error));
 			cmd->end_parse_error = 1;
+			return (NULL);
 		}
 		close(fd);
 	}
@@ -59,7 +60,8 @@ char    *init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 		if (fd == -1)
 		{
 			printf("minishell: %s: %s\n", cmd->fdin, strerror(error));
-			cmd->end_parse_error = 1;		
+			cmd->end_parse_error = 1;
+			return (NULL);	
 		}
 		close(fd);
 	}
@@ -97,5 +99,6 @@ char	*init_inoutfd(char *command, t_cmd *cmd)
 	}
 	if (!ret)
 		return (command);
+	free(command);
 	return (ret);
 }

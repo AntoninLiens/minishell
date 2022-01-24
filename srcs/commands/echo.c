@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 23:19:42 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/22 21:19:46 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/24 17:19:16 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	echo(char **cmd)
 	int		tmp;
 	int		no_backslash;
 
+	if (!cmd[1])
+	{
+		printf("\n");
+		return (0);
+	}
     i = 1;
 	no_backslash = 0;
 	while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))

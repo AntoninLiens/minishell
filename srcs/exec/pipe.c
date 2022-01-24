@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/21 19:24:51 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/24 17:44:05 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	pipe_child(t_cmd *tmp, int *pfd,int fdin, t_mini *shell)
 	close(pfd[0]);
 	if (!tmp->str[0])
 		exit(0);
-	mini_inout(shell, tmp);
+	if (mini_inout(shell, tmp))
+		exit(1);
 	if (tmp && !builts_in(shell, tmp->str))
 	{
 		if (exec_bin(tmp->str, shell))

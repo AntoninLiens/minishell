@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 16:31:56 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:14:34 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 char	*quotes(char *command, t_cmd *cmd)
 {
+	char	*tmp;
 	char	*ret;
 	int		i;
 	int		j;
@@ -27,7 +28,6 @@ char	*quotes(char *command, t_cmd *cmd)
 	ret = ft_substr(command, 0, i);
 	while (command[i])
 	{
-		printf("%c\n", command[i]);
 		if (command[i] == '\'' || command[i] == '\"')
 		{
 			if (command[i] == '\'')
@@ -37,7 +37,9 @@ char	*quotes(char *command, t_cmd *cmd)
 			j = 1;	
 			while (command[i + j] != command[i])
 				j++;
-			ret = ft_strjoin(ret, ft_substr(command, i + 1, j - 1));
+			tmp = ft_substr(command, i + 1, j - 1);
+			ret = ft_strjoin_gnl(ret, tmp);
+			free(tmp);
 			i += j + 1;
 		}
 		j = 0;
@@ -45,9 +47,14 @@ char	*quotes(char *command, t_cmd *cmd)
 		command[i + j] != '\"' && command[i + j] != '\'')
 			j++;
 		if (j)
-			ret = ft_strjoin(ret, ft_substr(command, i, j));
+		{
+			tmp = ft_substr(command, i, j);
+			ret = ft_strjoin_gnl(ret, tmp);
+			free(tmp);
+		}
 		i += j;
 	}
+	free(command);
 	return (ret);
 }
 

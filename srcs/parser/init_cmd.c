@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 15:50:13 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:03:55 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	init_first_cmd(t_mini *shell, char *command)
 	shell->cmd->append = 0;
 	shell->cmd->s_quotes = 0;
 	shell->cmd->d_quotes = 0;
+	shell->cmd->fdin = NULL;
+	shell->cmd->fdout = NULL;
 	shell->cmd->prev = NULL;
 	shell->cmd->next = NULL;
 	command = quotes(command, shell->cmd);
@@ -42,6 +44,8 @@ int	init_other_cmd(t_mini *shell, char *command)
 	shell->cmd->next->append = 0;
 	shell->cmd->s_quotes = 0;
 	shell->cmd->d_quotes = 0;
+	shell->cmd->fdin = NULL;
+	shell->cmd->fdout = NULL;
 	shell->cmd->next->prev = shell->cmd;
 	shell->cmd->next->next = NULL;
 	command = quotes(command, shell->cmd->next);
@@ -82,7 +86,7 @@ int	init_cmd(t_mini *shell, char **cmd)
 	{
 		if (!add_command(shell, cmd[i]))
 		{
-			free_cmd(shell->cmd);
+			shell->cmd->end_parse_error = 1;
 			return (0);
 		}
 	}

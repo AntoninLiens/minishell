@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 15:09:12 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/13 17:56:10 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/24 18:03:27 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,18 @@ void	free_env(t_env *env)
 
 void    free_cmd(t_cmd *cmd)
 {
-	if (!cmd)
+	if (cmd == NULL)
 		return ;
     lst_first(&cmd);
     while(cmd->next)
     {
+		if (cmd->fdin)
+			free(cmd->fdin);
+		if (cmd->fdout)
+			free(cmd->fdout);
         cmd = cmd->next;
         free(cmd->prev);
     }
-    free(cmd);
+   	free(cmd);
+	cmd = NULL;
 }

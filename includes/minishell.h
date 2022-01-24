@@ -146,7 +146,7 @@ void	close_my_pipes(int *pfd, t_mini *shell, pid_t pid);
 
 /*		REDIRECTIONS		*/
 
-void	mini_inout(t_mini *shell, t_cmd *cmd);
+int		mini_inout(t_mini *shell, t_cmd *cmd);
 
 int		mini_heredoc(t_cmd *cmd);
 int		child_heredoc(t_cmd *cmd, char *line, int pipefd[2]);
