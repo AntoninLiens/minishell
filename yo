@@ -5,10 +5,3 @@ minishell
 objs
 srcs
 yo
-Makefile
-includes
-libft
-minishell
-objs
-srcs
-yo

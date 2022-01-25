@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 19:10:52 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/25 16:34:02 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	init_other_cmd(t_mini *shell, char *command)
 	if (shell->cmd->next->end_parse_error)
 		return (0);
 	shell->cmd->next->str = ft_split(command, ' ');
+	free(command);
 	shell->cmd = shell->cmd->next;
 	return (1);
 }
@@ -55,6 +56,7 @@ int	add_command(t_mini *shell, char *command)
 		if (shell->cmd->end_parse_error)
 			return (0);
 		shell->cmd->str = ft_split(command, ' ');
+		free(command);
 		return (1);
 	}
 	else
@@ -101,6 +103,7 @@ int	check_operator(char *ans, t_mini *shell)
 			nb_cmd++;
 	cmd = ft_split(ans, '|');
 	if (!init_cmd(shell, cmd))
-		return (0);
+		nb_cmd = 0;
+	free(cmd);
 	return (nb_cmd);
 }

@@ -64,7 +64,6 @@ typedef struct  s_mini
     t_env	*env;
 	char	**basic_env;
 	char	*answer;
-	int		pfd[2];
 	int		fdin;
 	int		fdout;
     int		exit;
@@ -95,6 +94,7 @@ char	*ft_strjoin_mini(char *s1, char *s2);
 char	*get_file_name(char *str);
 
 void	free_env(t_env *env);
+void	free_double_char(char **str);
 void    free_cmd(t_cmd *cmd);
 
 void    lst_first(t_cmd **list);

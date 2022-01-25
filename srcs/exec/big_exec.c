@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 15:22:45 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/20 15:14:54 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/25 13:54:09 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	one_cmd_no_fork(t_mini *shell)
 {
 	if (shell->cmd && !shell->cmd->next)
 	{
-		if (!ft_strncmp(shell->cmd->str[0], "exit", 4)
-		|| !ft_strncmp(shell->cmd->str[0], "cd", 2)
-		|| !ft_strncmp(shell->cmd->str[0], "export", 6)
-		|| !ft_strncmp(shell->cmd->str[0], "unset", 5))
+		if (!ft_strncmp(shell->cmd->str[0], "exit", 5)
+		|| !ft_strncmp(shell->cmd->str[0], "cd", 3)
+		|| !ft_strncmp(shell->cmd->str[0], "export", 7)
+		|| !ft_strncmp(shell->cmd->str[0], "unset", 6))
 		{
 			builts_in(shell, shell->cmd->str);
 			return (1);

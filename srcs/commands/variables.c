@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:04:02 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/17 18:24:00 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/25 18:04:47 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,20 @@ int	export_no_arg(t_env *env)
 	while (tmp)
 	{
 		i++;
-		export[i] = (char *)malloc(sizeof(char) * (ft_strlen(tmp->str) + 1));
+		export[i] = ft_strdup(tmp->str);
 		if (!export[i])
 		{
-			while (i--)
-				free(export[i]);
-			free(export[i]);
+			free_double_char(export);
 			return (-1);
 		}
-		export[i] = tmp->str;
 		tmp = tmp->next;
 	}
+	export[i + 1] = NULL;
 	export = sort_env(export);
 	i = -1;
 	while (export[++i])
-	{
 		printf("declare -x %s\n", export[i]);
-		free(export[i]);
-	}
-	free(export);
+	free_double_char(export);
 	return (0);
 }
 
@@ -85,26 +80,30 @@ int	export(t_env *env, char **cmd)
     tmp->next = (t_env *)malloc(sizeof(t_env));
 	if (!tmp->next)
 		return (-1);
-    tmp->next->str = cmd[1];
+    tmp->next->str = ft_strdup(cmd[1]);
     tmp->next->next = NULL;
 	return (0);
 }
 
 void	unset(t_env *env, char *name)
 {
-    char    *res;
     t_env   *tmp;
     t_env   *tmp2;
 
     tmp = env;
-    res = get_env_val(env, name);
-    if (!res)
-        return ;
+	if (!ft_strncmp(tmp->str, name, ft_strlen(name)))
+	{
+		env = env->next;
+		free(tmp->str);
+		free(tmp);
+		return ;
+	}
     while (tmp->next)
     {
         if (!ft_strncmp(tmp->next->str, name, ft_strlen(name)))
         {
             tmp2 = tmp->next->next;
+            free(tmp->next->str);
             free(tmp->next);
             tmp->next = tmp2;
             return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shlvl.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:08:15 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/08 00:26:57 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/25 14:18:53 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void    replace_shlvl(t_env *env, char *sh_lvl)
         }
         tmp = tmp->next;
     }
+	free(sh_lvl);
 }
 
 void    up_shlvl(t_mini *shell)
@@ -39,5 +40,6 @@ void    up_shlvl(t_mini *shell)
 
     shlvl = get_env_val(shell->env, "SHLVL");
     sh_lvl = ft_atoi(shlvl) + 1;
+	free(shlvl);
     replace_shlvl(shell->env, ft_itoa(sh_lvl));
 }

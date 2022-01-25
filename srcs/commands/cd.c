@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 00:05:34 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/17 17:44:11 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/25 18:01:44 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ static void replace_oldpwd(t_env *env)
         {
             free(tmp->str);
             tmp->str = ft_strjoin("OLDPWD=", old_pwd);
+			free(old_pwd);
             return ;
         }
         tmp = tmp->next;
     }
+	free(old_pwd);
 }
 
 static void replace_pwd(t_env *env)
@@ -51,13 +53,17 @@ static void replace_pwd(t_env *env)
 
 int	cd(t_mini *shell, char **cmd)
 {
+	char	*env_val;
+
+	env_val = get_env_val(shell->env, "HOME");
 	if (!cmd[1])
-		chdir(get_env_val(shell->env, "HOME"));
+		chdir(env_val);
     else if (chdir(cmd[1]) < 0)
 	{
 		printf("cd: no such file or directory: %s\n", cmd[1]);
 		return (1);
 	}
+	free(env_val);
     replace_oldpwd(shell->env);
     replace_pwd(shell->env);
 	return (0);
