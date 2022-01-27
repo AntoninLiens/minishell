@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/25 18:43:59 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:58:26 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,16 @@ void	get_env_var(t_cmd *cmd, int i, t_mini *shell)
 			&& cmd->str[i][j + k] != '\'' && cmd->str[i][j + k] != '\"')
 				k++;
 			name = ft_substr(cmd->str[i], j, k);
-			tmp = get_env_val(shell->env, name);
 			if (!ft_strncmp(name, "?", 2))
 				tmp = ft_itoa(shell->exit_status);
+			else
+				tmp = get_env_val(shell->env, name);
 			free(name);
 			perm = ft_strjoin_gnl(perm, tmp);
 			free(tmp);
-			name = ft_substr(cmd->str[i], j + k, ft_strlen(cmd->str[i]));
+			name = ft_substr(cmd->str[i], j + k, \
+				ft_strlen(cmd->str[i]) - j - k);
+			free(cmd->str[i]);
 			cmd->str[i] = ft_strjoin_gnl(perm, name);
 			free(name);
 			j = -1;

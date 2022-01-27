@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/27 14:59:33 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:58:49 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ int	check_operator(char *ans, t_mini *shell)
 
 	shell->cmd = NULL;
 	if (!ans[0])
+	{
+		free(ans);
 		return (0);
+	}
 	nb_cmd = 1;
 	i = -1;
 	ans = quotes(ans);
