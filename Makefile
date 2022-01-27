@@ -6,7 +6,7 @@
 #    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/24 16:54:19 by ctirions         ###   ########.fr        #
+#    Updated: 2022/01/25 18:25:26 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,12 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			@make full -C ./libft
-			@$(CC) -o $(NAME) $(OBJS) libft/libft.a -lreadline
+			@$(CC) -o $(NAME) $(OBJS) libft/libft.a -lreadline -g
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
 			
 objs/%.o:	srcs/%.c
 			@printf "[$(PURPLE)✓$(RESET)] compilation of $<       \r"
-			@$(CC) $(CFLAGS) -c -I./includes $^ -o $@
+			@$(CC) $(CFLAGS) -c -I ./includes $^ -o $@
 
 run:		@make && ./minishell
 

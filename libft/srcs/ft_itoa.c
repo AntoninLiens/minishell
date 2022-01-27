@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 13:40:51 by ctirions          #+#    #+#             */
-/*   Updated: 2021/12/04 16:39:03 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/25 18:43:25 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,12 @@ char	*ft_itoa(int n)
 	char			*res;
 	unsigned int	nb;
 
+	if (!n)
+		return (ft_strdup("0"));
 	count = ft_ternint(n, ft_itoa_count(n), 1);
 	res = (char *)ft_calloc(sizeof(char), count + 1);
 	if (!res)
 		return (0);
-	if (!n)
-	{
-		res[0] = '0';
-		return (res);
-	}
 	nb = ft_ternint(n < 0, -n, n);
 	while (count)
 	{

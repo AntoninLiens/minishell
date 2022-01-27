@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/24 18:02:45 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/27 15:03:04 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ void	stop_parse_error(t_mini *shell)
 	}
 }
 
-int	parser(char *ans, t_mini *shell)
+void	parser(char *ans, t_mini *shell)
 {
 	shell->nb_cmds = check_operator(ans, shell);
 	stop_parse_error(shell);
-	replace_env_variable(shell);
 	if (!shell->nb_cmds)
-		return (0);
-	return (0);
+		return ;
+	replace_env_variable(shell);
 }

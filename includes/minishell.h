@@ -117,7 +117,7 @@ void    sigint(int code);
 
 /*		PARSE		*/
 
-int		parser(char *ans, t_mini *shell);
+void	parser(char *ans, t_mini *shell);
 void	stop_parse_error(t_mini *shell);
 
 int		check_operator(char *ans, t_mini *shell);
@@ -125,7 +125,7 @@ int		init_cmd(t_mini *shell, char **cmd);
 int		add_command(t_mini *shell, char *command);
 int		init_other_cmd(t_mini *shell, char *command);
 
-int		close_quotes(char **cmd);
+int		close_quotes(char *cmd);
 char	*quotes(char *command);
 
 char	*init_inoutfd(char *command, t_cmd *cmd);

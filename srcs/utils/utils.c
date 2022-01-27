@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:03:24 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/13 18:07:57 by aliens           ###   ########.fr       */
+/*   Updated: 2022/01/27 14:44:56 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,16 @@ char	*pathfinder(char *ans, t_env *env)
 	i = -1;
 	while (paths[++i])
 	{
-		part_path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(part_path, ans);
-		free(part_path);
+		part_path = ft_strjoin_gnl(paths[i], "/");
+		path = ft_strjoin_gnl(part_path, ans);
 		if (!access(path, F_OK))
+		{
+			free(paths);
 			return (path);
+		}
+		free(path);
 	}
-	free(path);
+	free(paths);
 	return (NULL);
 }
 

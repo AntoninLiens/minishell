@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/25 16:34:02 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:59:33 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	init_other_cmd(t_mini *shell, char *command)
 		return (0);
 	init_cmd_var(shell->cmd->next, 1);
 	shell->cmd->next->prev = shell->cmd;
-	command = quotes(command);
 	command = init_inoutfd(command, shell->cmd->next);
 	if (shell->cmd->next->end_parse_error)
 		return (0);
@@ -51,7 +50,6 @@ int	add_command(t_mini *shell, char *command)
 		if (!shell->cmd)
 			return (0);
 		init_cmd_var(shell->cmd, 0);
-		command = quotes(command);
 		command = init_inoutfd(command, shell->cmd);
 		if (shell->cmd->end_parse_error)
 			return (0);
@@ -69,11 +67,6 @@ int	init_cmd(t_mini *shell, char **cmd)
 {
 	int	i;
 	
-	if (!close_quotes(cmd))
-	{
-		printf("minishell: quotes not closed\n");
-		return (0);
-	}
 	i = -1;
 	while(cmd[++i])
 	{
@@ -98,12 +91,16 @@ int	check_operator(char *ans, t_mini *shell)
 		return (0);
 	nb_cmd = 1;
 	i = -1;
+	ans = quotes(ans);
+	if (!ans)
+		return (0);
 	while (ans[++i])
-		if (ans[i] == '|')
+		if (ans[i] == -3)
 			nb_cmd++;
-	cmd = ft_split(ans, '|');
+	cmd = ft_split(ans, -3);
 	if (!init_cmd(shell, cmd))
 		nb_cmd = 0;
+	free(ans);
 	free(cmd);
 	return (nb_cmd);
 }

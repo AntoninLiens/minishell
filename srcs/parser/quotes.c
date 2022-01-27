@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 19:43:38 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/27 15:06:46 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,18 @@ char	*quotes(char *command)
 	int		i;
 	int		j;
 
+	if (close_quotes(command))
+		return (NULL);
 	ret = NULL;
 	i = 0;
 	while (command[i] && command[i] != '\"' && command[i] != '\'')
+	{
+		if (command[i] == '$')
+			command[i] = -2;
+		else if (command[i] == '|')
+			command[i] = -3;
 		i++;
+	}
 	if (!command[i])
 		return (command);
 	ret = ft_substr(command, 0, i);
@@ -35,7 +43,7 @@ char	*quotes(char *command)
 			{
 				if (command[i + j] == '$' && command[i] == '\"')
 					command[i + j] = -2;
-				if (command[i + j] == ' ')
+				else if (command[i + j] == ' ')
 					command[i + j] = -1;
 				j++;
 			}
@@ -50,6 +58,8 @@ char	*quotes(char *command)
 		{
 			if (command[i + j] == '$')
 				command[i + j] = -2;
+			else if (command[i] == '|')
+				command[i] = -3;
 			j++;
 		}
 		if (j)
@@ -64,28 +74,26 @@ char	*quotes(char *command)
 	return (ret);
 }
 
-int	close_quotes(char **cmd)
+int	close_quotes(char *cmd)
 {
 	int	i;
 	int	j;
-	int	k;
 
 	i = -1;
 	while (cmd[++i])
 	{
-		j = -1;
-		while (cmd[i][++j])
+		j = 1;
+		if (cmd[i] == '\'' || cmd[i] == '\"')
 		{
-			if (cmd[i][j] == '\'' || cmd[i][j] == '\"')
+			while (cmd[i + j] && cmd[i + j] != cmd[i])
+				j++;
+			if (!cmd[i + j])
 			{
-				k = 1;
-				while (cmd[i][j + k] && cmd[i][j + k] != cmd[i][j])
-					k++;
-				if (!cmd[i][j + k])
-					return (0);
-				j += k;
+				free(cmd);
+				return (printf("minishell: quotes not closed\n"));
 			}
+			i += j;
 		}
 	}
-	return (1);
+	return (0);
 }
