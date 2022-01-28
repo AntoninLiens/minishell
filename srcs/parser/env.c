@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/27 17:58:26 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:40:57 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	get_env_var(t_cmd *cmd, int i, t_mini *shell)
 {
+	char	*name;
 	char	*perm;
 	char	*tmp;
-	char	*name;
 	int		j;
 	int		k;
 
+	name = NULL;
 	perm = NULL;
 	tmp = NULL;
 	j = -1;
@@ -27,7 +28,6 @@ void	get_env_var(t_cmd *cmd, int i, t_mini *shell)
 	{
 		if (cmd->str[i][j] == -2)
 		{
-			cmd->str[i][j] = '$';
 			perm = ft_substr(cmd->str[i], 0, j);
 			j++;
 			k = 0;
@@ -80,8 +80,8 @@ char    *get_env_val(t_env *env, char *name)
 
 void	replace_env_variable(t_mini *shell)
 {
-	int		i;
 	t_cmd	*cmd;
+	int		i;
 
 	cmd = shell->cmd;
 	while(cmd)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/27 15:03:04 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:37:49 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	stop_parse_error(t_mini *shell)
 
 void	parser(char *ans, t_mini *shell)
 {
+	shell->cmd = NULL;
 	shell->nb_cmds = check_operator(ans, shell);
 	stop_parse_error(shell);
 	if (!shell->nb_cmds)

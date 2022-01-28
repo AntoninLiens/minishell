@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_inoutfd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 18:44:55 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:19:57 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret)
 {
-    int	fd;
 	int	error;
+    int	fd;
 
 	errno = 0;
 	if (command[*i] == '<' && command[*i + 1] == '<')
@@ -46,8 +46,8 @@ char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret)
 
 char    *init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 {
-	int	fd;
 	int	error;
+	int	fd;
 
 	errno = 0;
 	if (command[*i] == '>' && command[*i + 1] != '>')
@@ -91,8 +91,6 @@ char	*init_inoutfd(char *command, t_cmd *cmd)
 
 	i = -1;
 	ret = NULL;
-	cmd->fdin = NULL;
-	cmd->fdout = NULL;
 	while (command[++i])
 	{
         ret = init_infile(command, cmd, &i, ret);

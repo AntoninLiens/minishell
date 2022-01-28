@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/27 17:58:49 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:37:53 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	check_operator(char *ans, t_mini *shell)
 	int		nb_cmd;
 	int		i;
 
-	shell->cmd = NULL;
 	if (!ans[0])
 	{
 		free(ans);

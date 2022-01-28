@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/27 15:06:46 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/28 13:59:53 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	close_quotes(char *cmd)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (cmd[++i])
+	{
+		j = 1;
+		if (cmd[i] == '\'' || cmd[i] == '\"')
+		{
+			while (cmd[i + j] && cmd[i + j] != cmd[i])
+				j++;
+			if (!cmd[i + j])
+			{
+				free(cmd);
+				return (printf("minishell: quotes not closed\n"));
+			}
+			i += j;
+		}
+	}
+	return (0);
+}
 
 char	*quotes(char *command)
 {
@@ -72,28 +96,4 @@ char	*quotes(char *command)
 	}
 	free(command);
 	return (ret);
-}
-
-int	close_quotes(char *cmd)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (cmd[++i])
-	{
-		j = 1;
-		if (cmd[i] == '\'' || cmd[i] == '\"')
-		{
-			while (cmd[i + j] && cmd[i + j] != cmd[i])
-				j++;
-			if (!cmd[i + j])
-			{
-				free(cmd);
-				return (printf("minishell: quotes not closed\n"));
-			}
-			i += j;
-		}
-	}
-	return (0);
 }
