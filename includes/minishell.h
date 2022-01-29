@@ -35,8 +35,8 @@
 # define WHITE "\033[37m"
 # define RESET "\033[0m"
 
-typedef struct	s_env	t_env;
-typedef struct	s_cmd	t_cmd;
+typedef struct s_env	t_env;
+typedef struct s_cmd	t_cmd;
 
 struct	s_env
 {
@@ -58,18 +58,18 @@ struct	s_cmd
 	t_cmd	*prev;
 };
 
-typedef struct  s_mini
+typedef struct s_mini
 {
 	t_cmd	*cmd;
-    t_env	*env;
+	t_env	*env;
 	char	**basic_env;
 	char	*answer;
 	int		fdin;
 	int		fdout;
-    int		exit;
+	int		exit;
 	int		exit_status;
 	int		nb_cmds;
-}               t_mini;
+}				t_mini;
 
 /*		MAIN		*/
 
@@ -77,15 +77,15 @@ void	minishell(t_mini *shell);
 
 /*		INIT		*/
 
-int 	init(t_mini *shell, char **env);
-int 	init_env(t_mini *shell, char **basic_env);
-void    up_shlvl(t_mini *shell);
+int		init(t_mini *shell, char **env);
+int		init_env(t_mini *shell, char **basic_env);
+void	up_shlvl(t_mini *shell);
 
 /*		ENV		*/
 
-void	replace_env_variable(t_mini *shell);
-void	get_env_var(t_cmd *cmd, int i, t_mini *shell);
-char    *get_env_val(t_env *env, char *name);
+void	replace_spec_char(t_mini *shell);
+void	get_spec_char(t_cmd *cmd, int i, t_mini *shell);
+char	*get_env_val(t_env *env, char *name);
 
 /*		UTILS		*/
 
@@ -95,10 +95,10 @@ char	*get_file_name(char *str);
 
 void	free_env(t_env *env);
 void	free_double_char(char **str);
-void    free_cmd(t_cmd *cmd);
+void	free_cmd(t_cmd *cmd);
 
-void    lst_first(t_cmd **list);
-void    lst_last(t_cmd **list);
+void	lst_first(t_cmd **list);
+void	lst_last(t_cmd **list);
 
 /*		SIGNALS		*/
 
@@ -113,7 +113,7 @@ int		sig_cmd_heredoc_in(void);
 int		sig_cmd_out(void);
 int		sig_cmd_in(void);
 void	ctrl_c_default(void);
-void    sigint(int code);
+void	sigint(int code);
 
 /*		PARSE		*/
 
@@ -129,18 +129,18 @@ int		close_quotes(char *cmd);
 char	*quotes(char *command);
 
 char	*init_inoutfd(char *command, t_cmd *cmd);
-char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
-char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret);
+char	*init_infile(char *command, t_cmd *cmd, int *i, char *ret);
+char	*init_infile(char *command, t_cmd *cmd, int *i, char *ret);
 
 /*		EXEC		*/
 
-int 	big_exec(t_mini *shell);
+int		big_exec(t_mini *shell);
 
 int		builts_in(t_mini *shell, char **cmd);
 int		exec_bin(char **cmd, t_mini *shell);
 
 int		pipes(t_mini *shell, int *pfd);
-void	pipe_child(t_cmd *tmp, int *pfd,int fdin, t_mini *shell);
+void	pipe_child(t_cmd *tmp, int *pfd, int fdin, t_mini *shell);
 void	close_my_pipes(int *pfd, t_mini *shell, pid_t pid);
 
 /*		REDIRECTIONS		*/
@@ -151,13 +151,12 @@ int		mini_heredoc(t_cmd *cmd);
 int		child_heredoc(t_cmd *cmd, char *line, int pipefd[2]);
 int		heredoc_no_cmd(t_cmd *cmd, char *line);
 
-
 /*		COMMANDS	*/
 
 int		echo(char **cmd);
 int		aff_env(t_env *env, char **cmd);
 int		mini_exit(t_mini *shell, char **cmd);
-int	  	pwd(t_env *env, char **cmd);
+int		pwd(t_env *env, char **cmd);
 int		cd(t_mini *shell, char **cmd);
 int		export(t_env *env, char **cmd);
 void	unset(t_env *env, char *name);

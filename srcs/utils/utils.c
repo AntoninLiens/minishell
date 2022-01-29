@@ -3,29 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:03:24 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/27 16:32:18 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/29 05:35:58 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*pathfinder(char *ans, t_env *env)
+char	*norm_4(char **paths, char *ans)
 {
-	char	**paths;
 	char	*part_path;
 	char	*path;
-	t_env	*tmp;
 	int		i;
 
-	if (!access(ans, F_OK))
-		return (ans);
-	tmp = env;
-	while (!ft_strnstr(tmp->str, "PATH", 4))
-		tmp = tmp->next;
-	paths = ft_split(tmp->str + 5, ':');
 	i = -1;
 	while (paths[++i])
 	{
@@ -38,22 +30,26 @@ char	*pathfinder(char *ans, t_env *env)
 		}
 		free(path);
 	}
-	free(paths);
 	return (NULL);
 }
 
-void    lst_first(t_cmd **list)
+char	*pathfinder(char *ans, t_env *env)
 {
-    if (list && *list)
-        while ((*list)->prev)
-            *list = (*list)->prev;
-}
+	char	**paths;
+	char	*path;
+	t_env	*tmp;
 
-void    lst_last(t_cmd **list)
-{
-    if (list && *list)
-        while ((*list)->next)
-            *list = (*list)->next;
+	if (!access(ans, F_OK))
+		return (ans);
+	tmp = env;
+	while (!ft_strnstr(tmp->str, "PATH", 4))
+		tmp = tmp->next;
+	paths = ft_split(tmp->str + 5, ':');
+	path = norm_4(paths, ans);
+	if (path)
+		return (path);
+	free(paths);
+	return (NULL);
 }
 
 char	*ft_strjoin_mini(char *s1, char *s2)
@@ -98,5 +94,5 @@ char	*get_file_name(char *str)
 		i++;
 	}
 	name[i] = 0;
-	return (name); 
+	return (name);
 }

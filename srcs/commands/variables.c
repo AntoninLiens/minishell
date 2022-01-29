@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:04:02 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/25 18:04:47 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/29 02:09:55 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ char	**sort_env(char **export)
 	char	*tmp;
 	int		i;
 	int		j;
-	
+
 	j = -1;
-	while(export[++j])
+	while (export[++j])
 		;
 	while (--j)
 	{
@@ -37,16 +37,10 @@ char	**sort_env(char **export)
 	return (export);
 }
 
-int	export_no_arg(t_env *env)
+int	norm_2(char **export, t_env *tmp)
 {
-	char	**export;
-	t_env	*tmp;
-	int		i;
+	int	i;
 
-	tmp = env;
-	export = (char **)malloc(sizeof(char *) * (ft_lstsize((t_list *)tmp) + 1));
-	if (!export)
-		return (-1);
 	i = -1;
 	while (tmp)
 	{
@@ -59,6 +53,20 @@ int	export_no_arg(t_env *env)
 		}
 		tmp = tmp->next;
 	}
+	return (i);
+}
+
+int	export_no_arg(t_env *env)
+{
+	char	**export;
+	t_env	*tmp;
+	int		i;
+
+	tmp = env;
+	export = (char **)malloc(sizeof(char *) * (ft_lstsize((t_list *)tmp) + 1));
+	if (!export)
+		return (-1);
+	i = norm_2(export, tmp);
 	export[i + 1] = NULL;
 	export = sort_env(export);
 	i = -1;
@@ -70,27 +78,27 @@ int	export_no_arg(t_env *env)
 
 int	export(t_env *env, char **cmd)
 {
-    t_env   *tmp;
+	t_env	*tmp;
 
 	if (!cmd[1])
 		return (export_no_arg(env));
-    tmp = env;
-    while (tmp->next)
-        tmp = tmp->next;
-    tmp->next = (t_env *)malloc(sizeof(t_env));
+	tmp = env;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = (t_env *)malloc(sizeof(t_env));
 	if (!tmp->next)
 		return (-1);
-    tmp->next->str = ft_strdup(cmd[1]);
-    tmp->next->next = NULL;
+	tmp->next->str = ft_strdup(cmd[1]);
+	tmp->next->next = NULL;
 	return (0);
 }
 
 void	unset(t_env *env, char *name)
 {
-    t_env   *tmp;
-    t_env   *tmp2;
+	t_env	*tmp;
+	t_env	*tmp2;
 
-    tmp = env;
+	tmp = env;
 	if (!ft_strncmp(tmp->str, name, ft_strlen(name)))
 	{
 		env = env->next;
@@ -98,16 +106,16 @@ void	unset(t_env *env, char *name)
 		free(tmp);
 		return ;
 	}
-    while (tmp->next)
-    {
-        if (!ft_strncmp(tmp->next->str, name, ft_strlen(name)))
-        {
-            tmp2 = tmp->next->next;
-            free(tmp->next->str);
-            free(tmp->next);
-            tmp->next = tmp2;
-            return ;
-        }
-        tmp = tmp->next;
-    }
+	while (tmp->next)
+	{
+		if (!ft_strncmp(tmp->next->str, name, ft_strlen(name)))
+		{
+			tmp2 = tmp->next->next;
+			free(tmp->next->str);
+			free(tmp->next);
+			tmp->next = tmp2;
+			return ;
+		}
+		tmp = tmp->next;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/28 14:37:49 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/01/29 02:25:17 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	parser(char *ans, t_mini *shell)
 	stop_parse_error(shell);
 	if (!shell->nb_cmds)
 		return ;
-	replace_env_variable(shell);
+	replace_spec_char(shell);
 }

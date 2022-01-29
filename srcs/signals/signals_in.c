@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_in.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 17:24:09 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/17 18:06:09 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/29 01:13:09 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	set_sig_cmd_in(t_cmd *cmd)
 {
-	t_cmd *tmp;
+	t_cmd	*tmp;
 
 	tmp = cmd;
 	while (tmp)

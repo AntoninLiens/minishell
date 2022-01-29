@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 17:44:05 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/29 01:27:08 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	pipe_child(t_cmd *tmp, int *pfd,int fdin, t_mini *shell)
+void	pipe_child(t_cmd *tmp, int *pfd, int fdin, t_mini *shell)
 {
 	if (tmp->heredoc)
 		mini_heredoc(tmp);
@@ -41,7 +41,7 @@ int	pipes(t_mini *shell, int *pfd)
 	t_cmd	*tmp;
 
 	fdin = 420;
-    tmp = shell->cmd;
+	tmp = shell->cmd;
 	i = 0;
 	while (tmp)
 	{

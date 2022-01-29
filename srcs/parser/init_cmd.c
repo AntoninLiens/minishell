@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/28 14:37:53 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/01/29 01:17:12 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	add_command(t_mini *shell, char *command)
 int	init_cmd(t_mini *shell, char **cmd)
 {
 	int	i;
-	
+
 	i = -1;
-	while(cmd[++i])
+	while (cmd[++i])
 	{
 		if (!add_command(shell, cmd[i]))
 		{

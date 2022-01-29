@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/27 14:47:05 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/29 01:28:25 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,20 @@ int	builts_in(t_mini *shell, char **cmd)
 {
 	if (!cmd)
 		return (0);
-    if (!ft_strncmp(cmd[0], "pwd", 4))
-        shell->exit_status = pwd(shell->env, cmd);
-    else if (!ft_strncmp(cmd[0], "env", 4))
-    	shell->exit_status = aff_env(shell->env, cmd);
-    else if (!ft_strncmp(cmd[0], "exit", 5))
+	if (!ft_strncmp(cmd[0], "pwd", 4))
+		shell->exit_status = pwd(shell->env, cmd);
+	else if (!ft_strncmp(cmd[0], "env", 4))
+		shell->exit_status = aff_env(shell->env, cmd);
+	else if (!ft_strncmp(cmd[0], "exit", 5))
 		shell->exit_status = mini_exit(shell, cmd);
-    else if (!ft_strncmp(cmd[0], "export", 7))
-        shell->exit_status = export(shell->env, cmd);
-    else if (!ft_strncmp(cmd[0], "unset", 6))
-        unset(shell->env, cmd[1]);
-    else if (!ft_strncmp(cmd[0], "echo", 5))
-        shell->exit_status = echo(cmd);
-    else if (!ft_strncmp(cmd[0], "cd", 3))
-        shell->exit_status = cd(shell, cmd);
+	else if (!ft_strncmp(cmd[0], "export", 7))
+		shell->exit_status = export(shell->env, cmd);
+	else if (!ft_strncmp(cmd[0], "unset", 6))
+		unset(shell->env, cmd[1]);
+	else if (!ft_strncmp(cmd[0], "echo", 5))
+		shell->exit_status = echo(cmd);
+	else if (!ft_strncmp(cmd[0], "cd", 3))
+		shell->exit_status = cd(shell, cmd);
 	else
 		return (0);
 	return (1);

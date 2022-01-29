@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
+#    By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/01/25 18:25:26 by ctirions         ###   ########.fr        #
+#    Updated: 2022/01/29 05:23:24 by zminhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ FILES =		minishell.c					\
 			signals/signals_in.c		\
 			signals/signals_out.c		\
 			utils/utils.c				\
+			utils/utils2.c				\
 			utils/free.c				\
 			commands/pwd.c				\
 			commands/aff_env.c			\
@@ -59,7 +60,7 @@ $(NAME):	$(OBJS)
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
 			
 objs/%.o:	srcs/%.c
-			@printf "[$(PURPLE)✓$(RESET)] compilation of $<       \r"
+			@printf "[$(PURPLE)✓$(RESET)] compilation of $<		\r"
 			@$(CC) $(CFLAGS) -c -I ./includes $^ -o $@
 
 run:		@make && ./minishell

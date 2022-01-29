@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:39:30 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/24 17:50:13 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/29 01:26:30 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	heredoc_no_cmd(t_cmd *cmd, char *line)
 	{
 		if (line)
 			free(line);
-		line = readline("> ");	
+		line = readline("> ");
 	}
 	free(line);
 	return (0);

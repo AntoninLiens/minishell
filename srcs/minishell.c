@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/27 17:06:24 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/29 01:44:13 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	minishell(t_mini *shell)
 	free_env(shell->env);
 }
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	t_mini	shell;
-	
+
 	if (argc > 1 && argv)
 		return (1);
 	if (init(&shell, env))

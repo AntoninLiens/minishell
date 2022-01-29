@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init_inoutfd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@students.s19.be>          +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/28 14:19:57 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/01/29 08:04:38 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret)
+char	*init_infile(char *command, t_cmd *cmd, int *i, char *ret)
 {
 	int	error;
-    int	fd;
+	int	fd;
 
 	errno = 0;
 	if (command[*i] == '<' && command[*i + 1] == '<')
@@ -41,10 +41,10 @@ char    *init_infile(char *command, t_cmd *cmd, int *i, char *ret)
 		}
 		close(fd);
 	}
-    return (ret);
+	return (ret);
 }
 
-char    *init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
+char	*init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 {
 	int	error;
 	int	fd;
@@ -61,7 +61,7 @@ char    *init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 		{
 			printf("minishell: %s: %s\n", cmd->fdout, strerror(error));
 			cmd->end_parse_error = 1;
-			return (NULL);	
+			return (NULL);
 		}
 		close(fd);
 	}
@@ -75,13 +75,13 @@ char    *init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 		if (fd == -1)
 		{
 			printf("minishell: %s: %s\n", cmd->fdout, strerror(error));
-			cmd->end_parse_error = 1;	
+			cmd->end_parse_error = 1;
 		}
 		cmd->append = 1;
 		close(fd);
 		(*i)++;
 	}
-    return (ret);
+	return (ret);
 }
 
 char	*init_inoutfd(char *command, t_cmd *cmd)
@@ -93,8 +93,8 @@ char	*init_inoutfd(char *command, t_cmd *cmd)
 	ret = NULL;
 	while (command[++i])
 	{
-        ret = init_infile(command, cmd, &i, ret);
-        ret = init_outfile(command, cmd, &i, ret);
+		ret = init_infile(command, cmd, &i, ret);
+		ret = init_outfile(command, cmd, &i, ret);
 	}
 	if (!ret)
 		return (command);

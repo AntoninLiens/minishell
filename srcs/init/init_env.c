@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 15:44:07 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/25 14:51:54 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/01/29 01:22:15 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int init_env(t_mini *shell, char **basic_env)
+int	init_env(t_mini *shell, char **basic_env)
 {
 	t_env	*tmp;
 	int		i;
