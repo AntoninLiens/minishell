@@ -6,7 +6,7 @@
 /*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:30:27 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/29 01:36:55 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/01 16:32:41 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	pwd(t_env *env, char **cmd)
 
 	if (cmd[1])
 	{
-		printf("pwd: too many arguments\n");
+		ft_putstr_fd("pwd: too many arguments\n", STDERR_FILENO);
 		return (1);
 	}
 	res = get_env_val(env, "PWD");

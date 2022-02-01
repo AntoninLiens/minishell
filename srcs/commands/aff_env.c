@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aff_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:47:24 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/08 00:26:04 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/01 16:36:00 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	aff_env(t_env *env, char **cmd)
 
 	if (cmd[1])
 	{
-		printf("env: too many arguments\n");
+		ft_putstr_fd("env: too many arguments\n", STDERR_FILENO);
 		return (127);
 	}
 	tmp = env;

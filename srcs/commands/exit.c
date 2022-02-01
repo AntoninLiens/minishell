@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 16:36:01 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/31 10:54:49 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/01 16:46:12 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	mini_exit(t_mini *shell, char **cmd)
 
 	if (cmd[2])
 	{
-		printf("minishell: exit: too many argument\n");
+		ft_putstr_fd("minishell: exit: too many argument\n", STDERR_FILENO);
 		return (2);
 	}
 	if (!cmd[1])
@@ -31,7 +31,9 @@ int	mini_exit(t_mini *shell, char **cmd)
 		i++;
 	if (cmd[1][i])
 	{
-		printf("minishell: exit: Illegal number: %s\n", cmd[1]);
+		ft_putstr_fd("minishell: exit: Illegal number: ", STDERR_FILENO);
+		ft_putstr_fd(cmd[1], STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
 		return (2);
 	}
 	shell->exit = 1;

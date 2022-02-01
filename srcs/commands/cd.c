@@ -6,7 +6,7 @@
 /*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 00:05:34 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/29 01:43:36 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/01 16:42:58 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ int	cd(t_mini *shell, char **cmd)
 	env_val = get_env_val(shell->env, "HOME");
 	if (!cmd[1])
 		chdir(env_val);
-	else if (chdir(cmd[1]) < 0)
+	if (chdir(cmd[1]) < 0)
 	{
-		printf("cd: no such file or directory: %s\n", cmd[1]);
+		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
+		perror(cmd[1]);
 		return (1);
 	}
 	free(env_val);
