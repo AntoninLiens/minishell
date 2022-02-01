@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:04:02 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/29 02:09:55 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/01 17:27:30 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	export_no_arg(t_env *env)
 	t_env	*tmp;
 	int		i;
 
+	if (!env)
+		return (0);
 	tmp = env;
 	export = (char **)malloc(sizeof(char *) * (ft_lstsize((t_list *)tmp) + 1));
 	if (!export)
@@ -76,6 +78,21 @@ int	export_no_arg(t_env *env)
 	return (0);
 }
 
+int	verify_export(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isalnum(cmd[i]))
+		i++;
+	if (!cmd[i] || cmd[i] == '=')
+		return (0);
+	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
+	return (1);
+}
+
 int	export(t_env *env, char **cmd)
 {
 	t_env	*tmp;
@@ -83,6 +100,10 @@ int	export(t_env *env, char **cmd)
 	if (!cmd[1])
 		return (export_no_arg(env));
 	tmp = env;
+	if (verify_export(cmd[1]))
+		return (1);
+	if (!ft_strrchr(cmd[1], '='))
+		return (0);
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = (t_env *)malloc(sizeof(t_env));
@@ -99,6 +120,8 @@ void	unset(t_env *env, char *name)
 	t_env	*tmp2;
 
 	tmp = env;
+	if (!ft_strncmp("_", name, 2))
+		return ;
 	if (!ft_strncmp(tmp->str, name, ft_strlen(name)))
 	{
 		env = env->next;
