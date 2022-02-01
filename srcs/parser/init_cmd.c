@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/29 01:17:12 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/01 13:34:31 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	init_other_cmd(t_mini *shell, char *command)
 	init_cmd_var(shell->cmd->next, 1);
 	shell->cmd->next->prev = shell->cmd;
 	command = init_inoutfd(command, shell->cmd->next);
+	shell->cmd->next->str = ft_split(command, ' ');
 	if (shell->cmd->next->end_parse_error)
 		return (0);
-	shell->cmd->next->str = ft_split(command, ' ');
 	free(command);
 	shell->cmd = shell->cmd->next;
 	return (1);
@@ -51,9 +51,9 @@ int	add_command(t_mini *shell, char *command)
 			return (0);
 		init_cmd_var(shell->cmd, 0);
 		command = init_inoutfd(command, shell->cmd);
+		shell->cmd->str = ft_split(command, ' ');
 		if (shell->cmd->end_parse_error)
 			return (0);
-		shell->cmd->str = ft_split(command, ' ');
 		free(command);
 		return (1);
 	}

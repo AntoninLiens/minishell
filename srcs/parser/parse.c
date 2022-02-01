@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:15:58 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/29 02:25:17 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/01 13:15:05 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	stop_parse_error(t_mini *shell)
 			shell->nb_cmds = 0;
 			free_cmd(tmp);
 			shell->cmd = NULL;
+			return ;
 		}
 		tmp = tmp->next;
 	}

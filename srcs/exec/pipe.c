@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/29 01:27:08 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/01 13:53:08 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	pipe_child(t_cmd *tmp, int *pfd, int fdin, t_mini *shell)
 {
-	if (tmp->heredoc)
-		mini_heredoc(tmp);
 	if (!tmp->heredoc)
 		dup2(fdin, 0);
+	if (tmp->heredoc)
+		mini_heredoc(tmp);
 	if (tmp->next)
 		dup2(pfd[1], 1);
 	close(pfd[0]);
