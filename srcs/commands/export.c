@@ -6,36 +6,11 @@
 /*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:04:02 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/02 16:21:48 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/02 19:40:52 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-char	**sort_env(char **export)
-{
-	char	*tmp;
-	int		i;
-	int		j;
-
-	j = -1;
-	while (export[++j])
-		;
-	while (--j)
-	{
-		i = -1;
-		while (export[++i + 1])
-		{
-			if (ft_strncmp(export[i], export[i + 1], ft_strlen(export[i])) > 0)
-			{
-				tmp = export[i];
-				export[i] = export[i + 1];
-				export[i + 1] = tmp;
-			}
-		}
-	}
-	return (export);
-}
 
 int	norm_2(char **export, t_env *tmp)
 {
@@ -78,15 +53,34 @@ int	export_no_arg(t_env *env)
 	return (0);
 }
 
-int	verify_export(char *cmd)
+int	already_exist(char *cmd, int i, t_env *env)
 {
-	int	i;
+	char	*name;
+	t_env	*tmp;
+
+	tmp = env;
+	name = ft_substr(cmd, 0, i);
+	while (env)
+	{
+		if (!ft_strncmp(env->str, cmd, i))
+			unset(tmp, name);
+		env = env->next;
+	}
+	free(name);
+	return (0);
+}
+
+int	verify_export(char *cmd, t_env *env)
+{
+	int		i;
 
 	i = 0;
 	while (ft_isalnum(cmd[i]))
 		i++;
-	if (!cmd[i] || cmd[i] == '=')
+	if (!cmd[i])
 		return (0);
+	else if (cmd[i] == '=')
+		return (already_exist(cmd, i, env));
 	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
@@ -97,10 +91,10 @@ int	export(t_env *env, char **cmd)
 {
 	t_env	*tmp;
 
-	if (!cmd[1])
-		return (export_no_arg(env));
 	tmp = env;
-	if (verify_export(cmd[1]))
+	if (!cmd[1])
+		return (export_no_arg(tmp));
+	if (verify_export(cmd[1], tmp))
 		return (1);
 	if (!ft_strrchr(cmd[1], '='))
 		return (0);

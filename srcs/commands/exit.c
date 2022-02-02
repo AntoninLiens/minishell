@@ -6,7 +6,7 @@
 /*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 16:36:01 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/01 16:46:12 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/02 18:03:38 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ int	mini_exit(t_mini *shell, char **cmd)
 {
 	int	i;
 
-	if (cmd[2])
-	{
-		ft_putstr_fd("minishell: exit: too many argument\n", STDERR_FILENO);
-		return (2);
-	}
 	if (!cmd[1])
 	{
 		shell->exit = 1;
 		return (0);
+	}
+	if (cmd[2])
+	{
+		ft_putstr_fd("minishell: exit: too many argument\n", STDERR_FILENO);
+		return (2);
 	}
 	i = 0;
 	while (cmd[1][i] && (ft_isdigit(cmd[1][i]) || cmd[1][i] == '-'))

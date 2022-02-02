@@ -6,7 +6,7 @@
 /*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/02 15:36:29 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/02 18:32:55 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ char	*init_infile(char *command, t_cmd *cmd, int *i, char *ret)
 	int	fd;
 
 	errno = 0;
-	if (command[*i] == '<' && command[*i + 1] == '<')
+	if (command[*i] == -4 && command[*i + 1] == -4)
 	{
 		cmd->heredoc = 1;
 		cmd->fdin = get_file_name(command + *i + 2);
 		(*i)++;
 	}
-	else if (command[*i] == '<' && command[*i + 1] != '<')
+	else if (command[*i] == -4 && command[*i + 1] != -4)
 	{
 		cmd->fdin = get_file_name(command + *i + 1);
 		fd = open(cmd->fdin, O_RDONLY);
@@ -74,7 +74,7 @@ char	*init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 	int	fd;
 
 	errno = 0;
-	if (command[*i] == '>' && command[*i + 1] != '>')
+	if (command[*i] == -5 && command[*i + 1] != -5)
 	{
 		cmd->fdout = get_file_name(command + *i + 1);
 		fd = open(cmd->fdout, O_CREAT | O_TRUNC | O_WRONLY, 0664);
@@ -83,7 +83,7 @@ char	*init_outfile(char *command, t_cmd *cmd, int *i, char *ret)
 			return (NULL);
 		close(fd);
 	}
-	else if (command[*i] == '>' && command[*i + 1] == '>')
+	else if (command[*i] == -5 && command[*i + 1] == -5)
 		return (init_append_outfile(command, cmd, i, ret));
 	return (ret);
 }
@@ -97,7 +97,7 @@ char	*init_inoutfd(char *command, t_cmd *cmd)
 	ret = NULL;
 	while (command[++i])
 	{
-		if (command[i] == '<' || command[i] == '>')
+		if (command[i] == -4 || command[i] == -5)
 		{
 			if (!ret)
 				ret = ft_substr(command, 0, i);

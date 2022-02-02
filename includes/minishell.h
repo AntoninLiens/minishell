@@ -100,6 +100,8 @@ void	free_cmd(t_cmd *cmd);
 void	lst_first(t_cmd **list);
 void	lst_last(t_cmd **list);
 
+char	**sort_env(char **export);
+
 /*		SIGNALS		*/
 
 int		set_sig_cmd_out(t_cmd *cmd);

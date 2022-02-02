@@ -6,7 +6,7 @@
 /*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/01/29 06:18:34 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/02 18:35:14 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	close_quotes(char *cmd)
 			if (!cmd[i + j])
 			{
 				free(cmd);
-				return (printf("minishell: quotes not closed\n"));
+				ft_putstr_fd("minishell: quotes not closed\n", 2);
+				return (1);
 			}
 			i += j;
 		}
@@ -47,6 +48,10 @@ int	before_quotes(char *command)
 			command[i] = -2;
 		else if (command[i] == '|')
 			command[i] = -3;
+		else if (command[i] == '<')
+			command[i] = -4;
+		else if (command[i] == '>')
+			command[i] = -5;
 		i++;
 	}
 	return (i);
@@ -89,6 +94,10 @@ int	after_quotes(char *command, char **ret)
 			command[i] = -2;
 		else if (command[i] == '|')
 			command[i] = -3;
+		else if (command[i] == '<')
+			command[i] = -4;
+		else if (command[i] == '>')
+			command[i] = -5;
 		i++;
 	}
 	if (i)
