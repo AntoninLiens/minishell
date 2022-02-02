@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals_defaults.c                                 :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 01:28:53 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/02 15:43:59 by zminhas          ###   ########.fr       */
+/*   Created: 2022/02/02 16:16:08 by zminhas           #+#    #+#             */
+/*   Updated: 2022/02/02 16:16:33 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	sigint(int code)
+void	unset(t_env *env, char *name)
 {
-	if (code != SIGINT)
-		return ;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	//rl_replace_line("", 0);
-	rl_redisplay();
-}
+	t_env	*tmp;
+	t_env	*tmp2;
 
-void	ctrl_c_default(void)
-{
-	signal(SIGINT, &sigint);
+	tmp = env;
+	if (!ft_strncmp("_", name, 2))
+		return ;
+	if (!ft_strncmp(tmp->str, name, ft_strlen(name)))
+	{
+		env = env->next;
+		free(tmp->str);
+		free(tmp);
+		return ;
+	}
+	while (tmp->next)
+	{
+		if (!ft_strncmp(tmp->next->str, name, ft_strlen(name)))
+		{
+			tmp2 = tmp->next->next;
+			free(tmp->next->str);
+			free(tmp->next);
+			tmp->next = tmp2;
+			return ;
+		}
+		tmp = tmp->next;
+	}
 }

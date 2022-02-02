@@ -6,7 +6,7 @@
 #    By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/02/01 15:00:16 by zminhas          ###   ########.fr        #
+#    Updated: 2022/02/02 16:35:23 by zminhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,30 +20,31 @@ SRCSDIR = 	srcs/
 OBJSDIR = 	objs/
 
 FILES =		minishell.c					\
-			init/init.c					\
-			init/init_env.c				\
-			init/shlvl.c				\
-			parser/parse.c				\
-			parser/env.c				\
-			parser/init_inoutfd.c		\
-			parser/init_cmd.c			\
-			parser/quotes.c				\
+			commands/aff_env.c			\
+			commands/cd.c				\
+			commands/echo.c				\
+			commands/exit.c				\
+			commands/export.c			\
+			commands/pwd.c				\
+			commands/unset.c			\
 			exec/big_exec.c				\
 			exec/exec.c					\
-			exec/redirections.c			\
 			exec/pipe.c					\
+			exec/redirections.c			\
+			init/init_env.c				\
+			init/init.c					\
+			init/shlvl.c				\
+			parser/env.c				\
+			parser/init_cmd.c			\
+			parser/init_inoutfd.c		\
+			parser/parse.c				\
+			parser/quotes.c				\
 			signals/signals_defaults.c	\
 			signals/signals_in.c		\
 			signals/signals_out.c		\
-			utils/utils.c				\
-			utils/utils2.c				\
 			utils/free.c				\
-			commands/pwd.c				\
-			commands/aff_env.c			\
-			commands/variables.c		\
-			commands/echo.c				\
-			commands/exit.c				\
-			commands/cd.c
+			utils/utils.c				\
+			utils/utils2.c
 
 SRCS	=	$(addprefix srcs/, $(FILES))
 OBJS	=	$(patsubst srcs%.c, objs%.o, $(SRCS))
@@ -60,7 +61,7 @@ $(NAME):	$(OBJS)
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
 			
 objs/%.o:	srcs/%.c
-			@printf "[$(PURPLE)✓$(RESET)] compilation of $<		\r"
+			@printf "[$(PURPLE)✓$(RESET)] compilation of $<\r"
 			@$(CC) $(CFLAGS) -c -I ./includes $^ -o $@
 
 run:		@make && ./minishell
