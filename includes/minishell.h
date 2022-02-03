@@ -116,6 +116,7 @@ int		sig_cmd_out(void);
 int		sig_cmd_in(void);
 void	ctrl_c_default(void);
 void	sigint(int code);
+void	sigquit(int code);
 
 /*		PARSE		*/
 

@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   signals_defaults.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:28:53 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/02 16:47:55 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/03 15:32:53 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	sigquit(int code)
+{
+	(void)code;
+	rl_on_new_line();
+	rl_redisplay();
+}
 
 void	sigint(int code)
 {
@@ -18,11 +25,12 @@ void	sigint(int code)
 		return ;
 	write(1, "\n", 1);
 	rl_on_new_line();
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
 void	ctrl_c_default(void)
 {
+	signal(SIGQUIT, &sigquit);
 	signal(SIGINT, &sigint);
 }
