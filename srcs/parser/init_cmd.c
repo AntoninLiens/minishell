@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:09:18 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/02 18:04:38 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/03 15:25:51 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_cmd_var(t_cmd *cmd, int type)
 	cmd->d_quotes = 0;
 	cmd->fdin = NULL;
 	cmd->fdout = NULL;
+	cmd->limit_string = NULL;
 	if (!type)
 		cmd->prev = NULL;
 	cmd->next = NULL;
