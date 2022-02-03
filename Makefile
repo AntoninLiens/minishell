@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+         #
+#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/02/02 17:48:37 by zminhas          ###   ########.fr        #
+#    Updated: 2022/02/03 15:44:08 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,12 @@ RESET	=	$(shell tput -Txterm sgr0)
 
 SRCSDIR = 	srcs/
 OBJSDIR = 	objs/
+
+RPATH	= /Users/$(USER)/.brew/opt/readline/
+
+RL_FLAGS	=	-L/usr/include  -lreadline\
+				-L /Users/$(USER)/.brew/opt/readline/lib\
+				-I/Users/$(USER)/.brew/opt/readline/include
 
 FILES =		minishell.c					\
 			commands/aff_env.c			\
@@ -57,14 +63,14 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			@make full -C ./libft
-			@$(CC) -o $(NAME) $(OBJS) libft/libft.a -lreadline -g
+			@$(CC) $(CFLAGS) $(RL_FLAGS) -o $(NAME) $(OBJS) libft/libft.a
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
 			
 objs/%.o:	srcs/%.c
 			@printf "[$(PURPLE)✓$(RESET)] compilation of $<\r"
-			@$(CC) $(CFLAGS) -c -I ./includes $^ -o $@
+			@$(CC) $(CFLAGS) $(RLFLAGS) -I ./includes -c $^ -o $@
 
-run:		@make && ./minishell
+run:		@make -C ./ && clear && ./minishell
 
 clean:
 			@make clean -C ./libft
