@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/01 13:53:08 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/03 14:09:27 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	pipe_child(t_cmd *tmp, int *pfd, int fdin, t_mini *shell)
 {
 	if (!tmp->heredoc)
-		dup2(fdin, 0);
+		dup2(fdin, STDIN_FILENO);
 	if (tmp->heredoc)
 		mini_heredoc(tmp);
 	if (tmp->next)
-		dup2(pfd[1], 1);
+		dup2(pfd[1], STDOUT_FILENO);
 	close(pfd[0]);
 	if (!tmp->str[0])
 		exit(0);

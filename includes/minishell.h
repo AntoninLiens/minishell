@@ -49,6 +49,7 @@ struct	s_cmd
 	char	**str;
 	char	*fdin;
 	char	*fdout;
+	char	**limit_string;
 	int		heredoc;
 	int		append;
 	int		s_quotes;
