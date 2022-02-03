@@ -6,7 +6,7 @@
 #    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/02/03 16:18:31 by ctirions         ###   ########.fr        #
+#    Updated: 2022/02/03 16:27:04 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ $(NAME):	$(OBJS)
 			
 objs/%.o:	srcs/%.c
 			@printf "[$(PURPLE)✓$(RESET)] compilation of $<\r"
-			@$(CC) $(CFLAGS) $(RLFLAGS) -I ./includes -c $^ -o $@
+			@$(CC) $(CFLAGS) $(RFLAGS) -I ./includes -c $^ -o $@
 
 run:		@make -C ./ && clear && ./minishell
 
