@@ -6,7 +6,7 @@
 #    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/02/03 15:44:08 by ctirions         ###   ########.fr        #
+#    Updated: 2022/02/03 16:18:31 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,9 @@ RESET	=	$(shell tput -Txterm sgr0)
 SRCSDIR = 	srcs/
 OBJSDIR = 	objs/
 
-RPATH	= /Users/$(USER)/.brew/opt/readline/
+RPATH	=	/Users/$(USER)/.brew/opt/readline/
 
-RL_FLAGS	=	-L/usr/include  -lreadline\
-				-L /Users/$(USER)/.brew/opt/readline/lib\
-				-I/Users/$(USER)/.brew/opt/readline/include
+RLFLAGS	=	-L $(RPATH)lib -I $(RPATH)include -Wno-unused-command-line-argument
 
 FILES =		minishell.c					\
 			commands/aff_env.c			\
@@ -63,7 +61,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			@make full -C ./libft
-			@$(CC) $(CFLAGS) $(RL_FLAGS) -o $(NAME) $(OBJS) libft/libft.a
+			@$(CC) $(CFLAGS) $(RLFLAGS) -lreadline -o $(NAME) $(OBJS) libft/libft.a
 			@echo "[$(GREEN)✓$(RESET)] minishell created"
 			
 objs/%.o:	srcs/%.c
