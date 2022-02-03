@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_defaults.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:28:53 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/03 15:32:53 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/02/03 16:13:15 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	sigint(int code)
 		return ;
 	write(1, "\n", 1);
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_redisplay();
 }
 

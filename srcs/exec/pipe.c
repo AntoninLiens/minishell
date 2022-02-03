@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/03 14:09:27 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/03 16:16:09 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,10 @@ int	pipes(t_mini *shell, int *pfd)
 		pid = fork();
 		if (!pid && set_sig_cmd_in(tmp))
 			pipe_child(tmp, pfd + i, fdin, shell);
-		else
-		{
-			close(pfd[i + 1]);
-			fdin = pfd[i];
-			tmp = tmp->next;
-			i += 2;
-		}
+		close(pfd[i + 1]);
+		fdin = pfd[i];
+		tmp = tmp->next;
+		i += 2;
 	}
 	close_my_pipes(pfd, shell, pid);
 	return (0);
