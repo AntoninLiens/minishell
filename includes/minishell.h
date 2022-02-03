@@ -128,6 +128,7 @@ int		check_operator(char *ans, t_mini *shell);
 int		init_cmd(t_mini *shell, char **cmd);
 int		add_command(t_mini *shell, char *command);
 int		init_other_cmd(t_mini *shell, char *command);
+int		init_heredoc(t_cmd *cmd, char *command, int *i);
 
 int		close_quotes(char *cmd);
 char	*quotes(char *command);

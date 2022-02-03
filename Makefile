@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
+#    By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/02/03 16:27:04 by ctirions         ###   ########.fr        #
+#    Updated: 2022/02/03 16:53:13 by zminhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ FILES =		minishell.c					\
 			init/shlvl.c				\
 			parser/env.c				\
 			parser/init_cmd.c			\
+			parser/init_heredoc.c		\
 			parser/init_inoutfd.c		\
 			parser/parse.c				\
 			parser/quotes.c				\

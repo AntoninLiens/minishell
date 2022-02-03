@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_inoutfd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:57:52 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/03 15:22:08 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/03 16:54:00 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,12 @@ char	*init_infile(char *command, t_cmd *cmd, int *i, char *ret)
 {
 	int			error;
 	int			fd;
-	static int	j;
 
 	errno = 0;
 	if (command[*i] == -4 && command[*i + 1] == -4)
 	{
-		if (!cmd->heredoc)
-		{
-			j = *i - 1;
-			while (command[++j])
-			{
-				if (command[j] == -4 && command[j + 1] == -4)
-					cmd->heredoc++;
-			}
-			cmd->limit_string = (char **)malloc(sizeof(char *) * cmd->heredoc + 1);
-			if (!cmd->limit_string)
-				return (NULL);
-			cmd->limit_string[cmd->heredoc] = 0;
-			j = 0;
-		}
-		cmd->limit_string[j++] = get_file_name(command + *i + 2);
-		(*i)++;
+		if (!init_heredoc(cmd, command, i))
+			return (NULL);
 	}
 	else if (command[*i] == -4 && command[*i + 1] != -4)
 	{

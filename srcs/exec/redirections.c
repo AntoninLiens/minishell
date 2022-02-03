@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:39:30 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/03 16:37:58 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/03 16:52:40 by zminhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	heredoc_no_cmd(t_cmd *cmd, char *line)
 		if (line)
 			free(line);
 		line = readline("> ");
-		if (!ft_strncmp(cmd->limit_string[i], line, ft_strlen(cmd->limit_string[i])))
+		if (!ft_strncmp(cmd->limit_string[i], line,
+				ft_strlen(cmd->limit_string[i])))
 			i++;
 	}
 	free(line);
@@ -45,7 +46,8 @@ int	child_heredoc(t_cmd *cmd, char *line, int pipefd[2])
 		line = readline("> ");
 		if (!line)
 			break ;
-		if (!ft_strncmp(cmd->limit_string[i], line, ft_strlen(cmd->limit_string[i])))
+		if (!ft_strncmp(cmd->limit_string[i], line,
+				ft_strlen(cmd->limit_string[i])))
 			i++;
 	}
 	free(line);
