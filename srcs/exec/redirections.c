@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:39:30 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/03 16:20:57 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/03 16:37:58 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	child_heredoc(t_cmd *cmd, char *line, int pipefd[2])
 	i = 0;
 	while (i < cmd->heredoc)
 	{
-		if (line && i == cmd->heredoc)
+		if (line && i == cmd->heredoc - 1)
 		{
 			write(pipefd[1], line, ft_strlen(line));
 			write(pipefd[1], "\n", 1);
@@ -74,7 +74,7 @@ int	mini_heredoc(t_cmd *cmd)
 	}
 	dup2(pipefd[0], STDIN_FILENO);
 	ctrl_c_default();
-	return (pipefd[1]);
+	return (pipefd[0]);
 }
 
 int	mini_inout(t_mini *shell, t_cmd *cmd)
@@ -83,11 +83,8 @@ int	mini_inout(t_mini *shell, t_cmd *cmd)
 	{
 		if (shell->fdin)
 			close(shell->fdin);
-		if (!cmd->heredoc)
-		{
-			shell->fdin = open(cmd->fdin, O_RDONLY);
-			dup2(shell->fdin, STDIN_FILENO);
-		}
+		shell->fdin = open(cmd->fdin, O_RDONLY);
+		dup2(shell->fdin, STDIN_FILENO);
 	}
 	if (cmd->fdout)
 	{
