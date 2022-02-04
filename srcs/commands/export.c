@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:04:02 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/02 19:40:52 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/04 14:38:11 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	already_exist(char *cmd, int i, t_env *env)
 	while (env)
 	{
 		if (!ft_strncmp(env->str, cmd, i))
-			unset(tmp, name);
+			unset(tmp, &name);
 		env = env->next;
 	}
 	free(name);

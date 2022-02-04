@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+         #
+#    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/02/03 16:53:13 by zminhas          ###   ########.fr        #
+#    Updated: 2022/02/04 14:36:23 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ $(NAME):	$(OBJS)
 			
 objs/%.o:	srcs/%.c
 			@printf "[$(PURPLE)✓$(RESET)] compilation of $<\r"
-			@$(CC) $(CFLAGS) $(RFLAGS) -I ./includes -c $^ -o $@
+			@$(CC) $(CFLAGS) $(RLFLAGS) -I ./includes -c $^ -o $@
 
 run:		@make -C ./ && clear && ./minishell
 

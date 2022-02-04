@@ -3,40 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 16:16:08 by zminhas           #+#    #+#             */
-/*   Updated: 2022/02/02 16:16:33 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/04 14:26:15 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	unset(t_env *env, char *name)
+int	unset(t_env *og_env, char **arg)
 {
+	t_env	*env;
 	t_env	*tmp;
-	t_env	*tmp2;
+	int		i;
 
-	tmp = env;
-	if (!ft_strncmp("_", name, 2))
-		return ;
-	if (!ft_strncmp(tmp->str, name, ft_strlen(name)))
+	i = -1;
+	while (arg[++i])
 	{
-		env = env->next;
-		free(tmp->str);
-		free(tmp);
-		return ;
-	}
-	while (tmp->next)
-	{
-		if (!ft_strncmp(tmp->next->str, name, ft_strlen(name)))
+		env = og_env;
+		if (!ft_strncmp(arg[i], env->str, ft_strlen(arg[i])))
 		{
-			tmp2 = tmp->next->next;
-			free(tmp->next->str);
-			free(tmp->next);
-			tmp->next = tmp2;
-			return ;
+			tmp = env->next;
+			free(env);
+			env = tmp;
+			og_env = tmp;
 		}
-		tmp = tmp->next;
+		while (env->next)
+		{
+			if (!ft_strncmp(arg[i], env->next->str, ft_strlen(arg[i])))
+			{
+				printf("coucou\n");
+				tmp = env->next->next;
+				free(env->next);
+				env->next = tmp;
+			}
+			env = env->next;
+		}
 	}
+	return (0);
 }
