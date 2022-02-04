@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 16:16:08 by zminhas           #+#    #+#             */
-/*   Updated: 2022/02/04 16:03:43 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:42:20 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	verify_unset(char **arg)
+int	unset(char **arg, t_env *env)
 {
 	int	i;
 	int	j;
@@ -33,6 +33,8 @@ int	verify_unset(char **arg)
 			ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
 			return (1);
 		}
+		else
+			unset_name(arg[i], env);
 	}
 	return (0);
 }
@@ -60,16 +62,4 @@ void	unset_name(char *name, t_env *og_env)
 		}
 		env = env->next;
 	}
-}
-
-int	unset(t_env *og_env, char **arg)
-{
-	int		i;
-
-	i = 0;
-	if (verify_unset(arg))
-		return (1);
-	while (arg[++i])
-		unset_name(arg[i], og_env);
-	return (0);
 }

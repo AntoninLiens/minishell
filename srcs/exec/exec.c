@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/04 14:01:45 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/04 17:10:50 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	builts_in(t_mini *shell, char **cmd)
 	else if (!ft_strncmp(cmd[0], "export", 7))
 		shell->exit_status = export(shell->env, cmd);
 	else if (!ft_strncmp(cmd[0], "unset", 6))
-		shell->exit_status = unset(shell->env, cmd);
+		shell->exit_status = unset(cmd, shell->env);
 	else if (!ft_strncmp(cmd[0], "echo", 5))
 		shell->exit_status = echo(cmd);
 	else if (!ft_strncmp(cmd[0], "cd", 3))
