@@ -165,5 +165,6 @@ int		pwd(t_env *env, char **cmd);
 int		cd(t_mini *shell, char **cmd);
 int		export(t_env *env, char **cmd);
 int		unset(t_env *og_env, char **arg);
+void	unset_name(char *name, t_env *og_env);
 
 #endif

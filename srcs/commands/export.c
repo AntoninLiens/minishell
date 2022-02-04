@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:04:02 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/04 14:38:11 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/04 16:04:33 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	already_exist(char *cmd, int i, t_env *env)
 	while (env)
 	{
 		if (!ft_strncmp(env->str, cmd, i))
-			unset(tmp, &name);
+			unset_name(name, tmp);
 		env = env->next;
 	}
 	free(name);
@@ -75,12 +75,15 @@ int	verify_export(char *cmd, t_env *env)
 	int		i;
 
 	i = 0;
-	while (ft_isalnum(cmd[i]))
-		i++;
-	if (!cmd[i])
-		return (0);
-	else if (cmd[i] == '=')
-		return (already_exist(cmd, i, env));
+	if (ft_isalpha(cmd[0]))
+	{
+		while (ft_isalnum(cmd[i]))
+			i++;
+		if (!cmd[i])
+			return (0);
+		else if (cmd[i] == '=')
+			return (already_exist(cmd, i, env));
+	}
 	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
@@ -90,12 +93,17 @@ int	verify_export(char *cmd, t_env *env)
 int	export(t_env *env, char **cmd)
 {
 	t_env	*tmp;
+	int		i;
 
 	tmp = env;
 	if (!cmd[1])
 		return (export_no_arg(tmp));
-	if (verify_export(cmd[1], tmp))
-		return (1);
+	i = 0;
+	while (cmd[++i])
+	{
+		if (verify_export(cmd[i], tmp))
+			return (1);
+	}
 	if (!ft_strrchr(cmd[1], '='))
 		return (0);
 	while (tmp->next)
