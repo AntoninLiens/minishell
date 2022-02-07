@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:04:02 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/04 17:40:38 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:40:49 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	export_no_arg(t_env *env)
 	return (0);
 }
 
-void	already_exist(char *cmd, t_env *env)
+void	already_exist(char *cmd, t_env *env, t_mini *shell)
 {
 	char	*name;
 	t_env	*tmp;
@@ -69,18 +69,18 @@ void	already_exist(char *cmd, t_env *env)
 	while (tmp2)
 	{
 		if (!ft_strncmp(tmp2->str, cmd, i))
-			unset_name(name, tmp);
+			unset_name(name, tmp, shell);
 		tmp2 = tmp2->next;
 	}
 	free(name);
 }
 
-void	export_name(char *line, t_env *og_env)
+void	export_name(char *line, t_env *og_env, t_mini *shell)
 {
 	t_env	*tmp;
 
 	tmp = og_env;
-	already_exist(line, og_env);
+	already_exist(line, og_env, shell);
 	if (!ft_strrchr(line, '='))
 		return ;
 	while (tmp->next)
@@ -92,7 +92,7 @@ void	export_name(char *line, t_env *og_env)
 	tmp->next->next = NULL;
 }
 
-int	export(t_env *env, char **cmd)
+int	export(t_env *env, char **cmd, t_mini *shell)
 {
 	int		i;
 	int		j;
@@ -116,7 +116,7 @@ int	export(t_env *env, char **cmd)
 			return (1);
 		}
 		else
-			export_name(cmd[i], env);
+			export_name(cmd[i], env, shell);
 	}
 	return (0);
 }
