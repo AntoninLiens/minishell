@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 00:05:34 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/02 15:26:48 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/07 13:46:53 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,12 @@ int	cd(t_mini *shell, char **cmd)
 	env_val = get_env_val(shell->env, "HOME");
 	if (!cmd[1])
 		chdir(env_val);
-	if (chdir(cmd[1]) < 0)
+	else
+		env_val = cmd[1];
+	if (chdir(env_val) < 0)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
-		perror(cmd[1]);
+		perror(env_val);
 		return (1);
 	}
 	free(env_val);

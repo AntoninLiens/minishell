@@ -6,7 +6,7 @@
 #    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/02/04 14:36:23 by aliens           ###   ########.fr        #
+#    Updated: 2022/02/07 14:01:41 by aliens           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ FILES =		minishell.c					\
 			parser/init_inoutfd.c		\
 			parser/parse.c				\
 			parser/quotes.c				\
+			signals/sig_call.c			\
+			signals/signals.c			\
 			signals/signals_defaults.c	\
 			signals/signals_in.c		\
 			signals/signals_out.c		\

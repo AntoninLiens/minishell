@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/03 15:27:50 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:53:59 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	minishell(t_mini *shell)
 {
-	ctrl_c_default();
+	signals_default();
 	while (!shell->exit)
 	{
 		shell->answer = readline("MINISHELL $ ");
@@ -29,7 +29,7 @@ void	minishell(t_mini *shell)
 		if (big_exec(shell))
 			shell->exit = 1;
 		free_cmd(shell->cmd);
-		ctrl_c_default();
+		signals_default();
 	}
 	free_env(shell->env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:39:30 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/03 16:52:40 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/07 13:53:59 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	mini_heredoc(t_cmd *cmd)
 		close(pipefd[1]);
 	}
 	dup2(pipefd[0], STDIN_FILENO);
-	ctrl_c_default();
+	signals_default();
 	return (pipefd[0]);
 }
 

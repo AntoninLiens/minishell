@@ -105,17 +105,21 @@ char	**sort_env(char **export);
 
 /*		SIGNALS		*/
 
-int		set_sig_cmd_out(t_cmd *cmd);
-int		set_sig_cmd_in(t_cmd *cmd);
-void	ctrl_c_cmd_heredoc_out(int code);
-void	ctrl_c_cmd_heredoc_in(int code);
-void	ctrl_c_cmd_out(int code);
-void	ctrl_c_cmd_in(int code);
+void	signals_default(void);
 int		sig_cmd_heredoc_out(void);
 int		sig_cmd_heredoc_in(void);
 int		sig_cmd_out(void);
 int		sig_cmd_in(void);
-void	ctrl_c_default(void);
+
+int		set_sig_cmd_out(t_cmd *cmd);
+int		set_sig_cmd_in(t_cmd *cmd);
+
+void	sigint_cmd_heredoc_out(int code);
+void	sigint_cmd_heredoc_in(int code);
+void	sigint_cmd_out(int code);
+void	sigquit_cmd_out(int code);
+void	sigint_cmd_in(int code);
+void	sigquit_cmd_in(int code);
 void	sigint(int code);
 void	sigquit(int code);
 
