@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aliens <aliens@student.42.fr>              +#+  +:+       +#+         #
+#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/02/07 14:01:41 by aliens           ###   ########.fr        #
+#    Updated: 2022/02/07 17:23:05 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ OBJS	=	$(patsubst srcs%.c, objs%.o, $(SRCS))
 
 NAME	=	minishell
 RM		=	rm -f
-CC		=	gcc -Wall -Wextra -Werror
+CC		=	gcc -Wall -Wextra -Werror -g
 
 all:		$(NAME)
 

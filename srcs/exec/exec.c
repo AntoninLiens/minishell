@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/07 16:40:58 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/02/07 17:53:17 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	exec_bin(char **cmd, t_mini *shell)
 		if (!cmd)
 			return (1);
 		path = pathfinder(cmd[0], shell->env);
-		if (!path || execve(path, cmd, shell->basic_env))
+		if (!path || execve(path, cmd, shell->basic_env) == -1)
 		{
 			ft_putstr_fd("minishell: ", STDERR_FILENO);
 			ft_putstr_fd(cmd[0], STDERR_FILENO);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 00:05:34 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/07 13:46:53 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/07 17:52:09 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,15 @@ int	cd(t_mini *shell, char **cmd)
 	if (!cmd[1])
 		chdir(env_val);
 	else
-		env_val = cmd[1];
+	{
+		free(env_val);
+		env_val = ft_strdup(cmd[1]);
+	}
 	if (chdir(env_val) < 0)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		perror(env_val);
+		free(env_val);
 		return (1);
 	}
 	free(env_val);
