@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:52:27 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/07 14:13:11 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/07 15:33:29 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	sig_cmd_in(void)
 
 int	sig_cmd_out(void)
 {
-    signal(SIGQUIT, &sigquit_cmd_out);
+	signal(SIGQUIT, &sigquit_cmd_out);
 	signal(SIGINT, &sigint_cmd_out);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 16:16:08 by zminhas           #+#    #+#             */
-/*   Updated: 2022/02/07 14:54:14 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/07 15:35:42 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ int	unset(char **arg, t_env *env)
 	i = 0;
 	while (arg[++i])
 	{
-		j = -1;
-		if (ft_isalpha(arg[i][0]))
+		j = 0;
+		if (ft_isalpha(arg[i][0]) || arg[i][0] == '_')
 		{
-			while (ft_isalnum(arg[i][++j]))
-				;
+			while (ft_isalnum(arg[i][j]) || arg[i][j] == '_')
+				j++;
 		}
-		if (!ft_isalpha(arg[i][0]) || arg[i][j])
+		if ((!ft_isalpha(arg[i][0]) || arg[i][j])
+		&& ft_strncmp(arg[i], "_", 1))
 		{
 			ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
 			ft_putstr_fd(arg[i], STDERR_FILENO);
@@ -45,21 +46,26 @@ void	unset_name(char *name, t_env *og_env)
 	t_env	*tmp;
 
 	env = og_env;
+	if (!ft_strncmp(name, "_", 1))
+		return ;
 	if (!ft_strncmp(name, env->str, ft_strlen(name)))
 	{
 		tmp = env->next;
 		free(env);
-		env = tmp;
 		og_env = tmp;
+		env = tmp;
 	}
-	while (env && env->next)
+	else
 	{
-		if (!ft_strncmp(name, env->next->str, ft_strlen(name)))
+		while (env && env->next)
 		{
-			tmp = env->next->next;
-			free(env->next);
-			env->next = tmp;
+			if (!ft_strncmp(name, env->next->str, ft_strlen(name)))
+			{
+				tmp = env->next->next;
+				free(env->next);
+				env->next = tmp;
+			}
+			env = env->next;
 		}
-		env = env->next;
 	}
 }
