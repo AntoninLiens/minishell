@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:11:00 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/02 18:35:14 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/08 13:45:10 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	before_quotes(char *command)
 			command[i] = -4;
 		else if (command[i] == '>')
 			command[i] = -5;
+		else if (command[i] == '\t')
+			command[i] = ' ';
 		i++;
 	}
 	return (i);
@@ -86,9 +88,9 @@ int	after_quotes(char *command, char **ret)
 	char	*tmp;
 	int		i;
 
-	i = 0;
-	while (command[i] && \
-	command[i] != '\"' && command[i] != '\'')
+	i = -1;
+	while (command[++i] \
+	&& command[i] != '\"' && command[i] != '\'')
 	{
 		if (command[i] == '$')
 			command[i] = -2;
@@ -98,7 +100,8 @@ int	after_quotes(char *command, char **ret)
 			command[i] = -4;
 		else if (command[i] == '>')
 			command[i] = -5;
-		i++;
+		else if (command[i] == '\t')
+			command[i] = ' ';
 	}
 	if (i)
 	{

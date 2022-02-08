@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_call.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:52:27 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/07 15:33:29 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/08 14:12:32 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ void	signals_default(void)
 int	sig_cmd_heredoc_in(void)
 {
 	signal(SIGINT, &sigint_cmd_heredoc_in);
+	signal(SIGQUIT, &sigquit_cmd_heredoc_in);
 	return (1);
 }
 
 int	sig_cmd_heredoc_out(void)
 {
+	signal(SIGQUIT, &sigquit_cmd_heredoc_out);
 	signal(SIGINT, &sigint_cmd_heredoc_out);
 	return (1);
 }

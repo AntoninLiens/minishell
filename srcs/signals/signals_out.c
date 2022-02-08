@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_out.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 17:18:22 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/07 14:16:55 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/08 14:25:47 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,11 @@ void	sigint_cmd_out(int code)
 {
 	(void)code;
 	write(STDERR_FILENO, "\n", 1);
+}
+
+void	sigquit_cmd_heredoc_out(int code)
+{
+	(void)code;
+//	rl_on_new_line();
+	return ;
 }

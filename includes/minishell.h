@@ -114,6 +114,8 @@ int		sig_cmd_in(void);
 int		set_sig_cmd_out(t_cmd *cmd);
 int		set_sig_cmd_in(t_cmd *cmd);
 
+void	sigquit_cmd_heredoc_in(int code);
+void	sigquit_cmd_heredoc_out(int code);
 void	sigint_cmd_heredoc_out(int code);
 void	sigint_cmd_heredoc_in(int code);
 void	sigint_cmd_out(int code);
