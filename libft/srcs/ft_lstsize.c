@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 12:43:30 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/10 18:12:38 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/08 16:00:44 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	size;
+	t_list	*tmp;
+	int		size;
 
+	tmp = lst;
 	size = 0;
-	if (!lst)
+	if (!tmp)
 		return (0);
-	while (lst && lst->next)
+	while (tmp && tmp->next)
 	{
 		size++;
-		lst = lst->next;
+		tmp = tmp->next;
 	}
 	return (++size);
 }

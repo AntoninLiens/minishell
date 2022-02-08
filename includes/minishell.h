@@ -87,6 +87,7 @@ void	up_shlvl(t_mini *shell);
 void	replace_spec_char(t_mini *shell);
 void	get_spec_char(t_cmd *cmd, int i, t_mini *shell);
 char	*get_env_val(t_env *env, char *name);
+char	**transform_env(t_env *env);
 
 /*		UTILS		*/
 

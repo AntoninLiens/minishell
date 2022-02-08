@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:39:30 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/07 13:53:59 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/08 15:22:35 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int	mini_heredoc(t_cmd *cmd)
 		pid = fork();
 		if (!pid)
 			exit(child_heredoc(cmd, line, pipefd));
+		sig_cmd_heredoc_out();
 		waitpid(pid, 0, 0);
 		close(pipefd[1]);
 	}
 	dup2(pipefd[0], STDIN_FILENO);
-	signals_default();
 	return (pipefd[0]);
 }
 

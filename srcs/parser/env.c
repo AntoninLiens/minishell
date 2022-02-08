@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+        */
+/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:10:39 by ctirions          #+#    #+#             */
-/*   Updated: 2022/01/29 03:09:31 by zminhas          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:08:25 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,24 @@ void	replace_spec_char(t_mini *shell)
 			get_spec_char(cmd, i, shell);
 		cmd = cmd->next;
 	}
+}
+
+char	**transform_env(t_env *env)
+{
+	t_env	*tmp;
+	char	**ret;
+	int		i;
+
+	i = 0;
+	tmp = env;
+	ret = (char **)malloc(sizeof(char *) * (ft_lstsize((t_list *)env) + 1));
+	if (!ret)
+		return (NULL);
+	while (tmp)
+	{
+		ret[i++] = ft_strdup(tmp->str);
+		tmp = tmp->next;
+	}
+	ret[i] = NULL;
+	return (ret);
 }

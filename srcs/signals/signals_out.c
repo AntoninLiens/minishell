@@ -6,7 +6,7 @@
 /*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 17:18:22 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/08 14:25:47 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/02/08 15:09:03 by ctirions         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ void	sigint_cmd_out(int code)
 void	sigquit_cmd_heredoc_out(int code)
 {
 	(void)code;
-//	rl_on_new_line();
-	return ;
+	printf("\r");
 }
