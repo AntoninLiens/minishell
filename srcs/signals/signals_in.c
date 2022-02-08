@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_in.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 17:24:09 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/08 15:23:01 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:05:16 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ void	sigquit_cmd_heredoc_in(int code)
 	rl_on_new_line();
 	rl_redisplay();
 }
-

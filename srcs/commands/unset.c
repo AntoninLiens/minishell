@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 16:16:08 by zminhas           #+#    #+#             */
-/*   Updated: 2022/02/07 16:35:56 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/02/08 16:49:27 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	unset_name(char *name, t_env *og_env, t_mini *shell)
 			if (!ft_strncmp(name, env->next->str, ft_strlen(name)))
 			{
 				tmp = env->next->next;
+				free(env->next->str);
 				free(env->next);
 				env->next = tmp;
 			}
