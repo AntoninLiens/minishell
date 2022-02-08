@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 16:08:15 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/08 17:04:58 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/08 18:18:25 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,7 @@ void	up_shlvl(t_mini *shell)
 	shlvl = get_env_val(shell->env, "SHLVL");
 	if (!shlvl)
 	{
-		str = (char **)malloc(sizeof(char *) * 3);
-		if (!str)
-			return ;
-		str[0] = ft_strdup("Cassandre le BG");
-		str[1] = ft_strdup("SHLVL=1");
-		if (!str[0] || !str[1])
-			return ;
-		str[2] = NULL;
-		export(shell->env, str, shell);
+		export_name("SHLVL=1", shell->env, shell);
 		free_double_char(str);
 	}
 	else

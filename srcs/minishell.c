@@ -6,7 +6,7 @@
 /*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:39:14 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/08 16:43:28 by aliens           ###   ########.fr       */
+/*   Updated: 2022/02/08 18:45:10 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	minishell(t_mini *shell)
 {
-	signals_default();
 	while (!shell->exit)
 	{
+		signals_default();
 		shell->basic_env = NULL;
 		shell->basic_env = transform_env(shell->env);
 		if (!shell->basic_env)
@@ -35,7 +35,6 @@ void	minishell(t_mini *shell)
 			shell->exit = 1;
 		free_cmd(shell->cmd);
 		free_double_char(shell->basic_env);
-		signals_default();
 	}
 	free_env(shell->env);
 }

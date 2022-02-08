@@ -171,6 +171,7 @@ int		mini_exit(t_mini *shell, char **cmd);
 int		pwd(t_env *env, char **cmd);
 int		cd(t_mini *shell, char **cmd);
 int		export(t_env *env, char **cmd, t_mini *shell);
+void	export_name(char *line, t_env *og_env, t_mini *shell);
 int		unset(char **arg, t_env *env, t_mini *shell);
 void	unset_name(char *name, t_env *og_env, t_mini *shell);
 

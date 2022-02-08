@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:49:51 by aliens            #+#    #+#             */
-/*   Updated: 2022/02/08 15:20:57 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:44:24 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,28 @@ void	pipe_child(t_cmd *tmp, int *pfd, int fdin, t_mini *shell)
 	exit(shell->exit_status);
 }
 
+void	close_my_pipes(int *pfd, t_mini *shell, pid_t pid)
+{
+	int		status;
+	int		i;
+	pid_t	pid2;
+
+	pid2 = waitpid(-1, &status, 0);
+	while (pid2 > 0)
+	{
+		if (pid2 == pid)
+		{
+			i = -1;
+			while (++i < (shell->nb_cmds) * 2)
+				close(pfd[i]);
+			if (WIFEXITED(status))
+				shell->exit_status = WEXITSTATUS(status);
+		}
+		pid2 = waitpid(-1, &status, 0);
+	}
+	free(pfd);
+}
+
 int	pipes(t_mini *shell, int *pfd)
 {
 	int		fdin;
@@ -56,26 +78,4 @@ int	pipes(t_mini *shell, int *pfd)
 	}
 	close_my_pipes(pfd, shell, pid);
 	return (0);
-}
-
-void	close_my_pipes(int *pfd, t_mini *shell, pid_t pid)
-{
-	int		status;
-	int		i;
-	pid_t	pid2;
-
-	pid2 = waitpid(-1, &status, 0);
-	while (pid2 > 0)
-	{
-		if (pid2 == pid)
-		{
-			i = -1;
-			while (++i < (shell->nb_cmds) * 2)
-				close(pfd[i]);
-			if (WIFEXITED(status))
-				shell->exit_status = WEXITSTATUS(status);
-		}
-		pid2 = waitpid(-1, &status, 0);
-	}
-	free(pfd);
 }

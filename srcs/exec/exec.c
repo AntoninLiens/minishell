@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+        */
+/*   By: aliens <aliens@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 17:05:32 by ctirions          #+#    #+#             */
-/*   Updated: 2022/02/07 17:53:17 by ctirions         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:46:32 by aliens           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exec_bin(char **cmd, t_mini *shell)
 	if (!pid)
 	{
 		if (!cmd)
-			return (1);
+			exit(1);
 		path = pathfinder(cmd[0], shell->env);
 		if (!path || execve(path, cmd, shell->basic_env) == -1)
 		{
