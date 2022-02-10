@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zminhas <zminhas@student.s19.be>           +#+  +:+       +#+         #
+#    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 17:05:49 by ctirions          #+#    #+#              #
-#    Updated: 2022/02/02 16:34:59 by zminhas          ###   ########.fr        #
+#    Updated: 2022/02/10 14:00:09 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,7 @@ RM			= rm -f
 
 .c.o:
 			@gcc -Wall -Wextra -Werror -c -I./includes $< -o ${<:.c=.o}
-			@printf "[$(LIGHTPURPLE)✓$(RESET)] compilation of $<         \r"
+			@printf "\r[$(LIGHTPURPLE)✓$(RESET)] compilation of $<         \r"
 
 $(NAME):	${OBJS} ${OBJS_PRINTF} ${OBJS_GNL}
 			@ar -rcs ${NAME} ${OBJS} ${OBJS_PRINTF} ${OBJS_GNL}

@@ -6,7 +6,7 @@
 #    By: ctirions <ctirions@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/30 14:42:50 by aliens            #+#    #+#              #
-#    Updated: 2022/02/07 17:23:05 by ctirions         ###   ########.fr        #
+#    Updated: 2022/02/10 13:59:12 by ctirions         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,14 +64,12 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			@make full -C ./libft
-			@$(CC) $(CFLAGS) $(RLFLAGS) -lreadline -o $(NAME) $(OBJS) libft/libft.a
-			@echo "[$(GREEN)✓$(RESET)] minishell created"
+			@$(CC) $(RLFLAGS) -lreadline -o $(NAME) $(OBJS) libft/libft.a
+			@echo "\r[$(GREEN)✓$(RESET)] minishell created              "
 			
 objs/%.o:	srcs/%.c
-			@printf "[$(PURPLE)✓$(RESET)] compilation of $<\r"
-			@$(CC) $(CFLAGS) $(RLFLAGS) -I ./includes -c $^ -o $@
-
-run:		@make -C ./ && clear && ./minishell
+			@printf "\r[$(PURPLE)✓$(RESET)] compilation of $<           "
+			@$(CC) $(RLFLAGS) -I ./includes -c $^ -o $@
 
 clean:
 			@make clean -C ./libft
@@ -87,4 +85,4 @@ fclean:
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re minishell .c.o
+.PHONY:		all clean fclean re minishell
